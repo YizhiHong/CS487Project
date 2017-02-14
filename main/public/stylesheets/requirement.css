@@ -1,0 +1,86 @@
+.bs-docs-nav .navbar-brand,.bs-docs-nav .navbar-nav>li>a {
+    font-weight:500;
+    color:#563d7c
+}
+.bs-docs-nav .navbar-nav>.active>a,.bs-docs-nav .navbar-nav>.active>a:hover,.bs-docs-nav .navbar-nav>li>a:hover {
+    color:#463265;
+    background-color:#f9f9f9
+}
+.bs-docs-nav .navbar-toggle .icon-bar {
+    background-color:#563d7c
+}
+.bs-docs-nav .navbar-header .navbar-toggle {
+    border-color:#fff
+}
+.bs-docs-nav .navbar-header .navbar-toggle:focus,.bs-docs-nav .navbar-header .navbar-toggle:hover {
+    background-color:#f9f9f9;
+    border-color:#f9f9f9
+}
+.bs-docs-sidenav {
+    margin-top:20px;
+    margin-bottom:20px
+}
+.bs-docs-sidebar{
+    position: fixed;
+}
+.bs-docs-sidebar .nav>li>a {
+    display:block;
+    padding:4px 20px;
+    font-size:13px;
+    font-weight:500;
+    color:#767676
+}
+.bs-docs-sidebar .nav>li>a:focus,.bs-docs-sidebar .nav>li>a:hover {
+    padding-left:19px;
+    color:#563d7c;
+    text-decoration:none;
+    background-color:transparent;
+    border-left:1px solid #563d7c
+}
+.bs-docs-sidebar .nav>.active:focus>a,.bs-docs-sidebar .nav>.active:hover>a,.bs-docs-sidebar .nav>.active>a {
+    padding-left:18px;
+    font-weight:700;
+    color:#563d7c;
+    background-color:transparent;
+    border-left:2px solid #563d7c
+}
+.bs-docs-sidebar .nav .nav {
+    display:none;
+    transition:0.5s;
+    padding-bottom:10px
+}
+.bs-docs-sidebar .nav .nav>li>a {
+    padding-top:1px;
+    padding-bottom:1px;
+    padding-left:30px;
+    font-size:12px;
+    font-weight:400
+}
+.bs-docs-sidebar .nav .nav>li>a:focus,.bs-docs-sidebar .nav .nav>li>a:hover {
+    padding-left:29px
+}
+.bs-docs-sidebar .nav .nav>.active:focus>a,.bs-docs-sidebar .nav .nav>.active:hover>a,.bs-docs-sidebar .nav .nav>.active>a {
+    padding-left:28px;
+    font-weight:500
+}
+table.req-table{
+    table-layout:fixed;
+    empty-cells:show;
+    border-collapse: collapse;
+    margin:0 auto;
+}
+.req-table{
+    border:1px solid #cad9ea;
+    color:#666;
+}
+.req-table th {
+    background-repeat:repeat-x;
+    height:30px;
+}
+.req-table td,.req-table th{
+    border:1px solid #cad9ea;
+    padding:0 1em 0;
+}
+.req-table tr.alter{
+    background-color:#f5fafe;
+}
