@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+.index{
+  margin-top: 50px;
+}
+.index .jumbotron > h1{
+  margin-bottom: 40px;
+}
+.index .jumbotron > p{
+  margin-bottom: 30px;
+}
