@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var requirement = require('./routes/requirement');
@@ -13,10 +14,14 @@ var app = express();
 /** get Test **/
 
 var mongoose = require('mongoose');
-var models = require('./model');
-require('express-mongoose');
-var StudentCollections = models.StudentCollection;
 
+var models = require('./index');
+require('express-mongoose');
+var DepartmentCollections = models.DepartmentCollection;
+var StaffCollection = models.StaffCollection;
+var StudentCollections = models.StudentCollection;
+var BookCollections = models.BookCollection;
+var CourseCollection = models.CourseCollection;
 
 app.get('/users', function(req, res) {
     res.send(StudentCollections.find());
@@ -43,14 +48,17 @@ app.get('/users', function(req, res) {
 *  search initial book
 *
 * */
-// var books = require('google-books-search');
-// books.search('High School', function(error, results) {
-//     if ( ! error ) {
-//         console.log(results);
-//     } else {
-//         console.log(error);
-//     }
-// });
+
+
+var books = require('google-books-search');
+books.search('High School Math', function(error, results) {
+    if ( ! error ) {
+        console.log(results);
+        console.log(results[0].industryIdentifiers);
+    } else {
+        console.log(error);
+    }
+});
 
 
 // view engine setup
