@@ -11,6 +11,11 @@ router.get('/', function(req, res, next) {
 });
 
 /* login */
+router.get('/menu', function(req, res) {
+    res.render('menu', { title: 'login' , layout: 'layout-login'});
+});
+
+/* login */
 router.get('/login', function(req, res) {
     res.render('login', { title: 'login' });
 });
@@ -32,23 +37,17 @@ router.post('/add-student-info', function(req, res) {
     };
     console.log(studentInfo);
 
-    // var newStudent = new Students(studentInfo);
+    var newStudent = new Students(studentInfo);
 
     (function(){
-        // newStudent.save(function (err) {
-        //     if(err){
-        //         console.log(err);
-        //     }else{
-        //         res.redirect('/');
-        //     }
-        // })
-        Students.save(studentInfo,function (err) {
-                if(err){
-                    console.log(err);
-                }else{
-                    res.redirect('/');
-                }
+        newStudent.save(function (err) {
+            if(err){
+                console.log(err);
+            }else{
+                res.redirect('/');
+            }
         })
+        // Students.save =
     })(studentInfo);
 });
 

@@ -95,4 +95,4 @@ var students = function () {
 };
 
 //Export model
-module.exports = students;
+module.exports = student;
