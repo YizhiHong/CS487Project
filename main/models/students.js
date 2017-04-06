@@ -34,5 +34,65 @@ studentSchema.virtual('url').get(function () {
     return '/student/' + this._id;
 });
 
+var student = mongoose.model('student', studentSchema);
+//
+// var studentController = function (){};
+//
+//
+// studentController.prototype = {
+//     //增
+//     save: function (json, callBack){
+//         var newUser = new student(json);
+//
+//         newUser.save(function (err){
+//             callBack(err);
+//         });
+//     },
+//     //删
+//     remove: function (json, callBack){
+//         student.remove(json, function (err){
+//             callBack(err);
+//         });
+//     },
+//     //改
+//     update: function (json, condition, callBack){
+//         student.update(json, condition, function (err){
+//             callBack(err);
+//         });
+//     },
+//     //查
+//     findByName: function (name, callBack){
+//         student.findOne({username: name}, function (err, doc){
+//             callBack(err, doc);
+//         });
+//     }
+// };
+
+var students = function () {
+    this.model = student;
+    this.save = function (json, callBack){
+        var newUser = new model(json);
+
+        newUser.save(function (err){
+            callBack(err);
+        });
+    },
+    this.remove = function (json, callBack){
+        student.remove(json, function (err){
+            callBack(err);
+        });
+    },
+    this.update = function (json, condition, callBack){
+        student.update(json, condition, function (err){
+            callBack(err);
+        });
+    },
+    this.findByName = function (name, callBack){
+        student.findOne({username: name}, function (err, doc){
+            callBack(err, doc);
+        });
+    }
+};
+
 //Export model
-module.exports = mongoose.model('student', studentSchema);
+module.exports = students;
