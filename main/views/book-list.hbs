@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
+<div class="container">
+    <div class="book-list">
+        <div>search</div>
+        <input id="search_value" value=""/>
+        <button id="search"class="btn btn-default">search</button>
+        <table id="book_table" class="display" width="100%">
+            <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>IMG</th>
+                <th>title</th>
+                <th>desc</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#search").on('click',function () {
+            var content = $("#search_value").val();
+            $.ajax({
+                url: '/book/book-list',
+                dataType:'json',
+                data: {"search":content},
+                type: 'POST'
+            }).done(function(data){
+                console.log(data);
+                $('#book_table').DataTable( {
+                    "processing": true,
+                    "data": data,
+                    "columns": [
+                        { "data": "industryIdentifiers.0.identifier" },
+                        { "data": "thumbnail" },
+                        { "data": "title" },
+                        { "data": "description"},
+                    ],
+                    "columnDefs": [
+                        {
+                            "render": function ( data, type, row ) {
+                                return '<img src="'+data+'">';
+                            },
+                            "targets": 1
+                        },
+                        {
+                            "render": function ( data, type, row ) {
+                                return data || "no description";
+                            },
+                            "targets": 3
+                        }
+                    ]
+                } );
+
+            });
+        })
+
+    } );
+
+</script>

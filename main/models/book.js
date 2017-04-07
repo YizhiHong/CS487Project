@@ -23,7 +23,8 @@ var bookSchema = new Schema({
     TotalChecked: {type:Number, default: 0},
     TotalAvailable: {type:Number, default: 10},
     ClassBook : {type: Schema.ObjectId, ref: 'course'},
-    CheckOut: {type: Schema.ObjectId, ref: 'student'}
+    CheckOut: {type: Schema.ObjectId, ref: 'student'},
+    image: String
 });
 
 module.exports = mongoose.model('book',bookSchema);
