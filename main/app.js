@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var requirement = require('./routes/requirement');
+var book = require('./routes/book');
 
 var app = express();
 
@@ -50,15 +51,6 @@ app.get('/users', function(req, res) {
 * */
 
 
-var books = require('google-books-search');
-books.search('High School Math', function(error, results) {
-    if ( ! error ) {
-        console.log(results);
-        console.log(results[0].industryIdentifiers);
-    } else {
-        console.log(error);
-    }
-});
 
 
 // view engine setup
@@ -76,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/requirement', requirement);
+app.use('/book', book);
 
 
 // catch 404 and forward to error handler

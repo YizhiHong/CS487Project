@@ -1,6 +1,9 @@
 body {
-  padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  font-size: 14px;
+  font-family: 'futuracondensed_medium';
+  margin: 0;
+  font-weight: normal;
 }
 
 a {
@@ -14,4 +17,75 @@ a {
 }
 .index .jumbotron > p{
   margin-bottom: 30px;
+}
+/** login page **/
+.form-vertical{
+  margin: 0 auto;
+  text-align: center;
+  width: 75%;
+}
+.form-vertical > h2{
+  font-size: 35px;
+  color: #000;
+  line-height: 35px;
+  text-transform: uppercase;
+}
+.form-vertical p{
+  font-size: 14px;
+  color: #adadad;
+  margin: 0 0 25px 0;
+}
+.form-vertical > form{
+  display: table;
+  margin: 0 auto;
+  width: 100%;
+}
+.input-box{
+  margin: 15px auto;
+  width: 100%;
+  max-width: 300px;
+}
+.input-box > label{
+  float: left;
+  font-size: 14px;
+  text-align: left !important;
+  width: 100%;
+}
+.input-box > input{
+  background: #f4f4f4;
+  padding: 5px;
+  height: 35px;
+  border: 0 none;
+  border-radius: 0;
+  margin: 0;
+  width: 100%;
+
+}
+.btn-full {
+  background: rgba(0, 0, 0, 0);
+  border: 2px solid #000000;
+  border-radius: 0;
+  color: #000;
+  font-size: 15px;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+}
+.vertical-divider{
+  height: 100%;
+  position: fixed;
+  left: 50%;
+  width: 2px;
+  top: 0;
+  background: black;
+}
+@media (max-width: 768px ) {
+  .vertical-divider{
+    width: 100%;
+    position: relative;
+    height: 2px;
+    background: black;
+    left: 0;
+    float: left;
+  }
 }
