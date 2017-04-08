@@ -19,7 +19,7 @@ var bookSchema = new Schema({
     Publisher: String,
     PublishedDate : Date,
     Description: String,
-    Categories: {type:Array,required: true},
+    Categories: {type:Array},
     TotalChecked: {type:Number, default: 0},
     TotalAvailable: {type:Number, default: 10},
     ClassBook : {type: Schema.ObjectId, ref: 'course'},
@@ -27,4 +27,6 @@ var bookSchema = new Schema({
     image: String
 });
 
-module.exports = mongoose.model('book',bookSchema);
+var books = mongoose.model('book',bookSchema);
+
+module.exports = books;

@@ -17,6 +17,7 @@ var app = express();
 var mongoose = require('mongoose');
 
 var models = require('./index');
+
 require('express-mongoose');
 var DepartmentCollections = models.DepartmentCollection;
 var StaffCollection = models.StaffCollection;
@@ -26,6 +27,10 @@ var CourseCollection = models.CourseCollection;
 
 app.get('/users', function(req, res) {
     res.send(StudentCollections.find());
+});
+
+app.get('/books', function(req, res) {
+    res.send(BookCollections.find());
 });
 
 /* google api and google book */
@@ -41,16 +46,6 @@ app.get('/users', function(req, res) {
 // google.options({
 //     auth: oauth2Client
 // });
-
-
-
-/*
-*
-*  search initial book
-*
-* */
-
-
 
 
 // view engine setup

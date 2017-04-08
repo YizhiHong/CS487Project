@@ -14,12 +14,33 @@
             </tr>
             </thead>
         </table>
+        <button id="save" class="btn btn-default">Save in db</button>
     </div>
 </div>
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
 <script>
+    var translate = function(data) {
+        var output=[];
+        for(var i in data){
+            output.push( {
+                "BookID": data[i].industryIdentifiers[0].identifier,
+                "ISBN": data[i].industryIdentifiers[0].identifier,
+                "Title": data[i].title,
+                "Authors": data[i].authors,
+                "Publisher": data[i].publisher,
+                "PublishedDate" : data[i].publishedDate,
+                "Description":  data[i].description,
+                "Categories": data[i].categories,
+                "TotalChecked": 0,
+                "TotalAvailable": 10,
+                "image": data[i].thumbnail
+            })
+        }
+        return JSON.stringify(output);
+    }
     $(document).ready(function() {
+        var current;
         $("#search").on('click',function () {
             var content = $("#search_value").val();
             $.ajax({
@@ -28,9 +49,10 @@
                 data: {"search":content},
                 type: 'POST'
             }).done(function(data){
-                console.log(data);
-                $('#book_table').DataTable( {
-                    "processing": true,
+//                console.log(data);
+                current = data;
+                var table = $('#book_table').DataTable( {
+                    "ajax": "",
                     "data": data,
                     "columns": [
                         { "data": "industryIdentifiers.0.identifier" },
@@ -54,6 +76,21 @@
                     ]
                 } );
 
+            });
+        });
+
+        $("#save").on('click',function () {
+            var content = translate(current);
+//            console.log(content);
+            $.ajax({
+                url: '/book/book-list-save',
+                dataType:'json',
+                contentType: "application/json",
+                data: content,
+                type: 'POST'
+            }).done(function(data){
+                console.log(data);
+                alert(data);
             });
         })
 
