@@ -1,0 +1,410 @@
+<link rel='stylesheet' type="text/css"  href='/stylesheets/requirement.css' />
+<div class="container">
+    <h2>Chicago High Library</h2>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-sm-9 col-xs-12">
+                    <h3 id="chapter1">1. Introduction</h3>
+                    <p>This tool maintains a small repository of school books. It could track books, classes and
+                        students who check out books. And staff shall manage books information and teacher shall check
+                        out the book that they teach.</p>
+                    <h4 id="chapter1-1">1.1 Goals and objectives</h4>
+                    <p>This tool maintains a repository of school books. The main goals of this application is to build
+                        a small repository of school books which support different kinds of operations for users.
+                        The objective of this software development lies in how well the requirements are understood and
+                        how this can be developed using proper planned phases in different modules. The application
+                        shall track books, classes and students who check out books. Each book has a unique school
+                        generated ID. A total number of books shall be tracked. The ability to add/update/delete all
+                        information is required. Numeric key fields should be automatically generated. Such as book ID,
+                        Student Id, Staff ID. Security is required.</p>
+                    <p>All users must be granted access to the system before they can use it. Access must be based on
+                        levels. The system must respond to all requests within 5 seconds. The application shall list
+                        all students with books checked out showing due date and date checked out. List all users and
+                        their access level. List all books in the system with search capabilities. To list all orders
+                        by order type (PC Repair Orders, etc.). List of all books checked out by class or book
+                        name/number. List of students and parents info with amount due. </p>
+                    <p>What’s more, each Book is identified with an ISBN number and unique school generated number.
+                        Each student shall check out up to the number of classes he/she is registered for. Each
+                        staff/teacher is assigned a unique user ID and an ID. Books data needs to be stored in a
+                        database of some sort and the data shall be obtained from an online web service
+                        (google books, Amazon or any other source). Each class the school offer must be recorded in
+                        the database.</p>
+
+                    <h4 id="chapter1-2">1.2 Statement of scope</h4>
+                    <p>The tool is mainly used in a school’s library. </p>
+                    <p>It could track books, classes, students and teachers who check out books. </p>
+                    <p>The essential goal is to track books by ISBN, to track students and teachers by ID. The desirable
+                        goal is to count the number of books checked out, and those left in the library. The future goal
+                        is to apply this tool into multiple platform in a different context, like hospital counting
+                        medicine, police station counting guns, etc.</p>
+                    <p>The Scope of the Project is to provide an interface to the customers that can interact with the
+                        system on a web based form which generates the list of order or repairs etc. to the
+                        administrator and also to the customer. This kind of format is very reasonable to manage and
+                        maintain for both administrator and to the customer.</p>
+                    <p>The List of major inputs, processing, etc. is presented below and their ranks are also specified.</p>
+                    <p>The application shall be accessible through a web browser such as chrome, Firefox, Safari and so
+                        on. It shall prompt the user for a username and password. Upon entering this information
+                        correctly, the user shall have access to the repository of school books.</p>
+                    <p>For the users, they shall be able to search and check out books which is essential for the
+                        course. In additional, the users shall able to view the capabilities of books. Most importantly,
+                        the user shall be able to view the current state of the orders.</p>
+                    <p>The users shall do this by requesting a report from the system. The report shall display,
+                        according to the type of report requested, either:
+                    </p>
+                    <p>1.All students with books checked out showing due date and date checked out.</p>
+                    <p>2.All authorized users and their access level.</p>
+                    <p>3.All books in the system with search capabilities.</p>
+                    <p>4.All orders by order type.</p>
+                    <p>5.All books checked out by class or book name/number.</p>
+                    <p>In the case that a new book is offered by the store, the administrator shall have the capability
+                        to add new items into the repository for tracking. To help maintain the current repository
+                        state, the administrator shall have the ability to update the quantity of books in repository
+                        when books are checked out. In order to update the information, the administrator will have to
+                        enter the number of books checked out, the due date. The administrator shall also be able to
+                        delete books in the case that they are no longer offered. Every book shall be differentiated by
+                        an ISBN number. Similar codes shall be created for the purpose of identifying students and
+                        teachers.</p>
+                    <p>In the case that a student or a teacher contact information should change, the administrator
+                        shall be able to update the contact information for the students or teachers. The administrator
+                        shall also have the ability to delete information of students or teachers.The administrator
+                        shall be able to add, update, and delete order information in the same way that he/she is able
+                        to do for a customer's information. In additional, the administrator shall search all the access
+                        level of authorized users and shall view all books checked out by class or book name/number.</p>
+                    <p>The customer list shall be maintained in a similar way to the books. When a student or teacher
+                        wants to check out some books, the system will list all the information of books through
+                        searching by book’s name or ISBN number. When students or teachers check out some books, system
+                        will automatically decrease the amount of books in the tracking portion of the system for
+                        repository. Students shall able to view the due date and the date checked out of books they
+                        checked out and check our up to the number of  classes he/she is registered for through
+                        entering their ID.</p>
+                    <p>Please see the table on the next page for more details on the system's requirements and
+                        capabilities.</p>
+                    <table class="req-table">
+                        <tr>
+                            <th>REQ.No</th>
+                            <th>DESCRIPTION </th>
+                            <th>RANK</th>
+                            <th>TESTED</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Navigation: HTMLLinks, Control</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>2</td>
+                            <td>Data Entry : HTML Form</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Database : SQL server</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>4</td>
+                            <td>NBooks list</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Username and password</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>6</td>
+                            <td>Book ISBN number</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Customer info : Personal data</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>8</td>
+                            <td>Customer info : Place order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Customer info : Delete order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>10</td>
+                            <td>Customer info : Update order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Customer info : Track order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>12</td>
+                            <td>Customer log note</td>
+                            <td>Desired</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Administrator Security Privileges</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>14</td>
+                            <td>Type of books and description</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Important Notifications and Updates</td>
+                            <td>Desired</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>16</td>
+                            <td>Order : Order List</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>Order : More number of orders</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>18</td>
+                            <td>Reports : List all customer with  access level</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>Reports : List students and books with due date and date checked out</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>20</td>
+                            <td>Reports : List books with capabilities</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>Reports : List orders by type</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>22</td>
+                            <td>Reports : List books checked out by class or book name/number</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>Reports : List students info with amount due</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                    </table>
+                    <h4 id="chapter1-3">1.3 Software context</h4>
+                    <p>The software is used to check and order books in a high school efficiently. It is a web based
+                        application which basically consists of 3 tier architecture. Application server (Node.js) will
+                        mainly handle the web application.</p>
+                    <p>The application will communicate to the database (MongoDB)
+                        to communicate and retrieve information. Users shall use a browser (Firefox, Chrome, Safari) to
+                        access the application. With the growing number of the users, in order to keep track of the
+                        changes to its books, the system shall not only allow multiple users to maintain an up-to-date
+                        account of the book repository, it shall also help link its inventory to both the users who
+                        borrow (check out) the book and the other users who return them. </p>
+                    <p>The system will help control the management process of the repository by keeping current contact
+                        information for students, parents, teachers and staffs. The students and the parents can be the
+                        main users who can borrow (check out), return their books and update their information.
+                        The teachers shall borrow (check out) more books than students and parents.
+                        The staffs shall manage the book information or inventory. Also, they can control the whole system.
+                    </p>
+                    <h4 id="chapter1-4">1.4 Major constraints</h4>
+                    <p>The major constraints in the development are that the system should respond within the required
+                        constraint described in the project manual. The software is developed keeping in mind about the
+                        needs of the customer and their interaction between the system. </p>
+                    <p>The software is designed to give the best efficiency possible. It is also organized to fix quick
+                        errors or bugs.</p>
+
+                    <h3 id="chapter2">2. Data Design</h3>
+                    <p>
+                        This part will describe the data structure including internal, global, and temporary data
+                        structures.
+                    </p>
+                    <h4 id="chapter2-1">2.1 Internal software data structure</h4>
+                    <p>
+                        High School Book Tracking web application’s internal structure is divided into two different
+                        main parts: Server-side and Client-side. </p>
+                    <p>For our Server-side, the data of the user information, book information and book inventory will
+                        be stored in our local database. The functionality of the storage will be accomplished using a
+                        MongoDB database. The data structure in the server will be handled in which defined based on the
+                        classes in requirement document and later. </p>
+                    <p>The Server side will be implemented by Node.js and Express back-end Framework. </p>
+                    <p>The class will be isolated in model module, The businesses and functionality will be controlled
+                        in Controller module, The view skeleton will be implemented in View module. Therefore, The data
+                        flowing will be handled by way of MVC (Model-View-Controller) System.</p>
+                    <p>The server side (Express) and the client-side (web browser) will exchange data in two ways: The First way
+                        is back-end Controller will render needed data for View which is for initialization, The Second way is back-end
+                        Controller sending data using JSON format which is for the huge amount of data.</p>
+                    <p>The client side exchange data mainly using the JSON based RESTful. The JSON is a versatile data
+                        object format which already dominated a web development. The client-side as web page mainly
+                        manipulated by javascript, exchange by AJAX.
+                    </p>
+                    <h4 id="chapter2-2">2.2 Global data structure</h4>
+                    <p>The global data structure of book tracking web application is characterized by the MongoDB database.
+                        The client-side (web browser) shall never access this database directly, it shall be able to
+                        make requests to our server side and get the data safely. The architecture of the data structure
+                        reveals the data is that the app need in its purest sense.</p>
+                    <h4 id="chapter2-3">2.3 Temporary data structure</h4>
+                    <p>The temporary data will be mainly exist in our client-side which is a web browser. There will be
+                        two mainly data objects’ type in our web browser. The one is cookie saved in the user’s browser
+                        to temporarily manipulate the user local data. The other is session saved on the machine to
+                        temporarily manage the login state. Those Temporary data will help us to refine and improve our
+                        application by lowering data exchange and front-end rely.</p>
+                    <h4 id=class"2-4">2.4 Database description</h4>
+                    <p>The Database will be preserved by MongoDB. The MongoDB as a document oriented database will have
+                        a lot of different features compare with traditional relational database.</p>
+                    <ol>
+                        <li> The document oriented database can essentially provide a flexible JSON structure.
+                        <li> The document oriented database don’t have to make a rigorous initialization.
+                        <li> The document oriented database don’t have “relation” which means no more relational join
+                            or limit. All relation from business oriented can be solved by ID and flexible structure.
+                    </ol>
+                    <p>It’s a very powerful database for web development based on Node.js.
+                    Here is our ERD Diagram on requirement specification document.
+                        So we can divide as 5 tables.</p>
+
+
+                    <h3 id="chapter3">3. Architecture and component-level design</h3>
+                    <h4 id="chapter3-1">3.1 System structure</h4>
+                    <p>The High School Book Tracking web application is broken up into two main parts: A server-side Node.js with mongoDB
+                        as database and the client-side(HTML,CSS,Javascript) in web browser.</p>
+                    <h4 id="chapter3-2">3.2  Student class</h4>
+                    <h5>3.2.1 Processing Narrative (PSPEC)</h5>
+                    <p>When a Students user first creates his /her account in the website, a new Student object is created. This object
+                        is responsible for storing information unique to the Student users. This object includes the following:</p>
+                    <ul>
+                        <li>StudentID
+                        <li>CWID
+                        <li>Email
+                        <li>Password
+                        <li>FirstName
+                        <li>LastName
+                        <li>Birthday
+                        <li>AmountDue
+                    </ul>
+                    <p>Thus, when the information related to the Student users is required, the Student user object is called upon.</p>
+                    <h4 id=""</h4>
+
+
+
+
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+                        <ul class="nav bs-docs-sidenav">
+                            <li class="">
+                                <a href="#chater1">1.0 Introduction</a>
+                                <ul class="nav">
+                                    <li class=""><a href="#chater1-1">1.1 Goals and objectives</a></li>
+                                    <li><a href="#chater1-2">1.2 Statement of scope</a></li>
+                                    <li><a href="#chater1-3">1.3 Software context</a></li>
+                                    <li><a href="#chater1-4">1.4 Major constraints</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href="#chater2">2.0 Usage scenario</a>
+                                <ul class="nav">
+                                    <li><a href="#chater2-1">2.1 User profiles</a></li>
+                                    <li><a href="#chater2-2">2.2 Use-cases</a></li>
+                                    <li><a href="#chater2-2-1">2.2.1 Use-Case Diagrams</a></li>
+                                    <li><a href="#chater2-2-2">2.2.2 Use-Case Descriptions</a></li>
+                                    <li><a href="#chater2-3">2.3 Special usage considerations</a></li>
+                                    <li><a href="#chater2-4">2.4 Activity Diagrams</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href="#chater3">3.0 Data Model and Descrpition</a>
+                                <ul class="nav">
+                                    <li><a href="#chater3-1">3.1 Data objects</a></li>
+                                    <li><a href="#chater3-2">3.2 Relationships</a></li>
+                                    <li><a href="#chater3-3">3.3 Complete data model</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chater4">4.0 Functional Model and Description</a>
+                                <ul class="nav">
+                                    <li><a href="#chater4-1">4.1 Class diagrams</a></li>
+                                    <li><a href="#chater4-2">4.2 Software Interface Description</a></li>
+                                    <li><a href="#chater4-2-1">4.2.1 External machine interfaces</a></li>
+                                    <li><a href="#chater4-2-2">4.2.2 External system interfaces</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chater5">5.0 Behavioral Model and Description</a>
+                                <ul class="nav">
+                                    <li><a href="#chater5-1">5.1 Description for software behavior</a></li>
+                                    <li><a href="#chater5-1-1">5.1.1 Events</a></li>
+                                    <li><a href="#chater5-1-2">5.1.2 States</a></li>
+                                    <li><a href="#chater5-2">5.2 Statechart Diagram</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chater6">6.0 Restrictions, Limitations, and Constraints</a>
+                                <ul class="nav">
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chater7">7.0 Validation Criteria</a>
+                                <ul class="nav">
+                                    <li><a href="#chater7-1">7.1 Classes of tests</a></li>
+                                    <li><a href="#chater7-2">7.2 Expected software response</a></li>
+                                    <li><a href="#chater7-3">7.3 Performance bounds</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a class="back-to-top" href="#top">
+                            Back to top
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var sn = $('.bs-docs-sidenav'),sl =sn.children('li');
+        sl.on('click',function () {
+            sn.find('.nav').css('display','none');
+            sl.removeClass('active');
+            $(this).addClass('active');
+            $(this).children('.nav').css('display','block');
+        })
+    })
+</script>
+
+

@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chicago High Library</title>
+</head>
+<body>
+
+<h1>
+    High School Book Tracking Application Design Specifications Document
+</h1>
+<article>
+    <h2>
+        1. Introduction
+    </h2>
+    <p>
+        This tool maintains a small repository of school books. It could track books, classes and students who check
+        out books. And staff shall manage books information and teacher shall check out the book that they teach.
+    </p>
+
+    <h3>
+        1.1 Goals and objectives
+    </h3>
+    This tool maintains a repository of school books. The main goals of this application is to build a small repository
+    of school books which support different kinds of operations for users. The objective of this software development
+    lies in how well the requirements are understood and how this can be developed using proper planned phases in
+    different modules. The application shall track books, classes and students who check out books. Each book has a
+    unique school generated ID. A total number of books shall be tracked. The ability to add/update/delete all
+    information is required. Numeric key fields should be automatically generated. Such as book ID, Student Id, Staff
+    ID. Security is required.  All users must be granted access to the system before they can use it. Access must be
+    based on levels. The system must respond to all requests within 5 seconds. The application shall list all students
+    with books checked out showing due date and date checked out. List all users and their access level. List all books
+    in the system with search capabilities. To list all orders by order type (PC Repair Orders, etc.). List of all books
+    checked out by class or book name/number. List of students and parents info with amount due. What’s more, each Book
+    is identified with an ISBN number and unique school generated number. Each student shall check out up to the number
+    of classes he/she is registered for. Each staff/teacher is assigned a unique user ID and an ID. Books data needs to
+    be stored in a database of some sort and the data shall be obtained from an online web service (google books, Amazon
+    or any other source). Each class the school offer must be recorded in the database.
+
+    <h3>
+        1.2 Statement of scope
+    </h3>
+    The tool is mainly used in a school’s library. It could track books, classes, students and teachers who check out
+    books. The essential goal is to track books by ISBN, to track students and teachers by ID. The desirable goal is to
+    count the number of books checked out, and those left in the library. The future goal is to apply this tool into
+    multiple platform in a different context, like hospital counting medicine, police station counting guns, etc. The
+    Scope of the Project is to provide an interface to the customers that can interact with the system on a web based
+    form which generates the list of order or repairs etc. to the administrator and also to the customer. This kind of
+    format is very reasonable to manage and maintain for both administrator and to the customer. The List of major
+    inputs, processing, etc. is presented below and their ranks are also specified. The application shall be accessible
+    through a web browser such as chrome, Firefox, Safari and so on. It shall prompt the user for a username and
+    password. Upon entering this information correctly, the user shall have access to the repository of school books.
+    For the users, they shall be able to search and check out books which is essential for the course. In additional,
+    the users shall able to view the capabilities of books. Most importantly, the user shall be able to view the current
+    state of the orders. The users shall do this by requesting a report from the system. The report shall display,
+    according to the type of report requested, either:
+
+    <ol>
+        <li>All students with books checked out showing due date and date checked out.
+        <li>All authorized users and their access level.
+        <li>All books in the system with search capabilities.
+        <li>All books checked out by class or book name/number.
+    </ol>
+
+    In the case that a new book is offered by the store, the administrator shall have the capability to add new items
+    into the repository for tracking. To help maintain the current repository state, the administrator (staff) shall
+    have the ability to update the quantity of books in the repository. In order to update the information, the
+    administrator will have to enter the number of books checked out, the due date. The administrator shall also be
+    able to delete books in the case that they are no longer offered. Every book shall be differentiated by an ISBN
+    number. Similar codes shall be created for the purpose of identifying students and teachers. In the case that a
+    student or a teacher contact information should change, the administrator shall be able to update the contact
+    information for the students or teachers. The administrator shall also have the ability to delete information of
+    students or teachers.The administrator shall be able to add, update, and delete order information in the same way
+    that he/she is able to do for a customer's information. In addition, the administrator shall search all the access
+    level of authorized users and shall view all books checked out by class or book name/number. The customer list shall
+    be maintained in a similar way to the book. When a student or teacher wants to check out some books, the system will
+    list all the information of books through searching by book’s name or ISBN number. When students or teachers check
+    out some books, the system will automatically decrease the amount of books in the tracking portion of the system for
+    repository. Students shall able to view the due date and the date checked out of books they checked out and check
+    our up to the number of  classes he/she is registered for through entering their ID. Please see the table on the
+    next page for more details on the system's requirements and capabilities.
+
+
+
+    <h3>
+        1.3 Software context
+    </h3>
+    The software is used to check and order books in a high school efficiently. It is a web based application which
+    basically consists of 3 tier architecture. Application server (Node.js) will mainly handle the web application. The
+    application will communicate to the database (MongoDB) to communicate and retrieve information. Users shall use a
+    browser (Firefox, Chrome, Safari) to access the application. With the growing number of the users, in order to keep
+    track of the changes to its books, the system shall not only allow multiple users to maintain an up-to-date account
+    of the book repository, it shall also help link its inventory to both the users who borrow (check out) the book and
+    the other users who return them. The system will help control the management process of the repository by keeping
+    current contact information for students, parents, teachers and staffs. The students and the parents can be the main
+    users who can borrow (check out), return their books and update their information. The teachers shall borrow (check
+    out) more books than students and parents. The staffs shall manage the book information or inventory. Also, they can
+    control the whole system.
+
+    <h3>
+        1.4 Major constraints
+    </h3>
+    The software needs to use the API from the third party like google books, or Amazon books. This would restrict its
+    originality. Also, It would be run in the certain web browser, it requests network and initial data for student,
+    staff and teacher.
+
+
+    <h2>
+        2.Data design
+    </h2>
+    This part will describe the data structure including internal, global, and temporary data structures.
+    <h3>
+        2.1 Internal software data structure
+    </h3>
+    High School Book Tracking web application’s internal structure is divided into two different main parts: Server-side
+    and Client-side. For our Server-side, the data of the user information, book information and book inventory will be
+    stored in our local database. The functionality of the storage will be accomplished using a MongoDB database. The
+    data structure in the server will be handled in which defined based on the classes in requirement document and
+    later. The Server side will be implemented by Node.js and Express back-end Framework. The class will be isolated in
+    model module, The businesses and functionality will be controlled in Controller module, The view skeleton will be
+    implemented in View module. Therefore, The data flowing will be handled by way of MVC (Model-View-Controller)
+    System. The server side (Express) and the client-side (web browser) will exchange data in two ways: The First way
+    is back-end Controller will render needed data for View which is for initialization, The Second way is back-end
+    Controller sending data using JSON format which is for the huge amount of data. The client side exchange data
+    mainly using the JSON based RESTful. The JSON is a versatile data object format which already dominated a web
+    development. The client-side as web page mainly manipulated by javascript, exchange by AJAX.
+    <h3>
+        2.2 Global data structure
+    </h3>
+    The global data structure of book tracking web application is characterized by the MongoDB database. The client-side
+    (web browser) shall never access this database directly, it shall be able to make requests to our server side and
+    get the data safely. The architecture of the data structure reveals the data is that the app need in its purest
+    sense.
+    <h3>
+        2.3 Temporary data structure
+    </h3>
+    The temporary data will be mainly exist in our client-side which is a web browser. There will be two mainly data
+    objects’ type in our web browser. The one is cookie saved in the user’s browser to temporarily manipulate the user
+    local data. The other is session saved on the machine to temporarily manage the login state. Those Temporary data
+    will help us to refine and improve our application by lowering data exchange and front-end rely.
+    <h3>
+        2.4 Database description
+    </h3>
+    The Database will be preserved by MongoDB. The MongoDB as a document oriented database will have a lot of different
+    features compare with traditional relational database.
+    <ol>
+        <li> The document oriented database can essentially provide a flexible JSON structure.
+        <li> The document oriented database don’t have to make a rigorous initialization.
+        <li> The document oriented database don’t have “relation” which means no more relational join or limit. All
+        relation from business oriented can be solved by ID and flexible structure.
+    </ol>
+    It’s a very powerful database for web development based on Node.js.
+    Here is our ERD Diagram on requirement specification document.
+    So we can divide as 5 tables.
+
+    Department
+
+
+
+
+
+    Staff
+
+    Student
+
+    Course
+
+    Book
+
+    <h2>
+        3. Architectural and component-level design
+    </h2>
+    <h3>
+        3.1 System structure
+    </h3>
+
+    The High School Book Tracking web application is broken up into two main parts: A server-side Node.js with mongoDB
+    as database and the client-side(HTML,CSS,Javascript) in web browser.
+    <h4>
+        3.1.1 Architecture diagram
+    </h4>
+
+    <h3>
+        3.2  Student class
+    </h3>
+
+    The Student class is used to represent the Student users and includes a StudentID, CWID, Email, Password, Name,
+    Birthday, AmountDue. Each instance of the class Books, Course hold one or more instance of this class
+
+    <h4>
+        3.2.1 Processing Narrative (PSPEC)
+    </h4>
+    When a Students user first creates his /her account in the website, a new Student object is created. This object
+    is responsible for storing information unique to the Student users. This object includes the following:
+
+    StudentID
+    CWID
+    Email
+    Password
+    FirstName
+    LastName
+    Birthday
+    AmountDue
+
+    Thus, when the information related to the Student users is required, the Student user object is called upon.
+
+    <h4>
+        3.2.2 Interface Description
+    </h4>
+
+    checkOutBook(String) : boolean
+    modifyInfor(String, String) : boolean
+    updateAmountDue() : boolean
+    Register(): Boolean
+    ListCourse() : Object
+
+    <h4>
+        3.2.3 Processing Detail
+    </h4>
+    This class is mainly responsible for checking out the books, modifying the information and updating amount due.
+    <h5>
+        3.2.3.1 DESIGN CLASS HIERARCHY
+    </h5>
+    The Student class has a child class  “Parent”. What’s more, each instance Book and Course have an associated
+    Student(which is not necessarily unique to that Book and Course).
+
+    <h5>
+        3.2.3.2 RESTRICTIONS/LIMITATIONS
+    </h5>
+    Since the Student class is self-contained, there are no practical restrictions.
+    <h5>
+        3.2.3.3 PERFORMANCE ISSUES
+    </h5>
+    Considering that there is only one UserAccount object associated with each device, there are no performance-related
+    issues associated with this class.
+    <h5>
+        3.2.3.4 DESIGN CONSTRAINTS
+    </h5>
+    Due to the nature of the design, each student should be be associated with a course at least. Each student must have
+    a unique CWID and Email.
+    <h5>
+        3.2.3.5 PROCESSING DETAIL FOR EACH OPERATION
+    </h5>
+    checkOutBook(String) : boolean
+    When each student enter the BookID, he/her can check out the book needed
+    modifyInfo(String, String) : boolean
+    When student modify some information, inputing the CWID and latest information, this method is called to change the
+    outdated information to the latest information.
+    updateAmountDue() : boolean
+    When a student wants to update the amount due, this method is called.
+    Register(): Boolean
+    When a student first login this website, he/her first needs to register, this method is called to register.
+    ListCourse() : Object
+    When a student wants to view what courses he/she takes, this method is called to list all the courses.
+    <h3>
+        3.3  Book class
+    </h3>
+
+    The Book class is used to represent all the books and includes BookID, ISBN, BookInfo, TotalChecked, TotalAvailable.
+    Each instance of the class Student, Teacher and Course hold one or more instance of this class.
+    <h4>
+        3.3.1 Processing Narrative (PSPEC)
+    </h4>
+    Many Books objects are stored in the database. Each object is responsible for storing information unique to the each
+    Book. This object includes the following:
+
+    BookID
+    ISBN
+    BookInfo
+    TotalChecked
+    TotalAvailable
+
+    Thus, when the information related to the Books is required, the Book object is called upon.
+
+    <h4>
+        3.3.2 Interface Description
+    </h4>
+
+    updateBookState() : boolean
+
+    <h4>
+        3.3.3 Processing Detail
+    </h4>
+    This class is mainly responsible for storing the information of books. There are no algorithms associated with this
+    class.
+    <h5>
+        3.3.3.1 DESIGN CLASS HIERARCHY
+    </h5>
+    The Book class has no parent or child classes. However, each instance Student and Course have an associated Book
+    (which is not necessarily unique to that Student and Course).
+
+    <h5>
+        3.3.3.2 RESTRICTIONS/LIMITATIONS
+    </h5>
+    Since the Book class is self-contained, there are no practical restrictions.
+    <h5>
+        3.3.3.3 PERFORMANCE ISSUES
+    </h5>
+    The only potential performance issue would occur when this class attempts to communicate with the database to update
+    the information of books. If the device cannot connect to the database, then the methods responsible for updating
+    books’ information will not function correctly.
+    <h5>
+        3.3.3.4 DESIGN CONSTRAINTS
+    </h5>
+    Due to the nature of the design, each books should be related to Course,User and Student. Each Book must have a
+    unique ISBN.
+    <h5>
+        3.3.3.5 PROCESSING DETAIL FOR EACH OPERATION
+    </h5>
+    updateBookState() : boolean
+    When the Staff wants to update information of books or Teacher and Student want to check out the books, this method
+    will be called by the modifyBookInfo and CheckOutBook method.
+
+    <h3>
+        3.4  Course class
+    </h3>
+
+    The Course class is used to represent all the courses and includes CourseID, CourseName, CourseNumber, Textbook.
+    Each instance of the class Student, Book and User hold one or more instance of this class. Each Course class has
+    unique association with Department class.
+
+    <h4>
+        3.4.1 Processing Narrative (PSPEC)
+    </h4>
+    Many course objects are stored in the database. Each object is responsible for storing information unique to the
+    each course. This object includes the following:
+
+    CourseID
+    CourseName
+    CourseNumber
+    TextBook
+
+    Thus, when the information related to the Course is required, the Course object is called upon.
+
+    <h4>
+        3.4.2 Interface Description
+    </h4>
+
+    addTextBook(String) : object
+    getTeacher() : object
+
+    <h4>
+        3.4.3 Processing Detail
+    </h4>
+    This class is mainly responsible for storing the information of courses.
+    <h5>
+        3.4.3.1 DESIGN CLASS HIERARCHY
+    </h5>
+    The Course class has no parent or child classes. However, each instance Student, User and Book have an associated
+    Course(which is not necessarily unique to that Student, User and Course) and each instance Department is unique to
+    Course(which is not necessarily unique to that Student, User and Course)
+    <h5>
+        3.4.3.2 RESTRICTIONS/LIMITATIONS
+    </h5>
+    Since the Course class is self-contained, there are no practical restrictions.
+    <h5>
+        3.4.3.3 PERFORMANCE ISSUES
+    </h5>
+    This class does not perform any computationally intensive tasks, nor does it require substantial resources.
+    Consequently, there should be no performance problems for this class.
+    <h5>
+        3.4.3.4 DESIGN CONSTRAINTS
+    </h5>
+    Due to the nature of the design, each Course should be related to Book, User, Department and Student. Each Course
+    must have a unique CourseNumber.
+    <h5>
+        3.4.3.5 PROCESSING DETAIL FOR EACH OPERATION
+    </h5>
+    addTextBook(String) : object
+    When a course needs more books for this course, the BookID is inputted and this method is called to add a textbook
+    to this course.
+    getTeacher() : object
+    When someone wants to know who teaches this course. this method is called to show the teacher’s information.
+
+
+    <h3>
+        3.5  Department class
+    </h3>
+
+    The Department class is used to represent all the department and includes DeptID, DeptName, Location. Each Course
+    and User class has unique association with Department class.
+
+    <h4>
+        3.5.1 Processing Narrative (PSPEC)
+    </h4>
+    Many department objects are stored in the database. Each object is responsible for storing information unique to
+    the each department. This object includes the following:
+
+    DeptID
+    DeptName
+    Location
+
+    Thus, when the information related to the department is required, the department object is called upon.
+
+    <h4>
+        3.5.2 Interface Description
+    </h4>
+
+    findStaff(String, String) : User
+    findCourse(String) : Course
+    listAllStaff() : object
+    listAllCourse() : object
+
+    <h4>
+        3.5.3 Processing Detail
+    </h4>
+    This class is mainly responsible for storing the information of department.
+    <h5>
+        3.5.3.1 DESIGN CLASS HIERARCHY
+    </h5>
+    The Course class has no parent or child classes. Each instance Department is unique to Course and User(which is not
+    necessarily unique Department)
+    <h5>
+        3.5.3.2 RESTRICTIONS/LIMITATIONS
+    </h5>
+    Since the Department class is self-contained, there are no practical restrictions.
+    <h5>
+        3.5.3.3 PERFORMANCE ISSUES
+    </h5>
+    The only potential performance issue would occur when this class attempts to list all the Users and courses in this
+    department. This method may need large memory and needs much time to connect to the database and to list all the
+    information.
+    <h5>
+        3.5.3.4 DESIGN CONSTRAINTS
+    </h5>
+    Due to the nature of the design, each department should be related to User and Course. Each Department must have a
+    unique DeptName.
+    <h5>
+        3.5.3.5 PROCESSING DETAIL FOR EACH OPERATION
+    </h5>
+    findStaff(String, String) : User
+    When someone wants to know information of the User in this department, inputing the User’s SSN and Email, this
+    method is called to connect to the User class to find the User’s information.
+    findCourse(String) : Course
+    When someone wants to know information of the course in this department, inputing the CourseNumber, this method is
+    called to connect to the Course class to find the course’s information.
+    listAllStaff() : object
+    When someone wants to know information of all the User in this department, this method is called to connect to the
+    User class to find all the Users’ information.
+    listAllCourse() : object
+    When someone wants to know information of the course in this department, this method is called to connect to the
+    Course class to find all the courses’ information.
+
+
+    <h3>
+        3.6   User class
+    </h3>
+
+    The User class is used to represent all the User and includes StaffID, SSN, Email, Password, FisrtName, LastName,
+    Birthday. Each User class has unique association with Department class and have an association with Course class.
+    <h4>
+        3.6.1 Processing Narrative (PSPEC)
+    </h4>
+    Many User objects are stored in the database. Each object is responsible for storing information unique to the each
+    User. This object includes the following:
+
+    StaffID
+    SSN
+    Email
+    Password
+    FirstName
+    LastName
+    Birthday
+
+    Thus, when the information related to the User is required, the User object is called upon.
+
+    <h4>
+        3.6.2 Interface Description
+    </h4>
+
+    getWorkDept() : String
+    listAccessLevel(): Object
+
+
+    <h4>
+        3.6.3 Processing Detail
+    </h4>
+    This class is mainly responsible for storing the information of User.
+    <h5>
+        3.6.3.1 DESIGN CLASS HIERARCHY
+    </h5>
+    The Course class has two children classes, Teacher and Admin. Each instance Department is unique to User(which is
+    not necessarily unique Department) and Each User has an associated to Course.
+    <h5>
+        3.6.3.2 RESTRICTIONS/LIMITATIONS
+    </h5>
+    Since the User class is self-contained, there are no practical restrictions.
+    <h5>
+        3.6.3.3 PERFORMANCE ISSUES
+    </h5>
+    This class does not perform any computationally intensive tasks, nor does it require substantial resources.
+    Consequently, there should be no performance problems for this class.
+    <h5>
+        3.6.3.4 DESIGN CONSTRAINTS
+    </h5>
+    Due to the nature of the design, each User should be related to Course and Department. Each User must have a unique
+    SSN and Email.
+    <h5>
+        3.6.3.5 PROCESSING DETAIL FOR EACH OPERATION
+    </h5>
+    getWorkDept() : String
+    When we want to know what the specific department the user belongs to, this method is called, then the department
+    the user works in is showed.
+    listAccessLevel(): Object
+    When a user wants to view all the access levels of the users and students, this method is called to list all the
+    access level of all the users and students.
+
+    <h3>
+        3.7   Teacher class
+    </h3>
+
+    The Teacher class is used to represent all the teacher and it’s the child class of the User inheriting all the
+    attributes of the User and has CourseList, BookList. Each Teacher class has unique association with Department class
+    and have an association with Course class.
+
+    <h4>
+        3.7.1 Processing Narrative (PSPEC)
+    </h4>
+    Many User objects are stored in the database. Each object is responsible for storing information unique to the each
+    User. it’s the child class of the User inheriting all the attributes of the User and has CourseList, BookList. This
+    object includes the following:
+
+    StaffID
+    SSN
+    Email
+    Password
+    FirstName
+    LastName
+    Birthday
+    CourseList
+    BookList
+
+    Thus, when the information related to the Teacher is required, the Teacher object is called upon.
+
+    <h4>
+        3.7.2 Interface Description
+    </h4>
+
+    updateCourse() : Object
+    updateBook() : Object
+    teacherCourse(String) : boolean
+    checkOutBook(String) : DATE
+
+    <h4>
+        3.7.3 Processing Detail
+    </h4>
+    This class is mainly responsible for storing the information of Teacher
+    <h5>
+        3.7.3.1 DESIGN CLASS HIERARCHY
+    </h5>
+    The Teacher is the child class of the User inheriting all the attributes of the User. Each Teacher class has unique
+    association with Department class and have an association with Course class.
+    <h5>
+        3.7.3.2 RESTRICTIONS/LIMITATIONS
+    </h5>
+    Since the User class is self-contained, there are no practical restrictions.
+    <h5>
+        3.7.3.3 PERFORMANCE ISSUES
+    </h5>
+    This class does not perform any computationally intensive tasks, nor does it require substantial resources.
+    Consequently, there should be no performance problems for this class.
+    <h5>
+        3.7.3.4 DESIGN CONSTRAINTS
+    </h5>
+    Due to the nature of the design, each teacher should be related to Course and Department. Each teacher must have a
+    unique SSN and Email.
+    <h5>
+        3.7.3.5 PROCESSING DETAIL FOR EACH OPERATION
+    </h5>
+    updateCourse() : Object
+    When a teacher wants to update the Courses’ information, this method is called to call to update the course.
+    updateBook() : Object
+    When a teacher wants to update the books’ information, this method is called to call to update the course.
+    teacherCourse(String) : boolean
+    When we want to know this teacher teaches what course, we input the SSN of the teacher to call the method to list
+    the courses the teacher has
+    checkOutBook(String) : DATE
+    When a teacher wants to check out a book, the teacher inputs the book’s ISBN to call this method.
+
+    <h3>
+        3.8   Staff class
+    </h3>
+
+    The Staff class is used to represent all the teacher and it’s the child class of the User inheriting all the
+    attributes of the User.
+    <h4>
+        3.8.1 Processing Narrative (PSPEC)
+    </h4>
+    Many Staff objects are stored in the database. Each object is responsible for storing information unique to the
+    each Staff. it’s the child class of the User inheriting all the attributes of the User. This object includes the
+    following:
+
+    StaffID
+    SSN
+    Email
+    Password
+    FirstName
+    LastName
+    Birthday
+
+    Thus, when the information related to the Teacher is required, the Staff object is called upon.
+
+    <h4>
+        3.8.2 Interface Description
+    </h4>
+
+    showAllBook() : boolean
+    modifyBook(String, String) : boolean
+
+    <h4>
+        3.8.3 Processing Detail
+    </h4>
+    This class is mainly responsible for storing the information of Teacher
+    <h5>
+        3.8.3.1 DESIGN CLASS HIERARCHY
+    </h5>
+    The Staff is the child class of the User inheriting all the attributes of the User.
+    <h5>
+        3.8.3.2 RESTRICTIONS/LIMITATIONS
+    </h5>
+    Since the User class is self-contained, there are no practical restrictions.
+    <h5>
+        3.8.3.3 PERFORMANCE ISSUES
+    </h5>
+    The only potential performance issue would occur when this class attempts to list all the books’ information. This method may need large memory and needs much time to connect to the database and to list all the information
+    <h5>
+        3.8.3.4 DESIGN CONSTRAINTS
+    </h5>
+    Due to the nature of the design, each Staff must have a unique SSN and Email.
+    <h5>
+        3.8.3.5 PROCESSING DETAIL FOR EACH OPERATION
+    </h5>
+    showAllBook() : boolean
+    When a staff wants to view all the information of all the books, this method is called to show all the books’
+    information
+    modifyBook(String, String) : boolean
+    When a staff wants to modify some information of book, inputing the BookID and latest information, this method is
+    called to change the outdated information to the latest information.
+
+
+    <h3>
+        3.9 Dynamic Behavior for Component
+    </h3>
+    A description of the interaction of the classes is presented.
+    <h4>
+        3.9.1 Interaction Diagrams
+    </h4>
+    <h5>
+        3.9.1.1 Student Sequence Diagram
+    </h5>
+
+
+
+
+
+
+
+
+    <h5>
+        3.9.1.2 Teacher Sequence Diagram
+    </h5>
+
+    <h5>
+        3.9.1.3 Staff Sequence Diagram
+    </h5>
+
+
+    <h2>
+        4. User interface design
+    </h2>
+    A group of menus which the user can interact with data on the system. This group of menus include“Register” menu, “Login” menu, “Staff” menu, “List books information” menu, “Modify books information” menu, “List user’s Access Level” menu, “Student” menu, “View Books” menu, “Borrow Books” menu, “Teacher” menu, “View Books Teacher” menu, “Register Class” menu. The user can interact with these menus by using web browser.
+    <h3>
+        4.1 Description of the user interface
+    </h3>
+    Each menu contains many GUI components, like buttons, labels, text fields and list objects. These components are composed by some ways which make user can quickly and easily interact with the menu.
+    <h4>
+        4.1.1 Screen images
+    </h4>
+
+
+    Log in menu
+
+
+    Register menu
+
+
+    Staff Menu
+
+
+    List Books Information
+
+
+    Modify Book Information
+
+
+    list User Access Level
+
+
+    Student Menu
+
+
+    View Books
+
+
+    Borrow Books
+
+
+    Teacher Menu
+
+
+    View Books Teacher
+
+
+    Register Class
+
+    <h4>
+        4.1.2 Objects and actions
+    </h4>
+    This section will introduce the objects and relevant actions in above menus.
+    <h5>
+        4.1.2.1 Log in menu
+    </h5>
+    When user open the “Book Tracking System” web application on the browser, the “Log in menu” will appear. In this
+    webpage, user should input the username, password and chose staff, teacher or student to log in the system. If the
+    user using this application at the first time, register is available for the user to register a new account.
+    <h5>
+        4.1.2.2 Register menu
+    </h5>
+    The user click the “Register” on the “log in” page, the “Register menu” will appear, which needs user input the
+    user’s First name, Last name, E-mail, and SSN so a new user account will be generated.
+    <h5>
+        4.1.2.3 Staff Menu
+    </h5>
+    The user who is using a staff account will enter the “Staff menu” webpage. In this webpage, the staff user will
+    have some abilities to list books information by clicking the button” List books information”, modify books
+    information by clicking the button “Modify books information”, and list users’ access level by clicking the button
+    “List User’s Access Level”
+    <h5>
+        4.1.2.4 List Books Information
+    </h5>
+    When the staff user click the button” List books information”, the books information webpage will appear.
+    <h5>
+        4.1.2.5  Modify Book Information
+    </h5>
+    When the staff user click the button” Modify books information”, the modify books information webpage will appear.
+    In this webpage, the staff user will be able to input ISBN of the book, add, update, and delete the number of books
+    by clicking the button “Modify”.
+    <h5>
+        4.1.2.6 List User Access Level
+    </h5>
+    When the staff user click the button” List User’s Information”, the list user’s information webpage will appear.
+
+    <h5>
+        4.1.2.7 Student Menu
+    </h5>
+    The user who is using a student account will enter the “Student menu” webpage. In this webpage, the student user
+    will have some abilities to view books information by clicking the button” View books”, borrow books information by
+    clicking the button “Borrow books”.
+
+    <h5>
+        4.1.2.8 View Books
+    </h5>
+    When the student user click the button” View books”, the view books webpage will appear.
+    <h5>
+        4.1.2.9 Borrow Books
+    </h5>
+    When the student user click the button” Borrow books”, the” borrow books “webpage will appear. In this webpage, the
+    student user will be able to input ISBN of the book, book name and course name to borrow a unique textbook by
+    clicking the button “Borrow”.
+    <h5>
+        4.1.2.10 Teacher Menu
+    </h5>
+    The user who is using a teacher account will enter the “Teacher menu” webpage. In this webpage, the teacher user
+    will have some abilities to view books information by clicking the button” View books”, register class by clicking
+    the button “Register class”.
+    <h5>
+        4.1.2.11 View Books Teacher
+    </h5>
+    When the teacher user click the button” View books”, the view books webpage will appear.
+    <h5>
+        4.1.2.12 Register Class
+    </h5>
+    When the teacher user click the button” Register class”, the” Register class “webpage will appear. In this webpage,
+    the teacher user will be able to input department name, course name and capacity of the course to create a course
+    by clicking the button “Register”.
+
+    <h2>
+        4.2 Interface design rules
+    </h2>
+    The interfaces of this web application called “Book tracking system” are based on the Ben Shneiderman’s “Eight
+    Golden Rules of Interface Design”. The details of eight rules are shown as below:
+    <h3>
+        4.2.1 Strive for consistency.
+    </h3>
+    Consistent sequences of actions should be required in similar situations; identical terminology should be used in
+    prompts, menus, and help screens; and consistent commands should be employed throughout.
+    In this web application, all contents are arranged in left side or in the central of the webpage.
+    <h3>
+        4.2.2 Enable frequent users to use shortcuts.
+    </h3>
+    As the frequency of use increases, so do the user's desires to reduce the number of interactions and to increase
+    the pace of interaction. Abbreviations, function keys, hidden commands, and macro facilities are very helpful to
+    an expert user. In this web application, buttons are used for making user finish the task quickly.
+    <h3>
+        4.2.3 Offer informative feedback.
+    </h3>
+    For every operator action, there should be some system feedback. For frequent and minor actions, the response can
+    be modest, while for infrequent and major actions, the response should be more substantial. This web application
+    will give feedbacks when the user finish the operation. When some errors happen, the user will receive the message.
+    <h3>
+        4.2.4 Design dialog to yield closure.
+    </h3>
+    Sequences of actions should be organized into groups with a beginning, middle, and end. The informative feedback
+    at the completion of a group of actions gives the operators the satisfaction of accomplishment, a sense of relief,
+    the signal to drop contingency plans and options from their minds, and an indication that the way is clear to
+    prepare for the next group of actions.
+    <h3>
+        4.2.5 Offer simple error handling.
+    </h3>
+    As much as possible, design the system so the user cannot make a serious error. If an error is made, the system
+    should be able to detect the error and offer simple, comprehensible mechanisms for handling the error.
+    If user do not input the available information, the note will show the user why the information is unavailable.
+    <h3>
+        4.2.6 Permit easy reversal of actions.
+    </h3>
+    This feature relieves anxiety, since the user knows that errors can be undone; it thus encourages exploration of
+    unfamiliar options. The units of reversibility may be a single action, a data entry, or a complete group of actions.
+    The staff users have the highest authority which can help the teachers and students  modify some operation errors.
+    <h3>
+        4.2.7 Support internal locus of control.
+    </h3>
+    Experienced operators strongly desire the sense that they are in charge of the system and that the system responds
+    to their actions. Design the system to make users the initiators of actions rather than the responders.
+    As highest manager, staff users will control the system if it is necessary.
+    <h3>
+        4.2.8 Reduce short-term memory load.
+    </h3>
+    The limitation of human information processing in short-term memory requires that displays be kept simple, multiple
+    page displays be consolidated, window-motion frequency be reduced, and sufficient training time be allotted for
+    codes, mnemonics, and sequences of actions.
+    Each menu is designed for a single task which make every operation is easy understood by the user.
+
+    <h2>
+        4.3 Components available
+    </h2>
+    The Bootstrap provides plenty of GUI components. The web application will use many of them including the following:
+    <h3>
+        4.3.1 Tables
+    </h3>
+    Tables are using for showing some information on the webpage, such as book information and user information.
+    <h3>
+        4.3.2 Input groups:
+    </h3>
+    Extend form controls by adding text or buttons before, after, or on both sides of any text-based <input>.
+    <h3>
+        4.3.3 Button
+    </h3>
+    This web application will use buttons as events driven. Each menu will have its own button to interact with users.
+    <h3>
+        4.3.4 TextView
+    </h3>
+    The TextView components allow webpage show text in a linear way.
+    <h3>
+        4.4 UIDS description
+    </h3>
+    The user interface development system is provided by bootstraps.
+    Our UIDS uses many components from bootstraps. But the graphical components in bootstraps is not enough, so much of
+    the components were designed by ourselves modifying the html codes.
+    Every function in the menu will be implemented by using Javascript.
+
+
+
+
+
+
+    <h2>
+        5. Restrictions, limitations, and constraints
+    </h2>
+
+    <h3>
+        5.1 Restrictions
+    </h3>
+    This is a local environmental program since no online web server.
+    It is for one high school only.
+    All the users’ information stored in a database which is accessible from faculty (teacher and staff).
+    Teachers shall only borrow (check out) the books needed for the class.
+    Students shall only borrow (check out) the book equal or less to the number of classes registered.
+
+    <h3>
+        5.2 Limitations
+    </h3>
+    The system should respond within required constraint in the project manual specifications.
+    The system should be used in the interaction between students, parents,  teachers, staff and the database.
+    The system should provide the best result possible.
+    The mongodb needs more memory than relational databases.
+    Node.js as a web server has some disadvantage. Being a single-threaded platform focused on I/O bound applications
+    on top of a language that does not guarantee purity and has no support for co-routines.
+
+    <h3>
+        5.3 Constraint
+    </h3>
+
+    The student and teacher can’t not register a class for a client site. It should be on the database before the
+    final version.
+    The users must have their correct usernames(Email) and passwords to enter into the user center.
+    The course and the due time of the book should only maintain by the developer.
+
+
+    <h2>
+        6. Testing Issues
+    </h2>
+    Test strategy and preliminary test case specification are presented in this section.
+    <h3>
+        6.1 Classes of tests
+    </h3>
+    <h4>
+        6.1.1 White box testing
+    </h4>
+    The developer shall assign to the class to make sure each function is working when the class is being implemented.
+    The developer is responsible for debugging the code he/she implemented. The White box testing provides an early
+    testing for the code and prevent the bug from over version release.
+    <h4>
+        6.1.2 Black box testing
+    </h4>
+    The Black box Testing will comprise a majority of the application process. The Testing will be needed after all the
+    components are successfully implemented. It will be not consider about the architecture and inner structure of our
+    book tracking web application, And it will consist of running through all functionality and different situation.
+    <h4>
+        6.1.3 Other testings
+    </h4>
+    Performance Test: ensure that the response time for information retrieval is within 5 seconds. And the website
+    shall be able to visited by different web browser.
+
+    Accuracy Test: ensure the output is what we expected.
+
+    User Interface Test: ensure our interface can be used by a range of the user, In our case, The staff and the student from high school shall be able to use it easily.
+
+    Security test: ensure that users shall only access that the level he/she belongs to.
+
+    <h3>
+        6.2 Expected software response
+    </h3>
+    The expected results from testing are specified.
+
+    Test condition
+
+
+    expected result
+    Database Connection
+    The server Shall connect to database in right time.
+    Server Connection
+    The different web browser shall be able to visit the website within 5 Seconds(locally).
+    Account creation
+    The student and staff can register at different page. The Staff should provide a code to register, The student
+    should use school’s email to register.
+    Enter to login page
+    The user can access the login screen to login.
+    Log in with email and password
+    The user can select the level (Staff, Student) to enter. Also, A valid user shall able to access the system by
+    correct email and password. And It will show the successfully log in if authorized. Otherwise, It will return
+    main page if fail to login.
+    Test all links on page from site map
+    Ensure all the link will be able to access to corresponding
+    page if the user has been authorized.
+
+
+    Test All UI Components with right function.
+    The UI Component shall be able to react in right way at right place.
+
+
+    Test all posted information with right format
+    The information that the user post to the server shall be tested before entering to server. Also the format shall
+    be in right format.
+    The user log out
+    The user shall be able to log out if needed.
+
+
+    List all books and Modify Book information by staff
+    The Staff can see all the book list by course and modify the book information in right format. The server shall be
+    able to verify before updating database.
+
+
+    List access level by staff and user
+    The staff and teacher shall be able to check all the user’s information by table.
+
+
+    Show all the course and select the course he/she teach
+    The teacher shall be able to check all the courses and select a course he teach.
+
+
+    The teacher Checks out book after registration.
+    The teacher shall be able to check out the book only if he/she is the teacher of the class.
+
+
+    The student can list all the books and check out the book.
+    The student shall be able to check out the book only if he/she is the student of the class.
+
+
+
+    The user Modifies information
+    The user shall be able to modify the user information.
+    Book information update
+    The book information shall be get from google book api at the initialization of the database. And only the staff
+    can be able to modify the book information. The book inventory shall be able to change automatically after the book
+    check out or return.
+    Course information maintenance
+    The course shall be able to include the book information automatically.
+    Algorithm
+    Create students, teachers, Staff, lists and make sure all data is accurate.
+
+
+    Performance
+    Time all actions to make sure web browser runs smoothly.
+
+
+
+    <h3>
+        6.3 Performance bounds
+    </h3>
+    According to the requirement of our web application. The interactions between the client web browser and the
+    server shall take the time within 5 seconds. And Since the deployment will be running our server locally, The
+    user from other networking can’t be able to access our system. We only allow one high school to use our web
+    application. We don't allow the user over thousand since the database and the server will not be able to handle
+    the huge amount user’s data. What we focus is on how to organize the book and students and make the book tracking
+    system. We might not allow people to register as a new staff since the level restriction. Our product can’t not be
+    deployed to the marketplace since the limited functionality and server size.
+
+    <h3>
+        6.4 Identification of critical components
+    </h3>
+    The two most critical components of the book tracking application - Server-side and Client-side.
+
+    For our Server-side, Without proper setup and interaction with database. Our website will be rendered useless
+    information or crush. The testing must be done and ensure the validation of the server. And the information
+    before writing in the database must be verified.
+
+    For our Client-side, We have to ensure the data sending to the server shall be verified by Client-side Script
+    before entering the server. The view of Client-side shall clearly show the consistency of information provided
+    by the server.
+
+</article>
+</body>
+</html>
