@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-md-4 col-xs-12">
             <div class="form-vertical">
                 <h2>Student</h2>
                 <p>For Student Sign In</p>
@@ -25,11 +25,38 @@
                 </form>
             </div>
         </div>
-        <div class="vertical-divider"></div>
-        <div class="col-sm-6 col-xs-12">
+
+        <div class="col-md-4 col-xs-12">
             <div class="form-vertical">
                 <h2>STAFF</h2>
                 <p>For Staff Sign In</p>
+                <form method="post" action="staff-center" id="Staff_login" accept-charset="UTF-8">
+                    <input value="staff_login" name="form_type" type="hidden">
+                    <input name="utf8" value="✓" type="hidden">
+                    <div class="input-box">
+                        <label for="StaffAddress">Email Address</label>
+                        <input name="name" id="StaffAddress" class="input-full" placeholder="your@email.com" autocorrect="off" autocapitalize="off" autofocus="" type="email">
+                    </div>
+                    <div class="input-box">
+                        <label for="StaffPassword">Password</label>
+                        <input value="" name="password" id="StaffPassword" class="input-full" placeholder="******" type="password">
+                    </div>
+                    <p>
+                        <input class="btn btn-full" value="Sign In" type="submit">
+                    </p>
+                    <p class="or"><span>or</span></p>
+                    <p><a href="#create" id="Staff_CreateAccount">Sign up now</a></p>
+                    <p><a href="/">Return to index</a></p>
+
+                </form>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-xs-12">
+            <div class="form-vertical">
+                <h2>TEACHER</h2>
+                <p>For Teacher Sign In</p>
                 <form method="post" action="staff-center" id="Staff_login" accept-charset="UTF-8">
                     <input value="staff_login" name="form_type" type="hidden">
                     <input name="utf8" value="✓" type="hidden">

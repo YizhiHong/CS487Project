@@ -6,20 +6,27 @@
         <button id="search"class="btn btn-default">search</button>
         <table id="book_table" class="display" width="100%">
             <thead>
-            <tr>
-                <th>ISBN</th>
-                <th>IMG</th>
-                <th>title</th>
-                <th>desc</th>
-            </tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Publisher</th>
+            <th>PublishedDate</th>
+            <th>Description</th>
+            <th>Categories</th>
+            <th>Image</th>
+            <th>More</th>
             </thead>
+            <tbody>
+            </tbody>
         </table>
+        <button id="save" class="btn btn-default">Save in db</button>
     </div>
 </div>
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
 <script>
     $(document).ready(function() {
+        var current,table;
         $("#search").on('click',function () {
             var content = $("#search_value").val();
             $.ajax({
@@ -28,32 +35,97 @@
                 data: {"search":content},
                 type: 'POST'
             }).done(function(data){
-                console.log(data);
-                $('#book_table').DataTable( {
-                    "processing": true,
+                current = data;
+                table = $('#book_table').DataTable( {
                     "data": data,
                     "columns": [
-                        { "data": "industryIdentifiers.0.identifier" },
-                        { "data": "thumbnail" },
-                        { "data": "title" },
-                        { "data": "description"},
+                        { "data": "ISBN" },
+                        { "data": "Title" },
+                        { "data": "Authors" },
+                        { "data": "Publisher"},
+                        { "data": "PublishedDate"},
+                        { "data": "Description"},
+                        { "data": "Categories"},
+                        { "data": "image"},
+                        {
+                            "orderable":false,
+                            "data": "ISBN"
+                        }
                     ],
                     "columnDefs": [
                         {
                             "render": function ( data, type, row ) {
-                                return '<img src="'+data+'">';
+                                return "<button ISBN='"+data+"' class='btn btn-danger save-to-database'>Save in DB</button>";
                             },
-                            "targets": 1
+                            "targets": 8
                         },
                         {
                             "render": function ( data, type, row ) {
-                                return data || "no description";
+                                return '<img src="'+data+'">';
+                            },
+                            "targets": 7
+                        },
+                        {
+                            "render": function ( data, type, row ) {
+                                return data || "No description";
                             },
                             "targets": 3
+                        },
+                        {
+                            "render": function ( data, type, row ) {
+                                return data || "No description";
+                            },
+                            "targets": 5
+                        },
+                        {
+                            "render": function ( data, type, row ) {
+                                return data || "Not Category";
+                            },
+                            "targets": 6
                         }
                     ]
                 } );
 
+                function findBook(bookList,id) {
+                    for(var i in bookList){
+                        if(bookList[i].ISBN == id){
+                            return bookList[i];
+                        }
+                    }
+                }
+
+                $(".save-to-database").on('click',function () {
+                    var id = $(this).attr('ISBN');
+                    var bookSave = JSON.stringify(findBook(current,String(id)));
+
+                    $.ajax({
+                        url: '/book/book-single-save',
+                        dataType:'json',
+                        contentType: "application/json",
+                        data: bookSave,
+                        type: 'POST'
+                    }).done(function(data){
+                        console.log(data);
+                        alert(data.msg);
+                    });
+
+                })
+
+            });
+        });
+
+        $("#save").on('click',function () {
+            var content = current;
+
+            $.ajax({
+                url: '/book/book-list-save',
+                dataType:'json',
+                contentType: "application/json",
+                data: JSON.stringify(content),
+                type: 'POST'
+            }).done(function(data){
+                console.log(data);
+                alert(data.msg);
             });
         })
 
