@@ -5,10 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/** initialize view template **/
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var requirement = require('./routes/requirement');
 var book = require('./routes/book');
+var staff = require('./routes/staff');
+var teacher = require('./routes/teacher');
+var student = require('./routes/student');
 
 var app = express();
 
@@ -33,21 +38,6 @@ app.get('/books', function(req, res) {
     res.send(BookCollections.find());
 });
 
-/* google api and google book */
-// var google = require('googleapis');
-// var urlshortener = google.urlshortener('v1');
-// var OAuth2 = google.auth.OAuth2;
-// var oauth2Client = new OAuth2(
-//     "205172263790-a5aha4gajkr71bso44fq08sidr4fiqkd.apps.googleusercontent.com",
-//     "xcVrZOx64ZPAyuVJwWj0QyCr",
-//     "localhost:8000/"
-// );
-//
-// google.options({
-//     auth: oauth2Client
-// });
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -60,10 +50,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', users);
 app.use('/requirement', requirement);
 app.use('/book', book);
+app.use('/staff', staff);
+app.use('/teacher', teacher);
+app.use('/student', student);
+
 
 
 // catch 404 and forward to error handler

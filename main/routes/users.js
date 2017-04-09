@@ -6,14 +6,11 @@ var mongoose = require("mongoose");
 /** get student controller**/
 var student = require('../controller/student').student;
 
-/** GET users listing.**/
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-/** login **/
-router.get('/menu', function(req, res) {
-    res.render('menu', { title: 'login' , layout: 'layout-login'});
+    res.render('index', {
+        title: 'High school book Tracking application'
+        , layout: 'layout-login'
+    });
 });
 
 /** login **/
