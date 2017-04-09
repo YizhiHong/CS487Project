@@ -317,7 +317,410 @@
                         <li>AmountDue
                     </ul>
                     <p>Thus, when the information related to the Student users is required, the Student user object is called upon.</p>
-                    <h4 id=""</h4>
+                    <h4>3.2.2 Interface Description</h4>
+
+                    <ul>
+                        <li>checkOutBook(String) : boolean
+                        <li>modifyInfor(String, String) : boolean
+                        <li>updateAmountDue() : boolean
+                        <li>Register(): Boolean
+                        <li>ListCourse() : Object
+                    </ul>
+
+                    <h4>3.2.3 Processing Detail</h4>
+                    <p>This class is mainly responsible for checking out the books, modifying the information and updating amount due.</p>
+                    <h5>3.2.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <p>The Student class has a child class  “Parent”. What’s more, each instance Book and Course have an associated
+                        Student(which is not necessarily unique to that Book and Course).</p>
+                    <h5>3.2.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <p>Since the Student class is self-contained, there are no practical restrictions.</p>
+                    <h5>3.2.3.3 PERFORMANCE ISSUES</h5>
+                    <p>Considering that there is only one UserAccount object associated with each device, there are no performance-related
+                        issues associated with this class.</p>
+                    <h5>3.2.3.4 DESIGN CONSTRAINTS</h5>
+                    <p>Due to the nature of the design, each student should be be associated with a course at least. Each student must have
+                        a unique CWID and Email.</p>
+                    <h5>3.2.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <p>
+                        <ul>
+                    <li>checkOutBook(String) : boolean
+                    When each student enter the BookID, he/her can check out the book needed
+                    <li>modifyInfo(String, String) : boolean
+                    When student modify some information, inputing the CWID and latest information, this method is called to change the
+                    outdated information to the latest information.
+                    <li>updateAmountDue() : boolean
+                    When a student wants to update the amount due, this method is called.
+                    <li>Register(): Boolean
+                    When a student first login this website, he/her first needs to register, this method is called to register.
+                    <li>ListCourse() : Object
+                    When a student wants to view what courses he/she takes, this method is called to list all the courses.
+                        </ul>
+                    </p>
+
+                    <h3 id="chapter3-3">3.3  Book class</h3>
+                    <p>The Book class is used to represent all the books and includes BookID, ISBN, BookInfo, TotalChecked, TotalAvailable.
+                        Each instance of the class Student, Teacher and Course hold one or more instance of this class.</p>
+                    <h4>3.3.1 Processing Narrative (PSPEC)</h4>
+                    <p>
+
+                    Many Books objects are stored in the database. Each object is responsible for storing information unique to the each
+                    Book. This object includes the following:
+                    <ul>
+                    <li>BookID</li>
+                    <li>ISBN</li>
+                    <li>BookInfo</li>
+                    <li>TotalChecked</li>
+                    <li>TotalAvailable</li>
+                    Thus, when the information related to the Books is required, the Book object is called upon.
+                    </ul>
+                    </p>
+
+                    <h4>3.3.2 Interface Description</h4>
+                    <p>updateBookState() : boolean</p>
+
+                    <h4>3.3.3 Processing Detail</h4>
+                    <p>This class is mainly responsible for storing the information of books. There are no algorithms associated with this
+                        class.</p>
+
+                    <h5>3.3.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <p>The Book class has no parent or child classes. However, each instance Student and Course have an associated Book
+                        (which is not necessarily unique to that Student and Course).</p>
+                    <h5>3.3.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <p>Since the Book class is self-contained, there are no practical restrictions.</p>
+                    <h5>3.3.3.3 PERFORMANCE ISSUES</h5>
+                    <p>The only potential performance issue would occur when this class attempts to communicate with the database to update
+                        the information of books. If the device cannot connect to the database, then the methods responsible for updating
+                        books’ information will not function correctly.</p>
+                    <h5>3.3.3.4 DESIGN CONSTRAINTS</h5>
+                    <p>Due to the nature of the design, each books should be related to Course,User and Student. Each Book must have a
+                        unique ISBN.</p>
+                    <h5>3.3.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <p>
+                        <ul>
+
+                            <li>updateBookState() : boolean</li>
+                        When the Staff wants to update information of books or Teacher and Student want to check out the books, this method
+                        will be called by the modifyBookInfo and CheckOutBook method.
+                        </ul>
+                    </p>
+
+                    <h3 id="chapter 3-4">3.4  Course class</h3>
+                    <p>The Course class is used to represent all the courses and includes CourseID, CourseName, CourseNumber, Textbook.
+                        Each instance of the class Student, Book and User hold one or more instance of this class. Each Course class has
+                        unique association with Department class.</p>
+
+                    <h4>3.4.1 Processing Narrative (PSPEC)</h4>
+                    <p>
+
+                    Many course objects are stored in the database. Each object is responsible for storing information unique to the
+                    each course. This object includes the following:
+                        <ul>
+
+                        <li>CourseID</li>
+                        <li>CourseName</li>
+                        <li>CourseNumber</li>
+                        <li>TextBook</li>
+                        </ul>
+                    Thus, when the information related to the Course is required, the Course object is called upon.
+
+
+                    </p>
+
+                    <h4>3.4.2 Interface Description</h4>
+                    <p>
+                        <ul>
+                            <li>addTextBook(String) : object</li>
+                            <li>getTeacher() : object</li>
+                        </ul>
+                    </p>
+
+                    <h4>3.4.3 Processing Detail</h4>
+                    <p>This class is mainly responsible for storing the information of courses.</p>
+
+                    <h5>3.4.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <p>The Course class has no parent or child classes. However, each instance Student, User and Book have an associated
+                        Course(which is not necessarily unique to that Student, User and Course) and each instance Department is unique to
+                        Course(which is not necessarily unique to that Student, User and Course)</p>
+
+                    <h5>3.4.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <p>Since the Course class is self-contained, there are no practical restrictions.</p>
+
+                    <h5>3.4.3.3 PERFORMANCE ISSUES</h5>
+                    <p>This class does not perform any computationally intensive tasks, nor does it require substantial resources.
+                        Consequently, there should be no performance problems for this class.</p>
+
+                    <h5>3.4.3.4 DESIGN CONSTRAINTS</h5>
+                    <p>Due to the nature of the design, each Course should be related to Book, User, Department and Student. Each Course
+                        must have a unique CourseNumber.</p>
+
+                    <h5>3.4.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <p>
+                        <ul>
+                    <li>addTextBook(String) : object</li>
+                        When a course needs more books for this course, the BookID is inputted and this method is called to add a textbook
+                        to this course.
+                    <li>getTeacher() : object</li>
+                        When someone wants to know who teaches this course. this method is called to show the teacher’s information.
+
+                        </ul>
+                    </p>
+
+                    <h3 id="chapter3-5">3.5  Department class</h3>
+                    <p>The Department class is used to represent all the department and includes DeptID, DeptName, Location. Each Course
+                        and User class has unique association with Department class.</p>
+
+                    <h4> 3.5.1 Processing Narrative (PSPEC)</h4>
+                    <p>
+                        Many department objects are stored in the database. Each object is responsible for storing information unique to
+                        the each department. This object includes the following:
+                        <ul>
+                        <li>DeptID
+                        <li>DeptName
+                        <li>Location
+                        </ul>
+                        Thus, when the information related to the department is required, the department object is called upon.
+                    </p>
+
+                    <h4>3.5.2 Interface Description</h4>
+                    <p>
+                        <ul>
+                            <li>findStaff(String, String) : User</li>
+                            <li>findCourse(String) : Course</li>
+                            <li>listAllStaff() : object</li>
+                            <li>listAllCourse() : object</li>
+                        </ul>
+                    </p>
+
+                    <h4>3.5.3 Processing Detail</h4>
+                    <p>This class is mainly responsible for storing the information of department.</p>
+
+                    <h5>3.5.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <p>The Course class has no parent or child classes. Each instance Department is unique to Course and User(which is not
+                        necessarily unique Department)</p>
+
+                    <h5>3.5.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <p>Since the Department class is self-contained, there are no practical restrictions.</p>
+
+                    <h5>3.5.3.3 PERFORMANCE ISSUES</h5>
+                    <p>The only potential performance issue would occur when this class attempts to list all the Users and courses in this
+                        department. This method may need large memory and needs much time to connect to the database and to list all the
+                        information.</p>
+
+                    <h5>3.5.3.4 DESIGN CONSTRAINTS</h5>
+                    <p>Due to the nature of the design, each department should be related to User and Course. Each Department must have a
+                        unique DeptName.</p>
+
+                    <h5>3.5.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <p>
+                        <ul>
+                    <li>findStaff(String, String) : User</li>
+                    When someone wants to know information of the User in this department, inputing the User’s SSN and Email, this
+                    method is called to connect to the User class to find the User’s information.
+                    <li>findCourse(String) : Course</li>
+                    When someone wants to know information of the course in this department, inputing the CourseNumber, this method is
+                    called to connect to the Course class to find the course’s information.
+                    <li>listAllStaff() : object</li>
+                    When someone wants to know information of all the User in this department, this method is called to connect to the
+                    User class to find all the Users’ information.
+                    <li>listAllCourse() : object</li>
+                    When someone wants to know information of the course in this department, this method is called to connect to the
+                    Course class to find all the courses’ information.
+                        </ul>
+                    </p>
+
+                    <h3 id="chapter3-6">3.6   User class</h3>
+                    <p>The User class is used to represent all the User and includes StaffID, SSN, Email, Password, FisrtName, LastName,
+                        Birthday. Each User class has unique association with Department class and have an association with Course class.</p>
+                    <h4>3.6.1 Processing Narrative (PSPEC)</h4>
+                    <p>
+                        Many User objects are stored in the database. Each object is responsible for storing information unique to the each
+                        User. This object includes the following:
+                        <ul>
+                    <li>StaffID</li>
+                    <li>SSN</li>
+                    <li>Email</li>
+                    <li>Password</li>
+                    <li>FirstName</li>
+                    <li>LastName</li>
+                    <li>Birthday</li>
+                        </ul>
+                        Thus, when the information related to the User is required, the User object is called upon.
+
+                    </p>
+
+                    <h4>3.6.2 Interface Description</h4>
+                    <p>
+                        <ul>
+                    <li>getWorkDept() : String</li>
+                    <li>listAccessLevel(): Object</li>
+                        </ul>
+                    </p>
+
+                    <h4>3.6.3 Processing Detail</h4>
+                    <p>
+                        This class is mainly responsible for storing the information of User.
+                    </p>
+
+                    <h5>3.6.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <p>
+                        The Course class has two children classes, Teacher and Admin. Each instance Department is unique to User(which is
+                        not necessarily unique Department) and Each User has an associated to Course.
+                    </p>
+
+                    <h5>3.6.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <p>Since the User class is self-contained, there are no practical restrictions.</p>
+
+                    <h5>3.6.3.3 PERFORMANCE ISSUES</h5>
+                    <p>This class does not perform any computationally intensive tasks, nor does it require substantial resources.
+                        Consequently, there should be no performance problems for this class.</p>
+
+                    <h5>3.6.3.4 DESIGN CONSTRAINTS</h5>
+                    <p>Due to the nature of the design, each User should be related to Course and Department. Each User must have a unique
+                        SSN and Email.</p>
+
+                    <h5>3.6.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <p>
+                        <ul>
+                    <li>getWorkDept() : String</li>
+                    When we want to know what the specific department the user belongs to, this method is called, then the department
+                    the user works in is showed.
+                    <li>listAccessLevel(): Object</li>
+                    When a user wants to view all the access levels of the users and students, this method is called to list all the
+                    access level of all the users and students.
+                        </ul>
+                    </p>
+
+                    <h3 id="chapter3-7">3.7   Teacher class</h3>
+                    <p>The Teacher class is used to represent all the teacher and it’s the child class of the User inheriting all the
+                        attributes of the User and has CourseList, BookList. Each Teacher class has unique association with Department class
+                        and have an association with Course class.</p>
+
+                    <h4>3.7.1 Processing Narrative (PSPEC)</h4>
+                    <p>
+                        Many User objects are stored in the database. Each object is responsible for storing information unique to the each
+                        User. it’s the child class of the User inheriting all the attributes of the User and has CourseList, BookList. This
+                        object includes the following:
+                        <ul>
+                        <li>StaffID</li>
+                        <li>SSN</li>
+                        <li>Email</li>
+                        <li>Password</li>
+                        <li>FirstName</li>
+                        <li>LastName</li>
+                        <li>Birthday</li>
+                        <li>CourseList</li>
+                        <li>BookList</li>
+                        </ul>
+                        Thus, when the information related to the Teacher is required, the Teacher object is called upon.
+                    </p>
+
+                    <h4>3.7.2 Interface Description</h4>
+                    <p>
+                        <ul>
+                    <li>updateCourse() : Object</li>
+                    <li>updateBook() : Object</li>
+                    <li>teacherCourse(String) : boolean</li>
+                    <li>checkOutBook(String) : DATE</li>
+                        </ul>
+                    </p>
+
+                    <h4>3.7.3 Processing Detail</h4>
+                    <p>This class is mainly responsible for storing the information of Teacher</p>
+
+                    <h5>3.7.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <p>The Teacher is the child class of the User inheriting all the attributes of the User. Each Teacher class has unique
+                        association with Department class and have an association with Course class.</p>
+
+                    <h5>3.7.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <p>Since the User class is self-contained, there are no practical restrictions.</p>
+
+                    <h5>3.7.3.3 PERFORMANCE ISSUES</h5>
+                    <p>This class does not perform any computationally intensive tasks, nor does it require substantial resources.
+                        Consequently, there should be no performance problems for this class.</p>
+
+                    <h5>3.7.3.4 DESIGN CONSTRAINTS</h5>
+                    <p>Due to the nature of the design, each teacher should be related to Course and Department. Each teacher must have a
+                        unique SSN and Email.</p>
+
+                    <h5>3.7.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <p>
+                        <ul>
+                    <li>updateCourse() : Object</li>
+                    When a teacher wants to update the Courses’ information, this method is called to call to update the course.
+                    <li>updateBook() : Object</li>
+                    When a teacher wants to update the books’ information, this method is called to call to update the course.
+                    <li>teacherCourse(String) : boolean</li>
+                    When we want to know this teacher teaches what course, we input the SSN of the teacher to call the method to list
+                    the courses the teacher has
+                    <li>checkOutBook(String) : DATE</li>
+                    When a teacher wants to check out a book, the teacher inputs the book’s ISBN to call this method.
+                        </ul>
+                    </p>
+
+                    <h3 id="chapter3-8">3.8   Staff class</h3>
+                    <p>The Staff class is used to represent all the teacher and it’s the child class of the User inheriting all the
+                        attributes of the User.</p>
+
+                    <h4>3.8.1 Processing Narrative (PSPEC)</h4>
+                    <p>
+                        <ul>
+                    Many Staff objects are stored in the database. Each object is responsible for storing information unique to the
+                    each Staff. it’s the child class of the User inheriting all the attributes of the User. This object includes the
+                    following:
+
+                    <li>StaffID</li>
+                    <li>SSN</li>
+                    <li>Email</li>
+                    <li>Password</li>
+                    <li>FirstName</li>
+                    <li>LastName</li>
+                    <li>Birthday</li>
+
+                    Thus, when the information related to the Teacher is required, the Staff object is called upon.
+
+                        </ul>
+                    </p>
+
+                    <h4>3.8.2 Interface Description</h4>
+                    <p>
+                        <ul>
+                    <li>showAllBook() : boolean</li>
+                    <li>modifyBook(String, String) : boolean</li>
+                        </ul>
+                    </p>
+
+                    <h4>3.8.3 Processing Detail</h4>
+                    <p>This class is mainly responsible for storing the information of Teacher</p>
+
+                    <h5>3.8.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <p>The Staff is the child class of the User inheriting all the attributes of the User.</p>
+
+                    <h5>3.8.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <p>Since the User class is self-contained, there are no practical restrictions.</p>
+
+                    <h5>3.8.3.3 PERFORMANCE ISSUES</h5>
+                    <p>The only potential performance issue would occur when this class attempts to list all the books’ information. This method may need large memory and needs much time to connect to the database and to list all the information
+                    </p>
+
+                    <h5>3.8.3.4 DESIGN CONSTRAINTS</h5>
+                    <p>Due to the nature of the design, each Staff must have a unique SSN and Email.</p>
+
+                    <h5>3.8.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <p>
+                    <ul>
+                    <li>showAllBook() : boolean</li>
+                    When a staff wants to view all the information of all the books, this method is called to show all the books’
+                    information
+                    <li>modifyBook(String, String) : boolean</li>
+                    When a staff wants to modify some information of book, inputing the BookID and latest information, this method is
+                    called to change the outdated information to the latest information.
+                    </ul>
+                    </p>
+
+                    <h3 id="chapter3-9">3.9 Dynamic Behavior for Component</h3>
+                    <p>A description of the interaction of the classes is presented.</p>
+
+
 
 
 
