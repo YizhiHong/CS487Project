@@ -10,6 +10,8 @@ var mongoose = require("mongoose");
 router.get('/', function(req, res, next) {
     res.render('staff-menu', { title: 'staff menu' , layout: 'layout-login'});
 });
-
+router.get('/level', function(req, res, next) {
+    res.render('user-access-level', { title: 'access level' , layout: 'layout-login'});
+});
 
 module.exports = router;
