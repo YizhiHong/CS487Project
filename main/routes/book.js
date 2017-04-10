@@ -74,20 +74,19 @@ router.post('/book-list-save',function (req,res,next){
     var _result
 
     (function(){
-        var count=0;
         for(var i in bookList){
             book.save(bookList[i],function (err) {
                 if(err){
                     console.log("error with"+err);
                 }else{
                     console.log("saved");
-                    count = count + 1;
                 }
+
             })
         }
         res.setHeader('Content-Type', 'application/json');
         _result={
-            msg: bookList.length == 0 ? "all saved": "totally " + (bookList.length - count) + " fail to save!! And totally " +  count + " saved in database!!! "
+            msg: count == 0 ? "all saved": "some of then fail to save!! And totally !!! "
         };
         res.json(_result);
 

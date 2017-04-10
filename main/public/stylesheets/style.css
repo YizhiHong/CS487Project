@@ -75,16 +75,14 @@ a {
   height: 100%;
   position: fixed;
   left: 50%;
-  width: 2px;
+  border: 1px dimgrey dashed;
   top: 0;
-  background: black;
 }
 @media (max-width: 768px ) {
   .vertical-divider{
     width: 100%;
     position: relative;
-    height: 2px;
-    background: black;
+    border: 1px dimgrey dashed;
     left: 0;
     float: left;
   }

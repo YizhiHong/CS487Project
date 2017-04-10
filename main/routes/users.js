@@ -48,7 +48,7 @@ router.post('/add-student-info', function(req, res) {
 
 
 /**  student Center **/
-router.post('/student-center', function(req, res) {
+router.post('/student', function(req, res) {
     var query = {
         Email: req.body.name,
         Password: req.body.password
@@ -59,7 +59,7 @@ router.post('/student-center', function(req, res) {
             console.log(doc);
             if(doc){
                 console.log(query.name + ": Login success " + new Date());
-                res.render('student-center', { title:'userCenter' });
+                res.render('student', { title:'Student Center' });
             }else{
                 console.log(query.name + ": fail to login " + new Date());
                 res.send('password wrong');
@@ -69,13 +69,13 @@ router.post('/student-center', function(req, res) {
 });
 
 /**  Staff Center **/
-router.post('/staff-center', function(req, res) {
+router.post('/staff', function(req, res) {
     var query = {Name: req.body.name, Password: req.body.password};
     student.find(query, function(err, doc){
         console.log(doc);
         if(doc){
             console.log(query.name + ": Login success " + new Date());
-            res.render('student-center', { title:'userCenter' });
+            res.render('staff', { title:'userCenter' });
         }else{
             console.log(query.name + ": fail to login " + new Date());
             res.send('password wrong');
