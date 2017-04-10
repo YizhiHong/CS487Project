@@ -17,7 +17,7 @@ var courseSchema = new Schema({
     CourseNumber:  {type:String,required: true,unique:true},
     Department: {type: Schema.ObjectId, ref: 'department'},
     Teachers: {type: Schema.ObjectId, ref: 'staff'},
-    Books: {type: Schema.ObjectId, ref: 'book'},
+    Books: {type: Array, ref: 'book'},
     Students: {type: Schema.ObjectId, ref: 'student'}
 });
 

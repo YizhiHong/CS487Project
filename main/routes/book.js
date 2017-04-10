@@ -15,7 +15,7 @@ var book = require('../controller/book').book;
 
 /* book option */
 var options = {
-    limit: 5,
+    limit: 10,
     type: 'books',
     order: 'relevance',
     lang: 'en'

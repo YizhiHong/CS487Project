@@ -60,3 +60,5 @@ exports.BookCollection = books;
  * **/
 
 exports.CourseCollection = courses;
+
+exports.db = connection;

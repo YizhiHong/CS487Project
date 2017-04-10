@@ -19,7 +19,7 @@ var staffSchema = new Schema({
     LastName: {type:String,max:50,required: true},
     Birthday : Date,
     Level : {type:Number,require: true, enum: [1, 0], default: 1},
-    WorkFor: {type: Schema.ObjectId, ref: 'department',JobTitle: String}
+    WorkFor: {type: Object, ref: 'department'}
 });
 
 module.exports = mongoose.model('staff',staffSchema);

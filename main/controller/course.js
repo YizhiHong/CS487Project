@@ -1,40 +1,40 @@
 /**
  * Created by Chi.Hong on 4/6/17.
  */
-var book = require("../models/book");
+var course = require("../models/course");
 
-var bookController = function () {};
+var courseController = function () {};
 
-bookController.prototype =  {
+courseController.prototype =  {
     //add
     save: function (json, callBack){
-        var newBook = new book(json);
-        newBook.save(function (err){
+        var newCourse = new course(json);
+        newCourse.save(function (err){
             callBack(err);
         });
     },
-    //删
+    //delete
     remove: function (json, callBack){
-        book.remove(json, function (err){
+        course.remove(json, function (err){
             callBack(err);
         });
     },
-    //改
+    //update
     update: function (json, condition, callBack){
-        book.update(json, condition, function (err){
+        course.update(json, condition, function (err){
             callBack(err);
         });
     },
-    //查
+    //find one
     find: function (json, callBack){
-        book.findOne(json, function (err, doc){
+        course.findOne(json, function (err, doc){
             callBack(err, doc);
         });
     },
     //find all
     findAll: function (){
-        return book.find();
+        return course.find();
     }
 };
 
-exports.book = new bookController();
+exports.course = new courseController();

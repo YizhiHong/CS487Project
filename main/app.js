@@ -8,12 +8,13 @@ var bodyParser = require('body-parser');
 /** initialize view template **/
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var requirement = require('./routes/requirement');
 var book = require('./routes/book');
 var staff = require('./routes/staff');
 var teacher = require('./routes/teacher');
 var student = require('./routes/student');
+
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -50,12 +51,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', users);
+app.use('/', index);
 app.use('/requirement', requirement);
 app.use('/book', book);
 app.use('/staff', staff);
 app.use('/teacher', teacher);
 app.use('/student', student);
+
+//only for admin
+app.use('/admin', admin);
 
 
 

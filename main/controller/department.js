@@ -1,39 +1,40 @@
 /**
  * Created by Chi.Hong on 4/6/17.
  */
-var student = require("../models/students");
+var department = require("../models/department");
 
-var studentController = function () {};
+var departmentController = function () {};
 
-studentController.prototype =  {
+departmentController.prototype =  {
     //add
     save: function (json, callBack){
-        var newUser = new student(json);
-        newUser.save(function (err){
+        var newDept = new department(json);
+        newDept.save(function (err){
             callBack(err);
         });
     },
     //删
     remove: function (json, callBack){
-        student.remove(json, function (err){
+        department.remove(json, function (err){
             callBack(err);
         });
     },
     //改
     update: function (json, condition, callBack){
-        student.update(json, condition, function (err){
+        department.update(json, condition, function (err){
             callBack(err);
         });
     },
     //查
     find: function (json, callBack){
-        student.findOne(json, function (err, doc){
+        department.findOne(json, function (err, doc){
             callBack(err, doc);
         });
     },
+
     findAll: function () {
-        return student.find();
+        return department.find();
     }
 };
 
-exports.student = new studentController();
+exports.department = new departmentController();
