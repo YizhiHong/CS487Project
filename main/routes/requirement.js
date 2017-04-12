@@ -5,7 +5,8 @@ var router = express.Router();
 
 router.get('/RSD', function(req, res, next) {
     res.render('requirement', {
-        title: 'High School Book Tracking Application - Requirement Specification Document'
+        title: 'High School Book Tracking Application - Requirement Specification Document',
+        layout:'layout-login'
     });
 });
 
@@ -14,7 +15,8 @@ router.get('/RSD', function(req, res, next) {
 
 router.get('/DSD', function(req, res, next) {
     res.render('DSD', {
-        title: 'High School Book Tracking Application - Requirement Specification Document'
+        title: 'High School Book Tracking Application - Requirement Specification Document',
+        layout:'layout-login'
     });
 });
 
