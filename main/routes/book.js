@@ -34,6 +34,7 @@ router.post('/book-list',function (req,res,next){
     books.search(searchContent, options,function(error, results) {
         if (!error) {
             results = translate(results);
+            console.log(results);
             googleBookList = JSON.stringify(results);
             res.setHeader('Content-Type', 'application/json');
             res.send(googleBookList);
@@ -46,19 +47,23 @@ router.post('/book-list',function (req,res,next){
 var translate = function(data) {
     var output=[];
     for(var i in data){
-        output.push( {
-            "BookID": data[i].industryIdentifiers[0].identifier,
-            "ISBN": data[i].industryIdentifiers[0].identifier,
-            "Title": data[i].title,
-            "Authors": data[i].authors,
-            "Publisher": data[i].publisher,
-            "PublishedDate" : data[i].publishedDate,
-            "Description":  data[i].description,
-            "Categories": data[i].categories,
-            "TotalChecked": 0,
-            "TotalAvailable": 10,
-            "image": data[i].thumbnail
-        })
+        if(!!data[i].industryIdentifiers){
+            console.log(data[i].industryIdentifiers);
+            output.push( {
+                "BookID": data[i].industryIdentifiers[0].identifier,
+                "ISBN": data[i].industryIdentifiers[0].identifier,
+                "Title": data[i].title,
+                "Authors": data[i].authors,
+                "Publisher": data[i].publisher,
+                "PublishedDate" : data[i].publishedDate,
+                "Description":  data[i].description,
+                "Categories": data[i].categories,
+                "TotalChecked": 0,
+                "TotalAvailable": 10,
+                "image": data[i].thumbnail
+            })
+        }
+
     }
     return output;
 }
@@ -71,7 +76,7 @@ router.post('/book-list-save',function (req,res,next){
     }
     var bookList = req.body;
     console.log(bookList);
-    var _result
+    var _result;
 
     (function(){
         for(var i in bookList){
