@@ -1,6 +1,7 @@
 <link rel='stylesheet' type="text/css"  href='/stylesheets/requirement.css' />
+
 <div class="container">
-    <h2>Chicago High Library</h2>
+    <h2>Design Specifications Document</h2>
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
@@ -284,7 +285,7 @@
                         to temporarily manipulate the user local data. The other is session saved on the machine to
                         temporarily manage the login state. Those Temporary data will help us to refine and improve our
                         application by lowering data exchange and front-end rely.</p>
-                    <h4 id=class"2-4">2.4 Database description</h4>
+                    <h4 id="chapter2-4">2.4 Database description</h4>
                     <p>The Database will be preserved by MongoDB. The MongoDB as a document oriented database will have
                         a lot of different features compare with traditional relational database.</p>
                     <ol>
@@ -296,6 +297,16 @@
                     <p>It’s a very powerful database for web development based on Node.js.
                     Here is our ERD Diagram on requirement specification document.
                         So we can divide as 5 tables.</p>
+                    <h5><b>Department</b></h5>
+
+                    <h5><b>Staff</b></h5>
+                    <img class="img-responsive" src="/image/2_4Staff.png" alt="Null" border="0">
+                    <h5><b>Student</b></h5>
+                    <img class="img-responsive" src="/image/2_4Student.png" alt="Null" border="0">
+                    <h5><b>Course</b></h5>
+                    <img class="img-responsive" src="/image/2_4Course.png" alt="Null" border="0">
+                    <h5><b>Book</b></h5>
+                    <img class="img-responsive" src="/image/2_4Book.png" alt="Null" border="0">
 
 
                     <h3 id="chapter3">3. Architecture and component-level design</h3>
@@ -303,7 +314,9 @@
                     <p>The High School Book Tracking web application is broken up into two main parts: A server-side Node.js with mongoDB
                         as database and the client-side(HTML,CSS,Javascript) in web browser.</p>
                     <h4 id="chapter3-2">3.2  Student class</h4>
-                    <h5>3.2.1 Processing Narrative (PSPEC)</h5>
+                    <p>The Student class is used to represent the Student users and includes a StudentID, CWID, Email, Password, Name, Birthday, AmountDue. Each instance of the class Books, Course hold one or more instance of this class</p>
+                    <img class="img-responsive" src="/image/3_2StudentClass.jpg" alt="Null" border="0">
+                    <h5 id="chapter3-2-1">3.2.1 Processing Narrative (PSPEC)</h5>
                     <p>When a Students user first creates his /her account in the website, a new Student object is created. This object
                         is responsible for storing information unique to the Student users. This object includes the following:</p>
                     <ul>
@@ -317,7 +330,7 @@
                         <li>AmountDue
                     </ul>
                     <p>Thus, when the information related to the Student users is required, the Student user object is called upon.</p>
-                    <h4>3.2.2 Interface Description</h4>
+                    <h4 id="chapter3-2-2">3.2.2 Interface Description</h4>
 
                     <ul>
                         <li>checkOutBook(String) : boolean
@@ -327,20 +340,20 @@
                         <li>ListCourse() : Object
                     </ul>
 
-                    <h4>3.2.3 Processing Detail</h4>
+                    <h4 id="chapter3-2-3">3.2.3 Processing Detail</h4>
                     <p>This class is mainly responsible for checking out the books, modifying the information and updating amount due.</p>
-                    <h5>3.2.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <h5 id="chapter3-2-3-1">3.2.3.1 DESIGN CLASS HIERARCHY</h5>
                     <p>The Student class has a child class  “Parent”. What’s more, each instance Book and Course have an associated
                         Student(which is not necessarily unique to that Book and Course).</p>
-                    <h5>3.2.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <h5 id="chapter3-2-3-2">3.2.3.2 RESTRICTIONS/LIMITATIONS</h5>
                     <p>Since the Student class is self-contained, there are no practical restrictions.</p>
-                    <h5>3.2.3.3 PERFORMANCE ISSUES</h5>
+                    <h5 id="chapter3-2-3-3">3.2.3.3 PERFORMANCE ISSUES</h5>
                     <p>Considering that there is only one UserAccount object associated with each device, there are no performance-related
                         issues associated with this class.</p>
-                    <h5>3.2.3.4 DESIGN CONSTRAINTS</h5>
+                    <h5 id="chapter3-2-3-4">3.2.3.4 DESIGN CONSTRAINTS</h5>
                     <p>Due to the nature of the design, each student should be be associated with a course at least. Each student must have
                         a unique CWID and Email.</p>
-                    <h5>3.2.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <h5 id="chapter3-2-3-5">3.2.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
                     <p>
                         <ul>
                     <li>checkOutBook(String) : boolean
@@ -360,7 +373,7 @@
                     <h3 id="chapter3-3">3.3  Book class</h3>
                     <p>The Book class is used to represent all the books and includes BookID, ISBN, BookInfo, TotalChecked, TotalAvailable.
                         Each instance of the class Student, Teacher and Course hold one or more instance of this class.</p>
-                    <h4>3.3.1 Processing Narrative (PSPEC)</h4>
+                    <h4 id="chapter3-3-1">3.3.1 Processing Narrative (PSPEC)</h4>
                     <p>
 
                     Many Books objects are stored in the database. Each object is responsible for storing information unique to the each
@@ -375,26 +388,26 @@
                     </ul>
                     </p>
 
-                    <h4>3.3.2 Interface Description</h4>
+                    <h4 id="chapter3-3-2">3.3.2 Interface Description</h4>
                     <p>updateBookState() : boolean</p>
 
-                    <h4>3.3.3 Processing Detail</h4>
+                    <h4 id="chapter3-3-3">3.3.3 Processing Detail</h4>
                     <p>This class is mainly responsible for storing the information of books. There are no algorithms associated with this
                         class.</p>
 
-                    <h5>3.3.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <h5 id="chapter3-3-3-1">3.3.3.1 DESIGN CLASS HIERARCHY</h5>
                     <p>The Book class has no parent or child classes. However, each instance Student and Course have an associated Book
                         (which is not necessarily unique to that Student and Course).</p>
-                    <h5>3.3.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <h5 id="chapter3-3-3-2">3.3.3.2 RESTRICTIONS/LIMITATIONS</h5>
                     <p>Since the Book class is self-contained, there are no practical restrictions.</p>
-                    <h5>3.3.3.3 PERFORMANCE ISSUES</h5>
+                    <h5 id="chapter3-3-3-3">3.3.3.3 PERFORMANCE ISSUES</h5>
                     <p>The only potential performance issue would occur when this class attempts to communicate with the database to update
                         the information of books. If the device cannot connect to the database, then the methods responsible for updating
                         books’ information will not function correctly.</p>
-                    <h5>3.3.3.4 DESIGN CONSTRAINTS</h5>
+                    <h5 id="chapter3-3-3-4">3.3.3.4 DESIGN CONSTRAINTS</h5>
                     <p>Due to the nature of the design, each books should be related to Course,User and Student. Each Book must have a
                         unique ISBN.</p>
-                    <h5>3.3.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <h5 id="chapter3-3-3-5">3.3.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
                     <p>
                         <ul>
 
@@ -409,7 +422,7 @@
                         Each instance of the class Student, Book and User hold one or more instance of this class. Each Course class has
                         unique association with Department class.</p>
 
-                    <h4>3.4.1 Processing Narrative (PSPEC)</h4>
+                    <h4 id="chapter 3-4-1">3.4.1 Processing Narrative (PSPEC)</h4>
                     <p>
 
                     Many course objects are stored in the database. Each object is responsible for storing information unique to the
@@ -426,7 +439,7 @@
 
                     </p>
 
-                    <h4>3.4.2 Interface Description</h4>
+                    <h4 id="chapter 3-4-2">3.4.2 Interface Description</h4>
                     <p>
                         <ul>
                             <li>addTextBook(String) : object</li>
@@ -434,26 +447,26 @@
                         </ul>
                     </p>
 
-                    <h4>3.4.3 Processing Detail</h4>
+                    <h4 id="chapter 3-4-3">3.4.3 Processing Detail</h4>
                     <p>This class is mainly responsible for storing the information of courses.</p>
 
-                    <h5>3.4.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <h5 id="chapter 3-4-3-1">3.4.3.1 DESIGN CLASS HIERARCHY</h5>
                     <p>The Course class has no parent or child classes. However, each instance Student, User and Book have an associated
                         Course(which is not necessarily unique to that Student, User and Course) and each instance Department is unique to
                         Course(which is not necessarily unique to that Student, User and Course)</p>
 
-                    <h5>3.4.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <h5 id="chapter 3-4-3-2">3.4.3.2 RESTRICTIONS/LIMITATIONS</h5>
                     <p>Since the Course class is self-contained, there are no practical restrictions.</p>
 
-                    <h5>3.4.3.3 PERFORMANCE ISSUES</h5>
+                    <h5 id="chapter 3-4-3-3">3.4.3.3 PERFORMANCE ISSUES</h5>
                     <p>This class does not perform any computationally intensive tasks, nor does it require substantial resources.
                         Consequently, there should be no performance problems for this class.</p>
 
-                    <h5>3.4.3.4 DESIGN CONSTRAINTS</h5>
+                    <h5 id="chapter 3-4-3-4">3.4.3.4 DESIGN CONSTRAINTS</h5>
                     <p>Due to the nature of the design, each Course should be related to Book, User, Department and Student. Each Course
                         must have a unique CourseNumber.</p>
 
-                    <h5>3.4.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <h5 id="chapter 3-4-3-5">3.4.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
                     <p>
                         <ul>
                     <li>addTextBook(String) : object</li>
@@ -469,7 +482,7 @@
                     <p>The Department class is used to represent all the department and includes DeptID, DeptName, Location. Each Course
                         and User class has unique association with Department class.</p>
 
-                    <h4> 3.5.1 Processing Narrative (PSPEC)</h4>
+                    <h4 id="chapter3-5-1"> 3.5.1 Processing Narrative (PSPEC)</h4>
                     <p>
                         Many department objects are stored in the database. Each object is responsible for storing information unique to
                         the each department. This object includes the following:
@@ -481,7 +494,7 @@
                         Thus, when the information related to the department is required, the department object is called upon.
                     </p>
 
-                    <h4>3.5.2 Interface Description</h4>
+                    <h4 id="chapter3-5-2">3.5.2 Interface Description</h4>
                     <p>
                         <ul>
                             <li>findStaff(String, String) : User</li>
@@ -491,26 +504,26 @@
                         </ul>
                     </p>
 
-                    <h4>3.5.3 Processing Detail</h4>
+                    <h4 id="chapter3-5-3">3.5.3 Processing Detail</h4>
                     <p>This class is mainly responsible for storing the information of department.</p>
 
-                    <h5>3.5.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <h5 id="chapter3-5-3-1">3.5.3.1 DESIGN CLASS HIERARCHY</h5>
                     <p>The Course class has no parent or child classes. Each instance Department is unique to Course and User(which is not
                         necessarily unique Department)</p>
 
-                    <h5>3.5.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <h5 id="chapter3-5-3-2">3.5.3.2 RESTRICTIONS/LIMITATIONS</h5>
                     <p>Since the Department class is self-contained, there are no practical restrictions.</p>
 
-                    <h5>3.5.3.3 PERFORMANCE ISSUES</h5>
+                    <h5 id="chapter3-5-3-3">3.5.3.3 PERFORMANCE ISSUES</h5>
                     <p>The only potential performance issue would occur when this class attempts to list all the Users and courses in this
                         department. This method may need large memory and needs much time to connect to the database and to list all the
                         information.</p>
 
-                    <h5>3.5.3.4 DESIGN CONSTRAINTS</h5>
+                    <h5 id="chapter3-5-3-4">3.5.3.4 DESIGN CONSTRAINTS</h5>
                     <p>Due to the nature of the design, each department should be related to User and Course. Each Department must have a
                         unique DeptName.</p>
 
-                    <h5>3.5.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <h5 id="chapter3-5-3-5">3.5.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
                     <p>
                         <ul>
                     <li>findStaff(String, String) : User</li>
@@ -531,7 +544,7 @@
                     <h3 id="chapter3-6">3.6   User class</h3>
                     <p>The User class is used to represent all the User and includes StaffID, SSN, Email, Password, FisrtName, LastName,
                         Birthday. Each User class has unique association with Department class and have an association with Course class.</p>
-                    <h4>3.6.1 Processing Narrative (PSPEC)</h4>
+                    <h4 id="chapter3-6-1">3.6.1 Processing Narrative (PSPEC)</h4>
                     <p>
                         Many User objects are stored in the database. Each object is responsible for storing information unique to the each
                         User. This object includes the following:
@@ -548,7 +561,7 @@
 
                     </p>
 
-                    <h4>3.6.2 Interface Description</h4>
+                    <h4 id="chapter3-6-2">3.6.2 Interface Description</h4>
                     <p>
                         <ul>
                     <li>getWorkDept() : String</li>
@@ -556,29 +569,29 @@
                         </ul>
                     </p>
 
-                    <h4>3.6.3 Processing Detail</h4>
+                    <h4 id="chapter3-6-3">3.6.3 Processing Detail</h4>
                     <p>
                         This class is mainly responsible for storing the information of User.
                     </p>
 
-                    <h5>3.6.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <h5 id="chapter3-6-3-1">3.6.3.1 DESIGN CLASS HIERARCHY</h5>
                     <p>
                         The Course class has two children classes, Teacher and Admin. Each instance Department is unique to User(which is
                         not necessarily unique Department) and Each User has an associated to Course.
                     </p>
 
-                    <h5>3.6.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <h5 id="chapter3-6-3-2">3.6.3.2 RESTRICTIONS/LIMITATIONS</h5>
                     <p>Since the User class is self-contained, there are no practical restrictions.</p>
 
-                    <h5>3.6.3.3 PERFORMANCE ISSUES</h5>
+                    <h5 id="chapter3-6-3-3">3.6.3.3 PERFORMANCE ISSUES</h5>
                     <p>This class does not perform any computationally intensive tasks, nor does it require substantial resources.
                         Consequently, there should be no performance problems for this class.</p>
 
-                    <h5>3.6.3.4 DESIGN CONSTRAINTS</h5>
+                    <h5 id="chapter3-6-3-4">3.6.3.4 DESIGN CONSTRAINTS</h5>
                     <p>Due to the nature of the design, each User should be related to Course and Department. Each User must have a unique
                         SSN and Email.</p>
 
-                    <h5>3.6.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <h5 id="chapter3-6-3-5">3.6.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
                     <p>
                         <ul>
                     <li>getWorkDept() : String</li>
@@ -595,7 +608,7 @@
                         attributes of the User and has CourseList, BookList. Each Teacher class has unique association with Department class
                         and have an association with Course class.</p>
 
-                    <h4>3.7.1 Processing Narrative (PSPEC)</h4>
+                    <h4 id="chapter3-7-1">3.7.1 Processing Narrative (PSPEC)</h4>
                     <p>
                         Many User objects are stored in the database. Each object is responsible for storing information unique to the each
                         User. it’s the child class of the User inheriting all the attributes of the User and has CourseList, BookList. This
@@ -614,7 +627,7 @@
                         Thus, when the information related to the Teacher is required, the Teacher object is called upon.
                     </p>
 
-                    <h4>3.7.2 Interface Description</h4>
+                    <h4 id="chapter3-7-2">3.7.2 Interface Description</h4>
                     <p>
                         <ul>
                     <li>updateCourse() : Object</li>
@@ -624,25 +637,25 @@
                         </ul>
                     </p>
 
-                    <h4>3.7.3 Processing Detail</h4>
+                    <h4 id="chapter3-7-3">3.7.3 Processing Detail</h4>
                     <p>This class is mainly responsible for storing the information of Teacher</p>
 
-                    <h5>3.7.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <h5 id="chapter3-7-3-1">3.7.3.1 DESIGN CLASS HIERARCHY</h5>
                     <p>The Teacher is the child class of the User inheriting all the attributes of the User. Each Teacher class has unique
                         association with Department class and have an association with Course class.</p>
 
-                    <h5>3.7.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <h5 id="chapter3-7-3-2">3.7.3.2 RESTRICTIONS/LIMITATIONS</h5>
                     <p>Since the User class is self-contained, there are no practical restrictions.</p>
 
-                    <h5>3.7.3.3 PERFORMANCE ISSUES</h5>
+                    <h5 id="chapter3-7-3-3">3.7.3.3 PERFORMANCE ISSUES</h5>
                     <p>This class does not perform any computationally intensive tasks, nor does it require substantial resources.
                         Consequently, there should be no performance problems for this class.</p>
 
-                    <h5>3.7.3.4 DESIGN CONSTRAINTS</h5>
+                    <h5 id="chapter3-7-3-4">3.7.3.4 DESIGN CONSTRAINTS</h5>
                     <p>Due to the nature of the design, each teacher should be related to Course and Department. Each teacher must have a
                         unique SSN and Email.</p>
 
-                    <h5>3.7.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <h5 id="chapter3-7-3-5">3.7.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
                     <p>
                         <ul>
                     <li>updateCourse() : Object</li>
@@ -661,7 +674,7 @@
                     <p>The Staff class is used to represent all the teacher and it’s the child class of the User inheriting all the
                         attributes of the User.</p>
 
-                    <h4>3.8.1 Processing Narrative (PSPEC)</h4>
+                    <h4 id="chapter3-8-1">3.8.1 Processing Narrative (PSPEC)</h4>
                     <p>
                         <ul>
                     Many Staff objects are stored in the database. Each object is responsible for storing information unique to the
@@ -681,7 +694,7 @@
                         </ul>
                     </p>
 
-                    <h4>3.8.2 Interface Description</h4>
+                    <h4 id="chapter3-8-2">3.8.2 Interface Description</h4>
                     <p>
                         <ul>
                     <li>showAllBook() : boolean</li>
@@ -689,23 +702,23 @@
                         </ul>
                     </p>
 
-                    <h4>3.8.3 Processing Detail</h4>
+                    <h4 id="chapter3-8-3">3.8.3 Processing Detail</h4>
                     <p>This class is mainly responsible for storing the information of Teacher</p>
 
-                    <h5>3.8.3.1 DESIGN CLASS HIERARCHY</h5>
+                    <h5 id="chapter3-8-3-1">3.8.3.1 DESIGN CLASS HIERARCHY</h5>
                     <p>The Staff is the child class of the User inheriting all the attributes of the User.</p>
 
-                    <h5>3.8.3.2 RESTRICTIONS/LIMITATIONS</h5>
+                    <h5 id="chapter3-8-3-2">3.8.3.2 RESTRICTIONS/LIMITATIONS</h5>
                     <p>Since the User class is self-contained, there are no practical restrictions.</p>
 
-                    <h5>3.8.3.3 PERFORMANCE ISSUES</h5>
+                    <h5 id="chapter3-8-3-3">3.8.3.3 PERFORMANCE ISSUES</h5>
                     <p>The only potential performance issue would occur when this class attempts to list all the books’ information. This method may need large memory and needs much time to connect to the database and to list all the information
                     </p>
 
-                    <h5>3.8.3.4 DESIGN CONSTRAINTS</h5>
+                    <h5 id="chapter3-8-3-4">3.8.3.4 DESIGN CONSTRAINTS</h5>
                     <p>Due to the nature of the design, each Staff must have a unique SSN and Email.</p>
 
-                    <h5>3.8.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
+                    <h5 id="chapter3-8-3-5">3.8.3.5 PROCESSING DETAIL FOR EACH OPERATION</h5>
                     <p>
                     <ul>
                     <li>showAllBook() : boolean</li>
@@ -720,128 +733,144 @@
                     <h3 id="chapter3-9">3.9 Dynamic Behavior for Component</h3>
                     <p>A description of the interaction of the classes is presented.</p>
 
-                    <h4>3.9.1 Interaction Diagrams</h4>
+                    <h4 id="chapter3-9-1">3.9.1 Interaction Diagrams</h4>
 
-                    <h5>3.9.1.1 Student Sequence Diagram</h5>
+                    <h5 id="chapter3-9-1-1">3.9.1.1 Student Sequence Diagram</h5>
 
-                    <h5>3.9.1.2 Teacher Sequence Diagram</h5>
+                    <img class="img-responsive" src="/image/3_9_1Student.png" alt="Null" border="0">
 
-                    <h5>3.9.1.3 Staff Sequence Diagram</h5>
+                    <h5 id="chapter3-9-1-2">3.9.1.2 Teacher Sequence Diagram</h5>
+
+                    <img class="img-responsive" src="/image/3_9_1Teacher.png" alt="Null" border="0">
+
+                    <h5 id="chapter3-9-1-3">3.9.1.3 Staff Sequence Diagram</h5>
+
+                    <img class="img-responsive" src="/image/3_9_1Staff.png" alt="Null" border="0">
 
                     <h2 id="chapter-4">4. User interface design</h2>
 
                     <p>A group of menus which the user can interact with data on the system. This group of menus include“Register” menu, “Login” menu, “Staff” menu, “List books information” menu, “Modify books information” menu, “List user’s Access Level” menu, “Student” menu, “View Books” menu, “Borrow Books” menu, “Teacher” menu, “View Books Teacher” menu, “Register Class” menu. The user can interact with these menus by using web browser.
                         </p>
 
-                    <h3>4.1 Description of the user interface</h3>
+                    <h3 id="chapter-4-1">4.1 Description of the user interface</h3>
 
                     <p>Each menu contains many GUI components, like buttons, labels, text fields and list objects. These components are composed by some ways which make user can quickly and easily interact with the menu.
                     </p>
 
-                    <h4>4.1.1 Screen images</h4>
+                    <h4 id="chapter-4-1-1">4.1.1 Screen images</h4>
 
-                    <ul>
-                        <li> Log in menu
+                    <img class="img-responsive" src="/image/4_1LogIn.png" alt="Null" border="0">
+
+                    <p>Log in menu</p>
+
+                    <img class="img-responsive" src="/image/4_1Registration.png" alt="Null" border="0">
+
+                    <p>Register menu</p>
+
+                    <img class="img-responsive" src="/image/4_1StaffMenu.png" alt="Null" border="0">
+
+                    <p>Staff Menu</p>
+
+                    <img class="img-responsive" src="/image/4_1ListBooks.png" alt="Null" border="0">
+
+                    <p>List Books Information</p>
+
+                    <img class="img-responsive" src="/image/4_1ModifyBook.png" alt="Null" border="0">
+
+                    <p>Modify Book Information</p>
+
+                    <img class="img-responsive" src="/image/4_1ListUser.png" alt="Null" border="0">
+
+                    <p>list User Access Level</p>
+
+                    <img class="img-responsive" src="/image/4_1StudentMenu.png" alt="Null" border="0">
+
+                    <p>Student Menu</p>
+
+                    <img class="img-responsive" src="/image/4_1ViewBooks.png" alt="Null" border="0">
+
+                    <p>View Books</p>
+
+                    <img class="img-responsive" src="/image/4_1BorrowBooks.png" alt="Null" border="0">
+
+                    <p>Borrow Books</p>
+
+                    <img class="img-responsive" src="/image/4_1TeacherMenu.png" alt="Null" border="0">
+
+                    <p>Teacher Menu</p>
+
+                    <img class="img-responsive" src="/image/ViewBooks.png" alt="Null" border="0">
+
+                    <p>View Books Teacher</p>
 
 
-                        <li> Register menu
+                    <p>Register Class</p>
 
-
-                        <li> Staff Menu
-
-
-                        <li> List Books Information
-
-
-                        <li> Modify Book Information
-
-
-                        <li> list User Access Level
-
-
-                        <li> Student Menu
-
-
-                        <li> View Books
-
-
-                        <li> Borrow Books
-
-
-                        <li> Teacher Menu
-
-
-                        <li> View Books Teacher
-
-
-                        <li>  Register Class
-                    </ul>
-
-                    <h4>4.1.2 Objects and actions</h4>
+                    <h4 id="chapter-4-1-2">4.1.2 Objects and actions</h4>
 
                     <p>This section will introduce the objects and relevant actions in above menus.</p>
 
-                    <h5>4.1.2.1 Log in menu</h5>
+                    <h5 id="chapter-4-1-2-1">4.1.2.1 Log in menu</h5>
 
                     <p>When user open the “Book Tracking System” web application on the browser, the “Log in menu” will appear. In this
                         webpage, user should input the username, password and chose staff, teacher or student to log in the system. If the
                         user using this application at the first time, register is available for the user to register a new account.
                     </p>
 
-                    <h5>4.1.2.2 Register menu</h5>
+                    <h5 id="chapter-4-1-2-2">4.1.2.2 Register menu</h5>
 
                     <p>The user click the “Register” on the “log in” page, the “Register menu” will appear, which needs user input the
                         user’s First name, Last name, E-mail, and SSN so a new user account will be generated.</p>
 
-                    <h5>4.1.2.3 Staff Menu</h5>
+                    <h5 id="chapter-4-1-2-3">4.1.2.3 Staff Menu</h5>
 
                     <p>The user who is using a staff account will enter the “Staff menu” webpage. In this webpage, the staff user will
                         have some abilities to list books information by clicking the button” List books information”, modify books
                         information by clicking the button “Modify books information”, and list users’ access level by clicking the button
                         “List User’s Access Level”</p>
 
-                    <h5>4.1.2.4 List Books Information</h5>
+                    <h5 id="chapter-4-1-2-4">4.1.2.4 List Books Information</h5>
 
                     <p>When the staff user click the button” List books information”, the books information webpage will appear.</p>
 
-                    <h5>4.1.2.5  Modify Book Information</h5>
+                    <h5 id="chapter-4-1-2-5">4.1.2.5  Modify Book Information</h5>
 
                     <p>When the staff user click the button” Modify books information”, the modify books information webpage will appear.
                         In this webpage, the staff user will be able to input ISBN of the book, add, update, and delete the number of books
                         by clicking the button “Modify”.</p>
 
-                    <h5>4.1.2.6 List User Access Level</h5>
+                    <h5 id="chapter-4-1-2-6">4.1.2.6 List User Access Level</h5>
 
                     <p>When the staff user click the button” List User’s Information”, the list user’s information webpage will appear.
                     </p>
 
-                    <h5>4.1.2.7 Student Menu</h5>
+                    <h5 id="chapter-4-1-2-7">4.1.2.7 Student Menu</h5>
 
                     <p>The user who is using a student account will enter the “Student menu” webpage. In this webpage, the student user
                         will have some abilities to view books information by clicking the button” View books”, borrow books information by
                         clicking the button “Borrow books”.</p>
 
-                    <h5>4.1.2.8 View Books</h5>
+                    <h5 id="chapter-4-1-2-8">4.1.2.8 View Books</h5>
 
                     <p>When the student user click the button” View books”, the view books webpage will appear.</p>
 
-                    <h5>4.1.2.9 Borrow Books</h5>
+                    <h5 id="chapter-4-1-2-9">4.1.2.9 Borrow Books</h5>
 
                     <p>When the student user click the button” Borrow books”, the” borrow books “webpage will appear. In this webpage, the
                         student user will be able to input ISBN of the book, book name and course name to borrow a unique textbook by
                         clicking the button “Borrow”.</p>
 
-                    <h5>4.1.2.10 Teacher Menu</h5>
+                    <h5 id="chapter-4-1-2-10">4.1.2.10 Teacher Menu</h5>
 
                     <p>The user who is using a teacher account will enter the “Teacher menu” webpage. In this webpage, the teacher user
                         will have some abilities to view books information by clicking the button” View books”, register class by clicking
                         the button “Register class”.</p>
 
-                    <h5>4.1.2.11 View Books Teacher</h5>
+                    <h5 id="chapter-4-1-2-11">4.1.2.11 View Books Teacher</h5>
 
                     <p>When the teacher user click the button” View books”, the view books webpage will appear.</p>
 
-                    <h5>4.1.2.12 Register Class</h5>
+                    <h5 id="chapter-4-1-2-12">4.1.2.12 Register Class</h5>
 
                     <p>When the teacher user click the button” Register class”, the” Register class “webpage will appear. In this webpage,
                         the teacher user will be able to input department name, course name and capacity of the course to create a course
@@ -852,50 +881,50 @@
                     <p>The interfaces of this web application called “Book tracking system” are based on the Ben Shneiderman’s “Eight
                         Golden Rules of Interface Design”. The details of eight rules are shown as below:</p>
 
-                    <h3>4.2.1 Strive for consistency.</h3>
+                    <h3 id="chapter4-2-1">4.2.1 Strive for consistency.</h3>
 
                     <p>Consistent sequences of actions should be required in similar situations; identical terminology should be used in
                         prompts, menus, and help screens; and consistent commands should be employed throughout.
                         In this web application, all contents are arranged in left side or in the central of the webpage.</p>
 
-                    <h3>4.2.2 Enable frequent users to use shortcuts.</h3>
+                    <h3 id="chapter4-2-2">4.2.2 Enable frequent users to use shortcuts.</h3>
 
                     <p>As the frequency of use increases, so do the user's desires to reduce the number of interactions and to increase
                         the pace of interaction. Abbreviations, function keys, hidden commands, and macro facilities are very helpful to
                         an expert user. In this web application, buttons are used for making user finish the task quickly.</p>
 
-                    <h3>4.2.3 Offer informative feedback.</h3>
+                    <h3 id="chapter4-2-3">4.2.3 Offer informative feedback.</h3>
 
                     <p>For every operator action, there should be some system feedback. For frequent and minor actions, the response can
                         be modest, while for infrequent and major actions, the response should be more substantial. This web application
                         will give feedbacks when the user finish the operation. When some errors happen, the user will receive the message.</p>
 
-                    <h3>4.2.4 Design dialog to yield closure.</h3>
+                    <h3 id="chapter4-2-4">4.2.4 Design dialog to yield closure.</h3>
 
                     <p>Sequences of actions should be organized into groups with a beginning, middle, and end. The informative feedback
                         at the completion of a group of actions gives the operators the satisfaction of accomplishment, a sense of relief,
                         the signal to drop contingency plans and options from their minds, and an indication that the way is clear to
                         prepare for the next group of actions.</p>
 
-                    <h3>4.2.5 Offer simple error handling.</h3>
+                    <h3 id="chapter4-2-5">4.2.5 Offer simple error handling.</h3>
 
                     <p>As much as possible, design the system so the user cannot make a serious error. If an error is made, the system
                         should be able to detect the error and offer simple, comprehensible mechanisms for handling the error.
                         If user do not input the available information, the note will show the user why the information is unavailable.</p>
 
-                    <h3>4.2.6 Permit easy reversal of actions.</h3>
+                    <h3 id="chapter4-2-6">4.2.6 Permit easy reversal of actions.</h3>
 
                     <p>This feature relieves anxiety, since the user knows that errors can be undone; it thus encourages exploration of
                         unfamiliar options. The units of reversibility may be a single action, a data entry, or a complete group of actions.
                         The staff users have the highest authority which can help the teachers and students  modify some operation errors.</p>
 
-                    <h3>4.2.7 Support internal locus of control.</h3>
+                    <h3 id="chapter4-2-7">4.2.7 Support internal locus of control.</h3>
 
                     <p>Experienced operators strongly desire the sense that they are in charge of the system and that the system responds
                         to their actions. Design the system to make users the initiators of actions rather than the responders.
                         As highest manager, staff users will control the system if it is necessary.</p>
 
-                    <h3>4.2.8 Reduce short-term memory load.</h3>
+                    <h3 id="chapter4-2-8">4.2.8 Reduce short-term memory load.</h3>
 
                     <p>The limitation of human information processing in short-term memory requires that displays be kept simple, multiple
                         page displays be consolidated, window-motion frequency be reduced, and sufficient training time be allotted for
@@ -906,19 +935,19 @@
 
                     <p>The Bootstrap provides plenty of GUI components. The web application will use many of them including the following:</p>
 
-                    <h3>4.3.1 Tables</h3>
+                    <h3 id="chapter4-3-1">4.3.1 Tables</h3>
 
                     <p>Tables are using for showing some information on the webpage, such as book information and user information.</p>
 
-                    <h3>4.3.2 Input groups</h3>
+                    <h3 id="chapter4-3-2">4.3.2 Input groups</h3>
 
                     <p>Extend form controls by adding text or buttons before, after, or on both sides of any text-based <input>.</p>
 
-                    <h3>4.3.3 Button</h3>
+                    <h3 id="chapter4-3-3">4.3.3 Button</h3>
 
                     <p>This web application will use buttons as events driven. Each menu will have its own button to interact with users.</p>
 
-                    <h3>4.3.4 TextView</h3>
+                    <h3 id="chapter4-3-4">4.3.4 TextView</h3>
 
                     <p>The TextView components allow webpage show text in a linear way.</p>
 
@@ -929,9 +958,9 @@
                         the components were designed by ourselves modifying the html codes.
                         Every function in the menu will be implemented by using Javascript.</p>
 
-                    <h2 id="chapter5">5. Restrictions, limitations, and constraints</h2>
+                    <h2 id="chapter5">5.0 Restrictions, limitations, and constraints</h2>
 
-                    <h3>5.1 Restrictions</h3>
+                    <h3 id="chapter5-1">5.1 Restrictions</h3>
 
                     <p>This is a local environmental program since no online web server.
                         It is for one high school only.
@@ -967,7 +996,7 @@
 
                     <h3 id="chapter6-1">6.1 Classes of tests</h3>
 
-                    <h4>6.1.1 White box testing</h4>
+                    <h4 id="chapter6-1-1">6.1.1 White box testing</h4>
 
                     <p><ul>
                     <li>The developer shall assign to the class to make sure each function is working when the class is being implemented.
@@ -975,7 +1004,7 @@
                     <li>The White box testing provides an early testing for the code and prevent the bug from over version release.
                     </ul></p>
 
-                    <h4>6.1.2 Black box testing</h4>
+                    <h4 id="chapter6-1-2">6.1.2 Black box testing</h4>
 
                     <p><ul>
                     <li>The Black box Testing will comprise a majority of the application process.
@@ -984,7 +1013,7 @@
                     book tracking web application, And it will consist of running through all functionality and different situation.
                     </ul></p>
 
-                    <h4>6.1.3 Other testings</h4>
+                    <h4 id="chapter6-1-3">6.1.3 Other testings</h4>
 
                     <p><ul>
                     <li>Performance Test: ensure that the response time for information retrieval is within 5 seconds. And the website
@@ -1002,77 +1031,93 @@
                     <p>
 
                         The expected results from testing are specified.
-                    <ul>
-                    <li>Test condition
+                    <table class="req-table">
+                        <tr>
+                            <th>Test condition</th>
+                            <th>Expected result</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Database Connection</th>
+                            <th>The server Shall connect to database in right time.</th>
+                        </tr>
+                        <tr>
+                            <th>Server Connection</th>
+                            <th>The different web browser shall be able to visit the website within 5 Seconds(locally).</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Account creation</th>
+                            <th>The student and staff can register at different page.The Staff should provide a code to register, The student should use school’s email to register.</th>
+                        </tr>
+                        <tr>
+                            <th>Enter to login page</th>
+                            <th>The user can access the login screen to login.</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Log in with email and password</th>
+                            <th>The user can select the level (Staff, Student) to enter.Also, A valid user shall able to access the system by correct email and password.
+                                And It will show the successfully log in if authorized.Otherwise, It will return main page if fail to login.</th>
+                        </tr>
+                        <tr>
+                            <th>Test all links on page from site map</th>
+                            <th>Ensure all the link will be able to access to corresponding page if the user has been authorized.</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Test All UI Components with right function.</th>
+                            <th>The UI Component shall be able to react in right way at right place.</th>
+                        </tr>
+                        <tr>
+                            <th>Test all posted information with right format</th>
+                            <th>The information that the user post to the server shall be tested before entering to server.
+                                Also the format shall be in right format.</th>
+                        </tr>
 
-
-                    <li>expected result
-                    <li>Database Connection
-                    <li>The server Shall connect to database in right time.
-                    <li>Server Connection
-                    <li>The different web browser shall be able to visit the website within 5 Seconds(locally).
-                    <li>Account creation
-                    <li>The student and staff can register at different page.
-                    <li>The Staff should provide a code to register, The student should use school’s email to register.
-                    <li>Enter to login page
-                    <li>The user can access the login screen to login.
-                    <li>Log in with email and password
-                    <li>The user can select the level (Staff, Student) to enter.
-                    <li>Also, A valid user shall able to access the system by correct email and password.
-                    <li>And It will show the successfully log in if authorized.
-                    <li>Otherwise, It will return main page if fail to login.
-                    <li>Test all links on page from site map
-                    <li>Ensure all the link will be able to access to corresponding page if the user has been authorized.
-
-
-                    <li>Test All UI Components with right function.
-                    <li>The UI Component shall be able to react in right way at right place.
-
-
-                    <li>Test all posted information with right format
-                    <li>The information that the user post to the server shall be tested before entering to server.
-                    <li>Also the format shall be in right format.
-                    <li>The user log out
-                    <li>The user shall be able to log out if needed.
-
-
-                    <li>List all books and Modify Book information by staff
-                    <li>The Staff can see all the book list by course and modify the book information in right format.
-                    <li>The server shall be able to verify before updating database.
-
-
-                    <li>List access level by staff and user
-                    <li>The staff and teacher shall be able to check all the user’s information by table.
-
-
-                    <li>Show all the course and select the course he/she teach
-                    <li>The teacher shall be able to check all the courses and select a course he teach.
-
-
-                    <li>The teacher Checks out book after registration.
-                    <li>The teacher shall be able to check out the book only if he/she is the teacher of the class.
-
-
-                    <li>The student can list all the books and check out the book.
-                    <li>The student shall be able to check out the book only if he/she is the student of the class.
-
-
-
-                    <li>The user Modifies information
-                    <li>The user shall be able to modify the user information.
-                    <li>Book information update
-                    <li>The book information shall be get from google book api at the initialization of the database.
-                    <li>And only the staff can be able to modify the book information.
-                    <li>The book inventory shall be able to change automatically after the book check out or return.
-                    <li>Course information maintenance
-                    <li>The course shall be able to include the book information automatically.
-                    <li>Algorithm
-                    <li>Create students, teachers, Staff, lists and make sure all data is accurate.
-
-
-                    <li>Performance
-                    <li>Time all actions to make sure web browser runs smoothly.
-                    </ul>
+                        <tr class="alter">
+                            <th>The user log out</th>
+                            <th>The user shall be able to log out if needed.</th>
+                        </tr>
+                        <tr>
+                            <th>List all books and Modify Book information by staff</th>
+                            <th>The Staff can see all the book list by course and modify the book information in right format.
+                                The server shall be able to verify before updating database.</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>List access level by staff and user</th>
+                            <th>The staff and teacher shall be able to check all the user’s information by table.</th>
+                        </tr>
+                        <tr>
+                            <th>Show all the course and select the course he/she teach</th>
+                            <th>The teacher shall be able to check all the courses and select a course he teach.</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>The teacher Checks out book after registration.</th>
+                            <th>The teacher shall be able to check out the book only if he/she is the teacher of the class.</th>
+                        </tr>
+                        <tr>
+                            <th>The student can list all the books and check out the book.</th>
+                            <th>The student shall be able to check out the book only if he/she is the student of the class.</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>The user Modifies information</th>
+                            <th>The user shall be able to modify the user information.</th>
+                        </tr>
+                        <tr>
+                            <th>Book information update</th>
+                            <th>The book information shall be get from google book api at the initialization of the database.
+                                And only the staff can be able to modify the book information. The book inventory shall be able to change automatically after the book check out or return.</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Course information maintenance</th>
+                            <th>The course shall be able to include the book information automatically.</th>
+                        </tr>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Create students, teachers, Staff, lists and make sure all data is accurate.</th>
+                        </tr>
+                        <tr>
+                            <th>Performance</th>
+                            <th>Time all actions to make sure web browser runs smoothly.</th>
+                        </tr>
+                    </table>
                     </p>
 
                     <h3 id="chapter6-3">6.3 Performance bounds</h3>
@@ -1121,53 +1166,52 @@
                                 </ul>
                             </li>
                             <li class="">
-                                <a href="#chapter2">2.0 Usage scenario</a>
+                                <a href="#chapter2">2.0 Data design</a>
                                 <ul class="nav">
-                                    <li><a href="#chapter2-1">2.1 User profiles</a></li>
-                                    <li><a href="#chapter2-2">2.2 Use-cases</a></li>
-                                    <li><a href="#chapter2-2-1">2.2.1 Use-Case Diagrams</a></li>
-                                    <li><a href="#chapter2-2-2">2.2.2 Use-Case Descriptions</a></li>
-                                    <li><a href="#chapter2-3">2.3 Special usage considerations</a></li>
-                                    <li><a href="#chapter2-4">2.4 Activity Diagrams</a></li>
+                                    <li><a href="#chapter2-1">2.1 Internal software data structur</a></li>
+                                    <li><a href="#chapter2-2">2.2 Global data structure</a></li>
+                                    <li><a href="#chapter2-3">2.3 Temporary data structure</a></li>
+                                    <li><a href="#chapter2-4">2.4 Database description</a></li>
                                 </ul>
                             </li>
                             <li class="">
-                                <a href="#chapter3">3.0 Data Model and Descrpition</a>
+                                <a href="#chapter3">3.0 Architectural and component-level design</a>
                                 <ul class="nav">
-                                    <li><a href="#chapter3-1">3.1 Data objects</a></li>
-                                    <li><a href="#chapter3-2">3.2 Relationships</a></li>
-                                    <li><a href="#chapter3-3">3.3 Complete data model</a></li>
+                                    <li><a href="#chapter3-1">3.1 System structure</a></li>
+                                    <li><a href="#chapter3-2">3.2 Student class</a></li>
+                                    <li><a href="#chapter3-3">3.3  Book class</a></li>
+                                    <li><a href="#chapter3-4">3.4  Course class</a></li>
+                                    <li><a href="#chapter3-5">3.5  Department class</a></li>
+                                    <li><a href="#chapter3-6">3.6  User class</a></li>
+                                    <li><a href="#chapter3-7">3.7  Teacher class</a></li>
+                                    <li><a href="#chapter3-8">3.8  Staff class</a></li>
+                                    <li><a href="#chapter3-9">3.9 Dynamic Behavior for Component</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#chapter4">4.0 Functional Model and Description</a>
+                                <a href="#chapter4">4.0 User interface design</a>
                                 <ul class="nav">
-                                    <li><a href="#chapter4-1">4.1 Class diagrams</a></li>
-                                    <li><a href="#chapter4-2">4.2 Software Interface Description</a></li>
-                                    <li><a href="#chapter4-2-1">4.2.1 External machine interfaces</a></li>
-                                    <li><a href="#chapter4-2-2">4.2.2 External system interfaces</a></li>
+                                    <li><a href="#chapter4-1">4.1 Description of the user interface</a></li>
+                                    <li><a href="#chapter4-2">4.2 Interface design rules</a></li>
+                                    <li><a href="#chapter4-3">4.3 Components available</a></li>
+                                    <li><a href="#chapter4-4">4.4 UIDS description</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#chapter5">5.0 Behavioral Model and Description</a>
+                                <a href="#chapter5">5.0 Restrictions, limitations, and constraints</a>
                                 <ul class="nav">
                                     <li><a href="#chapter5-1">5.1 Description for software behavior</a></li>
-                                    <li><a href="#chapter5-1-1">5.1.1 Events</a></li>
-                                    <li><a href="#chapter5-1-2">5.1.2 States</a></li>
                                     <li><a href="#chapter5-2">5.2 Statechart Diagram</a></li>
+                                    <li><a href="#chapter5-3">5.3 Constraint</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="#chapter6">6.0 Restrictions, Limitations, and Constraints</a>
                                 <ul class="nav">
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#chapter7">7.0 Validation Criteria</a>
-                                <ul class="nav">
-                                    <li><a href="#chapter7-1">7.1 Classes of tests</a></li>
-                                    <li><a href="#chapter7-2">7.2 Expected software response</a></li>
-                                    <li><a href="#chapter7-3">7.3 Performance bounds</a></li>
+                                    <li><a href="#chapter6-1">6.1 Classes of tests</a></li>
+                                    <li><a href="#chapter6-2">6.2 Expected software response</a></li>
+                                    <li><a href="#chapter6-3">6.3 Performance bounds</a></li>
+                                    <li><a href="#chapter6-4">6.4 Identification of critical components</a></li>
                                 </ul>
                             </li>
                         </ul>
