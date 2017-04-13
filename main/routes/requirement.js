@@ -15,7 +15,7 @@ router.get('/RSD', function(req, res, next) {
 
 router.get('/DSD', function(req, res, next) {
     res.render('DSD', {
-        title: 'High School Book Tracking Application - Requirement Specification Document',
+        title: 'High School Book Tracking Application - Design Specification Document',
         layout:'layout-login'
     });
 });
