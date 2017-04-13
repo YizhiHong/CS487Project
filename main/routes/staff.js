@@ -12,8 +12,14 @@ router.get('/',filter.authorizeIndex, function(req, res, next) {
     res.redirect('/login');
 });
 
-router.get('/level', function(req, res, next) {
+/** GET staff menu **/
+router.get('/:id/book', function(req, res, next) {
+    res.render('book-list', { title: 'access level' , layout: 'layout-login'});
+});
+
+router.get('/:id/level', function(req, res, next) {
     res.render('user-access-level', { title: 'access level' , layout: 'layout-login'});
 });
+
 
 module.exports = router;
