@@ -1,0 +1,1452 @@
+<link rel='stylesheet' type="text/css"  href='/stylesheets/requirement.css' />
+
+<div class="container">
+    <h2>Requirements Specifications Document</h2>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-sm-9 col-xs-12">
+                    <h3 id="chapter1">1. Introduction</h3>
+                    <p>This tool maintains a small repository of school books. It could track books, classes and students who check out books. And staff shall manage books information and teacher shall check out the book that they teach.</p>
+
+                    <h4 id="chapter1-1">1.1 Goals and objectives</h4>
+                    <p>This tool maintains a repository of school books. The main goals of this application is to build a small repository of school books which support different kinds of operations for users. The objective of this software development lies in how well the requirements are understood and how this can be developed using proper planned phases in different modules.</p>
+                    <p>The application shall track books, classes and students who check out books. Each book has a unique school generated ID. A total number of books shall be tracked. The ability to add/update/delete all information is required. Numeric key fields should be automatically generated. Such as book ID, Student Id, Staff ID. Security is required.  All users must be granted access to the system before they can use it. Access must be based on levels. The system must respond to all requests within 5 seconds. The application shall list all students with books checked out showing due date and date checked out. List all users and their access level. List all books in the system with search capabilities. To list all orders by order type (PC Repair Orders, etc.). List of all books checked out by class or book name/number. List of students and parents info with amount due.</p>
+                    <p>What’s more, each Book is identified with an ISBN number and unique school generated number. Each student shall check out up to the number of classes he/she is registered for. Each staff/teacher is assigned a unique user ID and an ID. Books data needs to be stored in a database of some sort and the data shall be obtained from an online web service (google books, Amazon or any other source). Each class the school offer must be recorded in the database.</p>
+
+                    <h4 id="chapter1-2">1.2 Statement of scope</h4>
+                    <p>The tool is mainly used in a school’s library. </p>
+                    <p>It could track books, classes, students and teachers who check out books. </p>
+                    <p>The essential goal is to track books by ISBN, to track students and teachers by ID. The desirable
+                        goal is to count the number of books checked out, and those left in the library. The future goal
+                        is to apply this tool into multiple platform in a different context, like hospital counting
+                        medicine, police station counting guns, etc.</p>
+                    <p>The Scope of the Project is to provide an interface to the customers that can interact with the
+                        system on a web based form which generates the list of order or repairs etc. to the
+                        administrator and also to the customer. This kind of format is very reasonable to manage and
+                        maintain for both administrator and to the customer.</p>
+                    <p>The List of major inputs, processing, etc. is presented below and their ranks are also specified.</p>
+                    <p>The application shall be accessible through a web browser such as chrome, Firefox, Safari and so
+                        on. It shall prompt the user for a username and password. Upon entering this information
+                        correctly, the user shall have access to the repository of school books.</p>
+                    <p>For the users, they shall be able to search and check out books which is essential for the
+                        course. In additional, the users shall able to view the capabilities of books. Most importantly,
+                        the user shall be able to view the current state of the orders.</p>
+                    <p>The users shall do this by requesting a report from the system. The report shall display,
+                        according to the type of report requested, either:
+                    </p>
+                    <p>1.All students with books checked out showing due date and date checked out.</p>
+                    <p>2.All authorized users and their access level.</p>
+                    <p>3.All books in the system with search capabilities.</p>
+                    <p>4.All orders by order type.</p>
+                    <p>5.All books checked out by class or book name/number.</p>
+                    <p>In the case that a new book is offered by the store, the administrator shall have the capability
+                        to add new items into the repository for tracking. To help maintain the current repository
+                        state, the administrator shall have the ability to update the quantity of books in repository
+                        when books are checked out. In order to update the information, the administrator will have to
+                        enter the number of books checked out, the due date. The administrator shall also be able to
+                        delete books in the case that they are no longer offered. Every book shall be differentiated by
+                        an ISBN number. Similar codes shall be created for the purpose of identifying students and
+                        teachers.</p>
+                    <p>In the case that a student or a teacher contact information should change, the administrator
+                        shall be able to update the contact information for the students or teachers. The administrator
+                        shall also have the ability to delete information of students or teachers.The administrator
+                        shall be able to add, update, and delete order information in the same way that he/she is able
+                        to do for a customer's information. In additional, the administrator shall search all the access
+                        level of authorized users and shall view all books checked out by class or book name/number.</p>
+                    <p>The customer list shall be maintained in a similar way to the books. When a student or teacher
+                        wants to check out some books, the system will list all the information of books through
+                        searching by book’s name or ISBN number. When students or teachers check out some books, system
+                        will automatically decrease the amount of books in the tracking portion of the system for
+                        repository. Students shall able to view the due date and the date checked out of books they
+                        checked out and check our up to the number of  classes he/she is registered for through
+                        entering their ID.</p>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>REQ.No</th>
+                            <th>DESCRIPTION </th>
+                            <th>RANK</th>
+                            <th>TESTED</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Navigation: HTMLLinks, Control</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>2</td>
+                            <td>Data Entry : HTML Form</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Database : SQL server</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>4</td>
+                            <td>NBooks list</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Username and password</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>6</td>
+                            <td>Book ISBN number</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Customer info : Personal data</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>8</td>
+                            <td>Customer info : Place order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Customer info : Delete order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>10</td>
+                            <td>Customer info : Update order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Customer info : Track order</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>12</td>
+                            <td>Customer log note</td>
+                            <td>Desired</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Administrator Security Privileges</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>14</td>
+                            <td>Type of books and description</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Important Notifications and Updates</td>
+                            <td>Desired</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>16</td>
+                            <td>Order : Order List</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>Order : More number of orders</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>18</td>
+                            <td>Reports : List all customer with  access level</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>Reports : List students and books with due date and date checked out</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>20</td>
+                            <td>Reports : List books with capabilities</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>Reports : List orders by type</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>22</td>
+                            <td>Reports : List books checked out by class or book name/number</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>Reports : List students info with amount due</td>
+                            <td>Essential</td>
+                            <td>No</td>
+                        </tr>
+                    </table>
+                    <h4 id="chapter1-3">1.3 Software context</h4>
+                    <p>The software is used to check and order books in a high school efficiently. It is a web based
+                        application which basically consists of 3 tier architecture. Application server (Node.js) will
+                        mainly handle the web application.</p>
+                    <p>The application will communicate to the database (MongoDB)
+                        to communicate and retrieve information. Users shall use a browser (Firefox, Chrome, Safari) to
+                        access the application. With the growing number of the users, in order to keep track of the
+                        changes to its books, the system shall not only allow multiple users to maintain an up-to-date
+                        account of the book repository, it shall also help link its inventory to both the users who
+                        borrow (check out) the book and the other users who return them. </p>
+                    <p>The system will help control the management process of the repository by keeping current contact
+                        information for students, parents, teachers and staffs. The students and the parents can be the
+                        main users who can borrow (check out), return their books and update their information.
+                        The teachers shall borrow (check out) more books than students and parents.
+                        The staffs shall manage the book information or inventory. Also, they can control the whole system.
+                    </p>
+                    <h4 id="chapter1-4">1.4 Major constraints</h4>
+                    <p>The major constraints in the development are that the system should respond within the required
+                        constraint described in the project manual. The software is developed keeping in mind about the
+                        needs of the customer and their interaction between the system. </p>
+                    <p>The software is designed to give the best efficiency possible. It is also organized to fix quick
+                        errors or bugs.</p>
+
+                    <h3 id="chapter2">2. User Scenario</h3>
+                    <p>
+                        The part of User Scenario mainly introduce the user cases in this book tracking system.
+                    </p>
+                    <h4 id="chapter2-1">2.1 User profiles</h4>
+                    <p><b>Staff</b></p>
+                    <p>The staff has been authorized to access into database. The staff has the ability to update the library database about total available books and total checked book. Staff is responsible for adding/updating/deleting relevant information. He/she can generate many useful reports, such as user information, account access levels and order lists.</p>
+
+                    <p><b>Students/Parents</b></p>
+                    <p>Students and parents have only some authorizations of the application. Students shall create their own account by using Email address and then share their account to their parents. Students also can place book orders, cancel orders and query order status which means showing due dates. Students and parents do not have any abilities to change the system.</p>
+
+                    <p><b>Teacher</b></p>
+                    <p>Teacher have the same abilities with students and teacher shall check out books by class. At the same time, teachers also cannot change the system.</p>
+
+                    <h4 id="chapter2-2">2.2 Use-cases</h4>
+                    <p>All use-cases for the software are presented</p>
+
+                    <h5 id="chapter2-2-1">2.2.1 Use case of the staff</h5>
+
+                    <img class="img-responsive" src="/image/2_2Staff.jpg" alt="Null" border="0">
+
+                    <h6><b>Table 2.2.1.1 “Staff sign up” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Staff sign up</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Staff</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Staff register account information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Main Course:</th>
+                            <td><ol>
+                                <li>The user clicks the "Staff register" button;</li>
+                                <li>The system go to "Staff registration" interface;</li>
+                                <li>The user in the "Staff registration" interface shall input user informationt, especially by using SSN to identification. When finished, click the "Register" button;</li>
+                                <li>The system is driven by the "Register" button event, adds the user registration information to the database, and then displays the prompt window "Register successful".</li>
+                            </ol></td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.1.2 “Staff log in” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Staff log in</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Staff</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Staff login account</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter login interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the login interface to fill out the account number, password, then chose the staff optional box and click on the login button;</li>
+                                    <li>The system is driven by the event of the button, converted to "home_staff" interface.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Alternative course:</th>
+                            <td>If staff forget their password. The user can click the "Forgot Password" button.</td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.1.3 “List books” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>List books</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Staff</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>List books information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter staff main interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the main interface to click on the modify information button;</li>
+                                    <li>The system is driven by the event of the button, showing books’ information</li>
+                                    <li>The user can add, update, and delete information</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.1.4 “Modify information” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Modify information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Staff</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Modify information from database</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter staff main interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the main interface to click on the modify information button;</li>
+                                    <li>The system is driven by the event of the button, showing books' information.</li>
+                                    <li>The user can add, update, and delete information.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.1.5 “List user’s access level” use case description </b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>List user's access level</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Staff</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>List users’ access level which includes teacher’s information and student/parent’s information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter staff main interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the main interface to click on the list access information button;</li>
+                                    <li>The system is driven by the event of the button, showing teacher’s and student/parent’s access level.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h5 id="chapter2-2-2">2.2.2 Students/Parents use case</h5>
+                    <img class="img-responsive" src="/image/2_2StudentParent.jpg" alt="Null" border="0">
+
+                    <h6><b>Table 2.2.2.1 “Student/Parent sign up” use case description </b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Student/Parent sign up</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Students/Parents</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Students register account information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>The user clicks the "Student/Parent register" button</li>
+                                    <li>The system go to "registration" interface;</li>
+                                    <li>The user in the "registration" interface for user information input,When finished, click the "Register" button;</li>
+                                    <li>The system is driven by the "Register" button event, adds the user registration information to the database, and then displays the prompt window "Register successful".</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.2.2 “Student/Parent log in” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Student/Parent log in</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Student/Parent</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Student/Parent log in account</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter login interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the login interface to fill out the account number, password and chose the student/parent optional box then click on the login button;</li>
+                                    <li>The system is driven by the event of the button, converted to "home" interface.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Alternative course:</th>
+                            <td>If student/parent forget their password. The user can click the "Forgot Password" button.</td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.2.3 “View books” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>View books</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Students/Parents</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>User view books' information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter login interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the main interface to click on the view books button;</li>
+                                    <li>The system is driven by the event of the button, showing books information</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Alternative course:</th>
+                            <td>
+                                <ol>
+                                    <li>The user can view the "due date" of borrowed books in interface</li>
+                                    <li>The use can make an operation called “view date check out” in interface</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.2.4 “Check out by students” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Check out by students</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Students/Parents</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>User check out books which means students borrow books from library.</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter login interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>Users in the main interface to click on the checkout by students(means borrow) books button</td>
+                        </tr>
+                    </table>
+
+                    <h5 id="chapter2-2-3">2.2.3 Teacher use case</h5>
+                    <img class="img-responsive" src="/image/2_3Teacher.jpg" alt="Null" border="0">
+
+                    <h6><b>Table 2.2.3.1 “Teacher sign up” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Teacher sign up</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Teachers</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Teacher register account information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>The user clicks the "Register" button;</li>
+                                    <li>The system go to "registration" interface;</li>
+                                    <li>The user in the "registration" interface for user information input,When finished, click the "Register" button;</li>
+                                    <li>The system is driven by the "Register" button event, adds the user registration information to the database, and then displays the prompt window "Register successful".</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.3.2 “Teacher log in” use case description </b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Teacher log in </td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Teachers</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Teachers login account</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter login interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the login interface to fill out the account number, password and chose the teacher optional box then click on the login button;</li>
+                                    <li>The system is driven by the event of the button, converted to "home " interface.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Alternative course:</th>
+                            <td>If teacher forget their password. The user can click the "Forgot Password" button.</td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.3.3 “View books” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>View books</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>teachers</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>User view books' information</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>User enter login interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>
+                                <ol>
+                                    <li>Users in the main interface to click on the view books button;</li>
+                                    <li>The system is driven by the event of the button, showing books information</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Alternative Course:</th>
+                            <td>
+                                <ol>
+                                    <li>The user can view the "due date" of borrowed books in interface</li>
+                                    <li>The use can make an operation called “view date check out” in interface</li>
+                                    <li>The use can make an operation called “view books check out by class” in interface</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h6><b>Table 2.2.3.4 “Register class” use case description</b></h6>
+                    <table class="req-table">
+                        <tr>
+                            <th>Name:</th>
+                            <td>Register class</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Actor:</th>
+                            <td>Teachers</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Teacher registers classes which he/she teached</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Precondition:</th>
+                            <td>user enter login interface successfully</td>
+                        </tr>
+                        <tr>
+                            <th>Main Course:</th>
+                            <td>Users in the main interface to click on the register class button</td>
+                        </tr>
+                    </table>
+
+                    <h4 id="chapter2-3">2.3 Special usage considerations</h4>
+
+                    <p>The book tracking system is built basing on web. So a standard web browser is very important and necessary, such as Google chrome, Microsoft edge and Firefox.</p>
+
+                    <h3 id="chapter3">3. Data Model and Description</h3>
+                    <p>This section mainly describes the information domain for the high school book tracking web application.</p>
+
+                    <h4 id="chapter3-1">3.1 Data objects</h4>
+                    <p>Following are the data objects in our database without relationship.</p>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>Schema Name</th>
+                            <th>Attribute</th>
+                            <th>Type</th>
+                            <th>Constraint</th>
+                            <th>Note</th>
+                        </tr>
+                        <tr class="alter">
+                            <th rowspan="8">Student</th>
+                            <td>StudentsID</td>
+                            <td>String(30)</td>
+                            <td>Primary Key</td>
+                            <td>generated</td>
+                        </tr>
+                        <tr>
+                            <td>CWID</td>
+                            <td>String(8)</td>
+                            <td>Unique</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Email</td>
+                            <td>String(50)</td>
+                            <td>Unique</td>
+                            <td>Account</td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>String(50)</td>
+                            <td>Not Null</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>FirstName</td>
+                            <td>String(50)</td>
+                            <td>Not Null</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>LastName</td>
+                            <td>String(50)</td>
+                            <td>Not Null</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Birthday</td>
+                            <td>Date</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Level</td>
+                            <td>number(1)</td>
+                            <td>1 or 0</td>
+                            <td>1:student, 0:parents</td>
+                        </tr>
+                        <tr class="alter">
+                            <th rowspan="8">Staff</th>
+                            <td>StaffID</td>
+                            <td>String(30)</td>
+                            <td>Primary Key</td>
+                            <td>generated</td>
+                        </tr>
+                        <tr>
+                            <td>SSN</td>
+                            <td>String(9)</td>
+                            <td>Unique</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Email</td>
+                            <td>String(50)</td>
+                            <td>Unique</td>
+                            <td>Account</td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>String(50)</td>
+                            <td>Not Null</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>FirstName</td>
+                            <td>String(50)</td>
+                            <td>Not Null</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>LastName</td>
+                            <td>String(50)</td>
+                            <td>Not Null</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Birthday</td>
+                            <td>Date</td>
+                        </tr>
+                        <tr>
+                            <td>Level</td>
+                            <td>number(1)</td>
+                            <td>1 or 0</td>
+                            <td>1:teacher, 0:admin</td>
+                        </tr>
+                        <tr class="alter">
+                            <th rowspan="3">Department</th>
+                            <td>DeptID</td>
+                            <td>String(30)</td>
+                            <td>Primary Key</td>
+                            <td>generated</td>
+                        </tr>
+                        <tr>
+                            <td>DeptName</td>
+                            <td>String(50)</td>
+                            <td>Unique</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Location</td>
+                            <td>String(100)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th rowspan="3">Course</th>
+                            <td>CourseID</td>
+                            <td>String(30)</td>
+                            <td>Primary Key</td>
+                            <td>generated</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>CourseName</td>
+                            <td>String(100)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CourseNumber</td>
+                            <td>String(10)</td>
+                            <td>Unique</td>
+                            <td>example:CS487</td>
+                        </tr>
+                        <tr class="alter">
+                            <th rowspan="10">Book</th>
+                            <td>BookID</td>
+                            <td>String(30)</td>
+                            <td>Primary Key</td>
+                            <td>generated</td>
+                        </tr>
+                        <tr>
+                            <td>ISBN</td>
+                            <td>String(13)</td>
+                            <td>Primary Key</td>
+                            <td>Google API</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Title</td>
+                            <td>String(100)</td>
+                            <td>Not Null</td>
+                            <td>Google API</td>
+                        </tr>
+                        <tr>
+                            <td>Authors</td>
+                            <td>String(100)</td>
+                            <td>Not Null</td>
+                            <td>Google API</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Publisher</td>
+                            <td>String(100)</td>
+                            <td></td>
+                            <td>Google API</td>
+                        </tr>
+                        <tr>
+                            <td>PublishedDate</td>
+                            <td>Date</td>
+                            <td></td>
+                            <td>Google API</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>Description</td>
+                            <td>String(1000)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Categories</td>
+                            <td>String(100)</td>
+                            <td>Not Null</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <td>TotalChecked</td>
+                            <td>Number(100)</td>
+                            <td>TotalChecked>=0</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>TotalAvailable</td>
+                            <td>Number(100)</td>
+                            <td>TotalAvailable>=0</td>
+                            <td></td>
+                        </tr>
+                    </table>
+
+                    <h4 id="chapter3-2">3.2 Relationships</h4>
+                    <p>Relationships among data objects are described.</p>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>Relationship sets</th>
+                            <th>Relationship</th>
+                            <th>Attribute:type</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>WorkFor(Department-Staff)</th>
+                            <td>one to many(0..1 to 0..*)</td>
+                            <td>JobTitle:String(100)</td>
+                            <td>A staff can work in a department. A department can be no one work for.</td>
+                        </tr>
+                        <tr>
+                            <th>DeptCourse(Department-Course)</th>
+                            <td>one to many(1 to 0..*)</td>
+                            <td></td>
+                            <td>A department can have many courses. A Course only belongs a department.</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Teach(Staff-Course)</th>
+                            <td>many to many(1..* to 0..*)</td>
+                            <td></td>
+                            <td>A staff (teacher) can teach many courses or didn't teach a class. A Course can be taught by at less a staff (teacher).</td>
+                        </tr>
+                        <tr>
+                            <th>Take(Student-Course</th>
+                            <td>many to many(0..* to 0..*)</td>
+                            <td></td>
+                            <td>A student can take many courses, A course can be taken by many students.</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>ClassBook(Course-Book)</th>
+                            <td>many to many(0..* to 0..*)</td>
+                            <td></td>
+                            <td>A course can have many test books. A book can be used by many courses.</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">CheckOut(Student-Book)</th>
+                            <td rowspan="2">many to many(0..* to 0..*)</td>
+                            <td>CheckOutDate: Date</td>
+                            <td rowspan="2">A Student can check out many books. A book can be borrowed by many students if available. For any check out behavior, we record a Check out date as a state.</td>
+                        </tr>
+                        <tr class="alter">
+                            <td>DueDate: Date</td>
+                        </tr>
+                    </table>
+
+                    <h4 id="chapter3-3">3.3 Complete data model</h4>
+                    <p>The ERD diagram of the database is given below.</p>
+                    <img class="img-responsive" src="/image/3_3ERD.png" alt="Null" border="0">
+
+                    <h3 id="chapter4">4. Functional Model and Description</h3>
+                    <p>This section describes the static structure of the software.</p>
+
+                    <h4 id="chapter4-1">4.1 Class Diagram</h4>
+                    <p>The class hierarchy (OO) sees below. (Ignoring all getter and setter)</p>
+                    <img class="img-responsive" src="/image/4_1Class.jpg" alt="Null" border="0">
+
+                    <h4 id="chapter4-2">4.2 Software Interface</h4>
+                    <p>The software interfaces to the outside world are described.</p>
+
+                    <h5 id="chapter4-2-1">4.2.1 External machine interfaces</h5>
+                    <p>There are two servers need to be used: A web server and database server.</p>
+                    <p>In our case, Since we use local network to run our web server and database. So we put the web server and database in one machine.The Web server runs on a machine through localhost. But Access to the database must be limited to the hosts providing the web serving.</p>
+                    <p>Clients for users to access the application through any web browser.</p>
+
+                    <h5 id="chapter4-2-2">4.2.2 External system interfaces</h5>
+                    <p>As a web application, the external system interfaces will be the client’s web browsers and the web server runs by node.js at same machine.</p>
+
+                    <h5 id="chapter4-2-3">4.2.3 Human interface</h5>
+                    <p>As a user of our application. We provide 4 levels of assessing level for our users.</p>
+
+                    <p>I.Staff:</p>
+                    <p>Modify book information.</p>
+                    <p>Check personal information.</p>
+                    <p>Assess to library</p>
+
+                    <p>II.Teacher:</p>
+                    <p>Check out the textbook that he/she teach.</p>
+                    <p>Check personal information.</p>
+
+                    <p>III.Student/Parents</p>
+                    <p>Check and Modify personal information.</p>
+                    <p>Check out the textbook that he/she learn.</p>
+                    <p>Check out and pay amount due.</p>
+
+                    <h3 id="chapter5">5. Behavioral Model and Description</h3>
+
+                    <h4 id="chapter5-1">5.1 Description of software behavior</h4>
+
+                    <h5 id="chapter5-1-1">5.1.1 Events</h5>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>No</th>
+                            <th>Event</th>
+                            <th>Actor</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>1</th>
+                            <td>User login/off</td>
+                            <td>All</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>Create new user's information</td>
+                            <td>All</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>3</th>
+                            <td>Update information of Users</td>
+                            <td>All</td>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <td>Delete user's information</td>
+                            <td>All</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>5</th>
+                            <td>View user's information</td>
+                            <td>All</td>
+                        </tr>
+                        <tr>
+                            <th>6</th>
+                            <td>Search books</td>
+                            <td>All</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>7</th>
+                            <td>Check out books</td>
+                            <td>Students,Teachers</td>
+                        </tr>
+                        <tr>
+                            <th>8</th>
+                            <td>View the information of books</td>
+                            <td>All</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>9</th>
+                            <td>Change the books checked out</td>
+                            <td>Students, Teachers</td>
+                        </tr>
+                        <tr>
+                            <th>10</th>
+                            <td>View the books checked out</td>
+                            <td>All</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>11</th>
+                            <td>Add books' information</td>
+                            <td>Staff</td>
+                        </tr>
+                        <tr>
+                            <th>12</th>
+                            <td>Update books' information</td>
+                            <td>Staff</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>13</th>
+                            <td>Delete books' informaiton</td>
+                            <td>Staff</td>
+                        </tr>
+                    </table>
+
+                    <h5 id="chapter5-1-2">5.1.2 States</h5>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>No</th>
+                            <th>State Name</th>
+                            <th>State Description</th>
+                            <th>Event handled</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>1</th>
+                            <td>Start</td>
+                            <td>This is the initial state . When the website is opened, we initialize and move on to the LOGIN state.</td>
+                            <td>Initialized</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>Log in</td>
+                            <td>The state where the login information is provided</td>
+                            <td>Log in correctly, log in incorrectly</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>3</th>
+                            <td>User check</td>
+                            <td>When the login successfully, the check for access level of the user is determined</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <td>User Main</td>
+                            <td>The main state for the users(including students and teachers). The state of the application should be here, to perform any valid operations by the users of type students and teachers.</td>
+                            <td>Search books, Check out books, Update/delete information, log out, View books checked out</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>5</th>
+                            <td>Book list</td>
+                            <td>This is a list showing all the books with ISBN, class, capabilities</td>
+                            <td>View Books’ information</td>
+                        </tr>
+                        <tr>
+                            <th>6</th>
+                            <td>Users’ information List</td>
+                            <td>This is a list containing all the information of users(including students and teachers)</td>
+                            <td></td>
+                        </tr>
+                        <tr class="alter">
+                            <th>7</th>
+                            <td>Books checked out list</td>
+                            <td>This is a list showing all the books checked out with date checked out and due date</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>8</th>
+                            <td>Staff Main</td>
+                            <td>The main state for the users. The state of the application should be here, to perform any valid operations by the users of type Staff</td>
+                            <td>Search books, Update/delete information, View books checked out, log out</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>9</th>
+                            <td>Books Information</td>
+                            <td>This is a list containing one book’s detail information</td>
+                            <td>Modify the book’s information for staff</td>
+                        </tr>
+                    </table>
+
+                    <h4 id="chapter5-2">5.2 State chart Diagram</h4>
+
+                    <img class="img-responsive" src="/image/5_2State.jpg" alt="Null" border="0">
+
+                    <h3 id="chapter6">6. Limitations and Restrictions</h3>
+
+                    <h4 id="chapter6-1">6.1 Restrictions</h4>
+
+                    <ol>
+                        <li>This is a local environmental program since no online web server.</li>
+                        <li>It is for one high school only.</li>
+                        <li>All the users’ information stored in a database which is accessible from faculty (teacher and staff).</li>
+                        <li>Teachers shall only borrow (check out) the books needed for the class.</li>
+                        <li>Students shall only borrow (check out) the book equal or less to the number of classes registered.</li>
+                    </ol>
+
+                    <h4 id="chapter6-2">6.2 Limitations</h4>
+
+                    <ol>
+                        <li>The system should respond within required constraint in the project manual specifications.</li>
+                        <li>The system should be used in the interaction between students, parents,  teachers, staff and the database.</li>
+                        <li>The system should provide the best result possible.</li>
+                        <li>The mongodb needs more memory than relational databases.</li>
+                        <li>Node.js as a web server has some disadvantage. Being a single-threaded platform focused on I/O bound applications on top of a language that does not guarantee purity and has no support for co-routines.</li>
+                    </ol>
+
+                    <h4 id="chapter6-3">6.3 Constraint</h4>
+
+                    <ol>
+                        <li>The student and teacher can’t not register a class for a client site. It should be on the database before the final version.</li>
+                        <li>The users must have their correct usernames(Email) and passwords to enter into the user center.</li>
+                        <li>The course and the due time of the book should only maintain by the developer.</li>
+                    </ol>
+
+                    <h3 id="chapter7">7. Standard of Validation</h3>
+
+                    <p>The approach to software validation is described below:</p>
+
+                    <h4 id="chapter7-1">7.1 Classes of tests</h4>
+
+                    <p>Types of tests to be conduncted:</p>
+
+                    <p>I&T</p>
+                    <p>Functional Testing(quality assurance process)</p>
+                    <p>System Testing(The process of testing an integrated system to verify it meets specified)</p>
+                    <p>Emphasis we will be on the Use case test</p>
+
+                    <h4 id="chapter7-2">7.2 Expected software response</h4>
+
+                    <h5>(1) Students & Parents use case test</h5>
+
+                    <h6>Students & Parents use case test chart</h6>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>Title</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                            <th>Procedure</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Sign in 1</th>
+                            <td>
+                                <ul>
+                                    <li>User: xxxx</li>
+                                    <li>Password:xxxxxx</li>
+                                    <li>Input:xxxxxx</li>
+                                </ul>
+                            </td>
+                            <td>Success</td>
+                            <td>Sign in on the user console page</td>
+                        </tr>
+                        <tr>
+                            <th>Sign in 2</th>
+                            <td>
+                                <ul>
+                                    <li>User: xxxx</li>
+                                    <li>Password:xxxxxx</li>
+                                    <li>Input:yyyyyy</li>
+                                </ul>
+                            </td>
+                            <td>fail hints: “wrong password or username”or “no data”</td>
+                            <td>Sign in on the user console page</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Sign up 1</th>
+                            <td>input “phone No, nickname, password, password hints Q&A, mailbox, gender, date of birth”</td>
+                            <td>Success</td>
+                            <td>Hit the ‘Sign up’ button</td>
+                        </tr>
+                        <tr>
+                            <th>Sign up 2</th>
+                            <td>fail to input “phone No, nickname, password, password hints Q&A, mailbox, gender, date of birth”</td>
+                            <td>fail hints:“phone No or nickname or password or password hints Q&A or mailbox or gender or date of birth”cannot be empty</td>
+                            <td>Hit the ‘Sign up’ button</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>View books</th>
+                            <td>View due dates, check-out dates</td>
+                            <td>Success</td>
+                            <td>Hit the ‘View Info’ button</td>
+                        </tr>
+                        <tr>
+                            <th>Check out books</th>
+                            <td>The books’ check-out info post</td>
+                            <td>Success</td>
+                            <td>Hit the ‘View Info’ button</td>
+                        </tr>
+                    </table>
+
+                    <h5>(2) Teachers use case test</h5>
+
+                    <h6>Teachers use case test chart</h6>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>Title</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                            <th>Procedure</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Sign in 1</th>
+                            <td>
+                                <ul>
+                                    <li>User: xxxx</li>
+                                    <li>Password:xxxxxx</li>
+                                    <li>Input:xxxxxx</li>
+                                </ul>
+                            </td>
+                            <td>Success</td>
+                            <td>Sign in on the user console page</td>
+                        </tr>
+                        <tr>
+                            <th>Sign in 2</th>
+                            <td>
+                                <ul>
+                                    <li>User: xxxx</li>
+                                    <li>Password:xxxxxx</li>
+                                    <li>Input:yyyyyy</li>
+                                </ul>
+                            </td>
+                            <td>fail hints: “wrong password or username”or “no data”</td>
+                            <td>Sign in on the user console page</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Sign up 1</th>
+                            <td>input “phone No, nickname, password, password hints Q&A,mailbox,gender, date of birth”</td>
+                            <td>Success</td>
+                            <td>Hit the ‘Sign up’ button</td>
+                        </tr>
+                        <tr>
+                            <th>Sign up 2</th>
+                            <td>fail to input “phone No, nickname, password, password hints Q&A, mailbox, gender, date of birth”</td>
+                            <td>fail hints:“phone No or nickname or password or password hints Q&A or mailbox or gender or date of birth”cannot be empty</td>
+                            <td>Hit the ‘Sign up’ button</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>View books</th>
+                            <td>View due dates, check-out dates</td>
+                            <td>Success</td>
+                            <td>Hit the ‘View Info’ button</td>
+                        </tr>
+                        <tr>
+                            <th>Check out books</th>
+                            <td>The books’ check-out info post</td>
+                            <td>Success</td>
+                            <td>Hit the ‘View Info’ button</td>
+                        </tr>
+                    </table>
+
+                    <h5>(3) Staff use case test</h5>
+
+                    <h6>Staff use case test chart</h6>
+
+                    <table class="req-table">
+                        <tr>
+                            <th>Title</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                            <th>Procedure</th>
+                        </tr>
+                        <tr class="alter">
+                            <th>Sign in 1</th>
+                            <td>
+                                <ul>
+                                    <li>User: xxxx</li>
+                                    <li>Password:xxxxxx</li>
+                                    <li>Input:xxxxxx</li>
+                                </ul>
+                            </td>
+                            <td>Success</td>
+                            <td>Sign in on the user console page</td>
+                        </tr>
+                        <tr>
+                            <th>Sign in 2</th>
+                            <td>
+                                <ul>
+                                    <li>User: xxxx</li>
+                                    <li>Password:xxxxxx</li>
+                                    <li>Input:yyyyyy</li>
+                                </ul>
+                            </td>
+                            <td>fail hints: “wrong password or username”or “no data”</td>
+                            <td>Sign in on the user console page</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>Sign up 1</th>
+                            <td>input “phone No, nickname, password, password hints Q&A, mailbox, gender, date of birth”</td>
+                            <td>Success</td>
+                            <td>Hit the ‘Sign up’ button</td>
+                        </tr>
+                        <tr>
+                            <th>Sign up 2</th>
+                            <td>fail to input “phone No, nickname, password, password hints Q&A, mailbox, gender, date of birth”</td>
+                            <td>fail hints:“phone No or nickname or password or password hints Q&A or mailbox or gender or date of birth”cannot be empty</td>
+                            <td>Hit the ‘Sign up’ button</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>List books</th>
+                            <td>list book capabilities</td>
+                            <td>Success</td>
+                            <td>Hit the 'List books' button</td>
+                        </tr>
+                        <tr>
+                            <th>Modify information</th>
+                            <td>Add information, Update information, Delete information</td>
+                            <td>Success</td>
+                            <td>Hit the ‘Modify info’ button</td>
+                        </tr>
+                        <tr class="alter">
+                            <th>List access level</th>
+                            <td>list access level: students & parents, teachers, staff</td>
+                            <td>Success</td>
+                            <td>Hit the ‘list access level’ button</td>
+                        </tr>
+                    </table>
+
+                    <p>Use cases is a technique that helps to identify test cases that exercise the whole system on a transaction by transaction basis from start to finish. Some of the examples would be:</p>
+                    <p>Check the info typed in correctness.</p>
+                    <p>Response time less or equal to 5 seconds.</p>
+
+                    <h4 id="chapte7-3">7.3 Performance boundaries</h4>
+
+                    <ol type="I">
+                        <li>Response-Time</li>
+                        <p>The time it take in searching books, placing order, deleting order, updating order, adding user information, deleting user information, updating user information should be less or equal to 5 seconds. It could take more time when the loading big profile.</p>
+                        <li>Faculty-Response</li>
+                        <p>The time it may take should be less or equal to 5 seconds.</p>
+                        <li>Loading-Capacity</li>
+                        <p>Different users (students, teachers and faculties) shall access the system at the same time.</p>
+                        <li>Resource-Utilization</li>
+                        <p>The checking out information would be modified by the system for different users. For example, the students shall only borrow(check out) less or equal to the number of the books registered, and the teachers shall only borrow(check out) the books needed for the classes.</p>
+
+                    </ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+                        <ul class="nav bs-docs-sidenav">
+                            <li class="">
+                                <a href="#chapter1">1. Introduction</a>
+                                <ul class="nav">
+                                    <li class=""><a href="#chapter1-1">1.1 Goals and objectives</a></li>
+                                    <li><a href="#chapter1-2">1.2 Statement of scope</a></li>
+                                    <li><a href="#chapter1-3">1.3 Software context</a></li>
+                                    <li><a href="#chapter1-4">1.4 Major constraints</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href="#chapter2">2. User Scenario</a>
+                                <ul class="nav">
+                                    <li><a href="#chapter2-1">2.1 User profiles</a></li>
+                                    <li><a href="#chapter2-2">2.2 Use-cases</a></li>
+                                    <li><a href="#chapter2-3">2.3 Special usage considerations</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href="#chapter3">3. Data Model and Description</a>
+                                <ul class="nav">
+                                    <li><a href="#chapter3-1">3.1 Data objects</a></li>
+                                    <li><a href="#chapter3-2">3.2 Relationships</a></li>
+                                    <li><a href="#chapter3-3">3.3 Complete data model</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chapter4">4. Functional Model and Description</a>
+                                <ul class="nav">
+                                    <li><a href="#chapter4-1">4.1 Class Diagram</a></li>
+                                    <li><a href="#chapter4-2">4.2 Software Interface Description</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chapter5">5. Restrictions, limitations, and constraints</a>
+                                <ul class="nav">
+                                    <li><a href="#chapter5-1">5.1 Description for software behavior</a></li>
+                                    <li><a href="#chapter5-2">5.2 State-chart Diagram</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chapter6">6. Limitations and Restrictions</a>
+                                <ul class="nav">
+                                    <li><a href="#chapter6-1">6.1 Restrictions</a></li>
+                                    <li><a href="#chapter6-2">6.2 Limitations</a></li>
+                                    <li><a href="#chapter6-3">6.3 Constraint</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#chapter7">7. Standard of Validation</a>
+                                <ul class="nav">
+                                    <li><a href="#chapter6-1">7.1 Classes of tests</a></li>
+                                    <li><a href="#chapter6-2">7.2 Expected software response</a></li>
+                                    <li><a href="#chapter6-3">7.3 Performance boundaries</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a class="back-to-top" href="#top">
+                            Back to top
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var sn = $('.bs-docs-sidenav'),sl =sn.children('li');
+        sl.on('click',function () {
+            sn.find('.nav').css('display','none');
+            sl.removeClass('active');
+            $(this).addClass('active');
+            $(this).children('.nav').css('display','block');
+        })
+    })
+</script>
+
+

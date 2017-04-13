@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET requirement page. */
 
 router.get('/RSD', function(req, res, next) {
-    res.render('requirement', {
+    res.render('RSD', {
         title: 'High School Book Tracking Application - Requirement Specification Document', users:!!req.session._id ,
         layout:'layout-login'
 
