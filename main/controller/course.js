@@ -26,8 +26,14 @@ courseController.prototype =  {
         });
     },
     //find one
-    find: function (json, callBack){
+    findOne: function (json, callBack){
         course.findOne(json, function (err, doc){
+            callBack(err, doc);
+        });
+    },
+    //find more
+    find: function (json, callBack){
+        course.find(json, function (err, doc){
             callBack(err, doc);
         });
     },

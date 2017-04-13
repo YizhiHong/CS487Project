@@ -123,27 +123,52 @@ router.post('/add-staff-info', function(req, res) {
 
 /** add student information **/
 router.post('/add-student-info', function(req, res) {
+    var CourseID = [];
+
+    if(!!req.body.studentCourse ){
+        if(req.body.studentCourse instanceof Array){
+            for (var i=0; i<req.body.studentCourse.length;i++){
+                CourseID.push(req.body.studentCourse[i].split(':')[0]);
+            }
+        }else{
+            CourseID.push(req.body.studentCourse.split(':')[0]);
+        }
+    }
+
     var studentInfo = {
         Email: req.body.email || "iit@hawk.iit.edu",
         Password: req.body.password  || 123,
         CWID : req.body.CWID || "A00000000",
         LastName: req.body.l_name || "unknown",
         FirstName: req.body.f_name || "unknown",
-        Brithday: req.body.birthday || "1989-06-04"
+        Brithday: req.body.birthday || "1989-06-04",
+        Courses:[]
     };
-    console.log(studentInfo);
 
-    (function(){
-        student.save(studentInfo,function (err) {
-            if(err){
-                console.log(err);
-                res.redirect('/');
-            }else{
-                console.log("Saved in students");
-                res.redirect('/admin');
-            }
-        })
-    })(studentInfo);
+    course.find( { CourseID : { $in : CourseID } } ,function (err,doc) {
+        if(!err){
+            console.log(doc);
+            studentInfo.Courses = doc;
+            student.save(studentInfo,function (err) {
+                if(err){
+                    console.log(err);
+                    res.redirect('/');
+                }else{
+                    console.log("Saved in students");
+                    res.redirect('/admin');
+                }
+            });
+            console.log(studentInfo);
+        }else {
+            console.log(err);
+            res.redirect('/');
+        }
+    });
+
+
+    // if(!(CourseObj.length === 0)) {studentInfo.Courses = CourseObj;}
+
+
 });
 
 
