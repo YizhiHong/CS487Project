@@ -52,18 +52,7 @@ app.get('/',filter.authorizeIndex, function(req, res, next) {
 
 /** login **/
 app.get('/login', filter.authorize, function(req, res) {
-    // sess = req.session;
-    // if(sess._id) {
-    //     if(sess.level === 1){
-    //         res.redirect('/teacher/' + sess._id);
-    //     }else if(sess.level === 0){
-    //         res.redirect('/staff/' + sess._id);
-    //     }else{
-    //         res.redirect('/student/' + sess._id);
-    //     }
-    // }else {
     res.render('login', {title: 'login', layout: 'layout-login'});
-    // }
 });
 
 app.get('/log-out', function(req, res) {
@@ -76,6 +65,11 @@ app.get('/log-out', function(req, res) {
         }
     });
 });
+
+app.get('/sign-up', filter.authorize, function(req, res) {
+    res.render('sign-up', {title: 'sign up', layout: 'layout-login'});
+});
+
 
 //
 // app.get('/users', function(req, res) {
