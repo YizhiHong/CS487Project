@@ -29,8 +29,8 @@
                         <ul class="list-group">
                             {{#each departments}}
                                 <li class="list-group-item">
-                                    <h4>{{ this.DeptName }}</h4>
-                                    <p>{{ this.Location }}</p>
+                                    <h4>Department Name: {{ this.DeptName }}</h4>
+                                    <h4>Department Location: {{ this.Location }}</h4>
                                 </li>
                             {{/each}}
                         </ul>
@@ -79,9 +79,9 @@
                         <ul class="list-group">
                             {{#each courses}}
                                 <li class="list-group-item">
-                                    <h4>{{ this.CourseNumber }}: {{this.CourseName}} </h4>
-                                    <p>belong to:{{this.Department}}</p>
-                                    <p>Books: {{ this.Books }}</p>
+                                    <h4>CourseNumber: {{ this.CourseNumber }}</h4>
+                                    <h4>CourseName: {{this.CourseName}} </h4>
+                                    <h4>Books: {{ this.Books }}</h4>
                                 </li>
                             {{/each}}
                         </ul>
@@ -144,8 +144,10 @@
                         <ul class="list-group">
                             {{#each staffs}}
                                 <li class="list-group-item">
-                                    <h4>{{this.SSN}}: {{ this.FirstName }} {{this.LastName}}</h4>
-                                    <p>{{this.Email}}</p>
+                                    <h4>SSN: {{this.SSN}}</h4>
+                                    <h4>First Name: {{ this.FirstName }}</h4>
+                                    <h4>Last Name: {{this.LastName}}</h4>
+                                    <h4>Email: {{this.Email}}</h4>
                                 </li>
                             {{/each}}
                         </ul>
