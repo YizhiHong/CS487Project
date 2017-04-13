@@ -20,7 +20,11 @@
               </div>
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
-                      <li><a href="/login">Login In</a></li>
+                      {{#if users}}
+                          <li><a href="/log-out">Log Out</a></li>
+                      {{else}}
+                          <li><a href="/login">Login</a></li>
+                      {{/if}}
                       <li><a href="/requirement/DSD">DSD</a></li>
                       <li><a href="/requirement/RSD">RSD</a></li>
 

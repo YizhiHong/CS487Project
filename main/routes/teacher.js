@@ -5,10 +5,12 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require("mongoose");
+var filter = require('../sessions/filter');
+
 
 /** GET teacher menu  **/
-router.get('/', function(req, res, next) {
-    res.render('teacher-menu', { title: 'teacher menu' , layout: 'layout-login'});
+router.get('/',filter.authorizeIndex, function(req, res, next) {
+    res.redirect('/login');
 });
 
 router.get('/view-books', function(req, res, next) {

@@ -19,7 +19,7 @@ var studentSchema = Schema(
         FirstName: {type:String,max:50,required: true},
         LastName: {type:String,max:50,required: true},
         Birthday : Date,
-        Courses: {type: Schema.ObjectId, ref: 'course'},
+        Courses: {type: Object, ref: 'course'},
         Books: {type: Schema.ObjectId, ref: 'book',
             CheckOutDate: {type: Date, default: Date.now},
             DueDate: {type: Date, default: '2017-06-01'}

@@ -93,6 +93,7 @@ router.post('/add-course-info', function(req, res) {
 
 /** add staff information **/
 router.post('/add-staff-info', function(req, res) {
+    console.log(req.body.level);
     var staffInfo = {
         SSN: req.body.SSN,
         Email: req.body.email || "iit@hawk.iit.edu",
@@ -100,7 +101,7 @@ router.post('/add-staff-info', function(req, res) {
         LastName: req.body.l_name || "unknown",
         FirstName: req.body.f_name || "unknown",
         Brithday: req.body.birthday || "1989-06-04",
-        Level: req.body.level || 1,
+        Level: req.body.level,
         WorkFor: {
             DeptID:req.body.workFor,
             JobTitle: req.body.JobTitle
@@ -119,7 +120,6 @@ router.post('/add-staff-info', function(req, res) {
         })
     })(staffInfo);
 });
-
 
 /** add student information **/
 router.post('/add-student-info', function(req, res) {
