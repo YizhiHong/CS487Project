@@ -116,7 +116,7 @@
                                     <input type="text" name="l_name" class="form-control" id="l_name" placeholder="last name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="staff_birthday">Student birthday</label>
+                                    <label for="staff_birthday">Staff birthday</label>
                                     <input type="text"  name="birthday" class="form-control" id="staff_birthday" placeholder="ex:2000-01-01">
                                 </div>
                                 <div class="form-group">
@@ -140,13 +140,12 @@
                         </div>
                     </div>
                     <div class="col-sm-4 col-xs-12">
-                        <h3>Current Students</h3>
+                        <h3>Current Staffs</h3>
                         <ul class="list-group">
                             {{#each staffs}}
                                 <li class="list-group-item">
                                     <h4>{{this.SSN}}: {{ this.FirstName }} {{this.LastName}}</h4>
-                                    <p>{{this.Level}}</p>
-                                    <p>{{this.WorkFor.DeptID}}</p>
+                                    <p>{{this.Email}}</p>
                                 </li>
                             {{/each}}
                         </ul>
@@ -185,6 +184,14 @@
                                     <label for="student_birthday">Student birthday</label>
                                     <input type="text"  name="birthday" class="form-control" id="student_birthday" placeholder="ex:2000-01-01">
                                 </div>
+                                <div class="form-group">
+                                    <label for="studentCourse">Select Course</label>
+                                    <select multiple name="studentCourse" class="form-control" style="height:200px">
+                                        {{#each courses}}
+                                            <option studentCourse={{ this.CourseName }} >{{ this.CourseID }}: {{ this.CourseName }}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
 
                                 <button type="submit" class="btn btn-default">Submit</button>
                             </form>
@@ -194,7 +201,10 @@
                         <h3>Current Students</h3>
                         <ul class="list-group">
                             {{#each students}}
-                                <li class="list-group-item">{{ this.FirstName }} {{this.LastName}}: {{this.CWID}}
+                                <li class="list-group-item"><h4>{{ this.FirstName }} {{this.LastName}}: {{this.CWID}}</h4>
+                                     {{#each this.Courses}}
+                                     <p>{{this.CourseID}}: {{this.CourseName}}</p>
+                                    {{/each}}
                                 </li>
                             {{/each}}
                         </ul>

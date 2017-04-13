@@ -4,7 +4,7 @@
             <div class="form-vertical">
                 <h2>Student</h2>
                 <p>For Student Sign In</p>
-                <form method="post" action="student-center" id="Student_login" accept-charset="UTF-8">
+                <form  id="Student_login" accept-charset="UTF-8">
                     <input value="Student_login" name="form_type" type="hidden">
                     <input name="utf8" value="✓" type="hidden">
                     <div class="input-box">
@@ -15,9 +15,11 @@
                         <label for="StudentPassword">Password</label>
                         <input value="" name="password" id="StudentPassword" class="input-full" placeholder="******" type="password">
                     </div>
+                    <div>{{student_msg}}</div>
                     <p>
-                        <input class="btn btn-full" value="Sign In" type="submit">
+                        <button class="btn btn-full" id="student_login" value="Sign In">Sign In</button>
                     </p>
+                    <div id="student_alert"></div>
                     <p class="or"><span>or</span></p>
                     <p><a href="#create" id="Student_CreateAccount">Sign up now</a></p>
                     <p><a href="/">Return to index</a></p>
@@ -30,7 +32,7 @@
             <div class="form-vertical">
                 <h2>STAFF</h2>
                 <p>For Staff/Teacher Sign In</p>
-                <form method="post" action="staff-center" id="Staff_login" accept-charset="UTF-8">
+                <form id="Staff_login" accept-charset="UTF-8">
                     <input value="staff_login" name="form_type" type="hidden">
                     <input name="utf8" value="✓" type="hidden">
                     <div class="input-box">
@@ -41,9 +43,11 @@
                         <label for="StaffPassword">Password</label>
                         <input value="" name="password" id="StaffPassword" class="input-full" placeholder="******" type="password">
                     </div>
+                    <div>{{staff_msg}}</div>
                     <p>
-                        <input class="btn btn-full" value="Sign In" type="submit">
+                        <button class="btn btn-full" id="staff_login" value="Sign In">Sign In</button>
                     </p>
+                    <div id="staff_alert"></div>
                     <p class="or"><span>or</span></p>
                     <p><a href="#create" id="Staff_CreateAccount">Sign up now</a></p>
                     <p><a href="/">Return to index</a></p>
@@ -53,3 +57,62 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+        var checkInfo = function () {
+            /** add some check in here **/
+            return true;
+        }
+
+        $('#student_login').click(function(evt){
+            evt.preventDefault();
+            if(checkInfo()){
+                var sname = $('#StudentAddress').val();
+                var spassword = $('#StudentPassword').val()
+                $.ajax({
+                    url: '/student',
+                    type: 'POST',
+                    data: {
+                        name: sname,
+                        password: spassword
+                    },
+                    success: function(data){
+                        if(data.body){
+                            window.location.href = '/student/' + data.body;
+                        }else{
+                            $('#student_alert').html('<div class="input-box alert alert-danger" role="alert">'+ data +'</div>');
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#staff_login').click(function(evt){
+            evt.preventDefault();
+            var sname = $('#StaffAddress').val();
+            var spassword = $('#StaffPassword').val();
+            if(checkInfo()){
+                $.ajax({
+                    url: '/staff',
+                    type: 'POST',
+                    data: {
+                        name: sname,
+                        password: spassword
+                    },
+                    success: function(data){
+                        if(data.body){
+                            window.location.href = '/staff/' + data.body;
+                        }else{
+                            $('#staff_alert').html('<div class="input-box alert alert-danger" role="alert">'+ data +'</div>');
+                        }
+                    }
+                });
+            }
+        });
+
+        $('.input-full').on('click',function () {
+            $('#staff_alert,#student_alert').html('');
+        })
+    })
+</script>

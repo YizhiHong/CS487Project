@@ -18,12 +18,10 @@ var admin = require('./routes/admin');
 
 var app = express();
 
-/** get Test **/
+/** get DB tables **/
 
 var mongoose = require('mongoose');
-
 var models = require('./index');
-
 require('express-mongoose');
 var DepartmentCollections = models.DepartmentCollection;
 var StaffCollection = models.StaffCollection;
@@ -31,13 +29,65 @@ var StudentCollections = models.StudentCollection;
 var BookCollections = models.BookCollection;
 var CourseCollection = models.CourseCollection;
 
-app.get('/users', function(req, res) {
-    res.send(StudentCollections.find());
+/** session check **/
+var session = require('express-session');
+// var FileStore = require('session-file-store')(session);
+// var identityKey = 'hong';
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+var filter = require('./sessions/filter');
+var sess;
+/** home page. **/
+app.get('/',filter.authorizeIndex, function(req, res, next) {
+    res.render('index', {
+        title: 'High school book Tracking application'
+        , layout: 'layout-login'
+    });
 });
 
-app.get('/books', function(req, res) {
-    res.send(BookCollections.find());
+
+/** login **/
+app.get('/login', filter.authorize, function(req, res) {
+    // sess = req.session;
+    // if(sess._id) {
+    //     if(sess.level === 1){
+    //         res.redirect('/teacher/' + sess._id);
+    //     }else if(sess.level === 0){
+    //         res.redirect('/staff/' + sess._id);
+    //     }else{
+    //         res.redirect('/student/' + sess._id);
+    //     }
+    // }else {
+    res.render('login', {title: 'login', layout: 'layout-login'});
+    // }
 });
+
+app.get('/log-out', function(req, res) {
+    req.session.destroy(function(err) {
+        if (err) {
+            res.json({msg: 'Fail to log out'});
+            console.log(err);
+        } else {
+            res.redirect('/');
+        }
+    });
+});
+
+//
+// app.get('/users', function(req, res) {
+//     res.send(StudentCollections.find());
+// });
+//
+// app.get('/books', function(req, res) {
+//     res.send(BookCollections.find());
+// });
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

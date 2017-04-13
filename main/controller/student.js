@@ -33,6 +33,9 @@ studentController.prototype =  {
     },
     findAll: function () {
         return student.find();
+    },
+    isLogined: function (req) {
+        return !!req.session._id
     }
 };
 
