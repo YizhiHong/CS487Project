@@ -42,6 +42,11 @@ router.get('/student/:id',function (req,res) {
         })
     }
 });
+//
+// router.get('/student/:id',function (req,res) {
+//
+//
+// });
 
 /**  Staff Center **/
 router.post('/staff' ,function(req, res) {

@@ -18,7 +18,7 @@ var courseSchema = new Schema({
     Department: {type: Schema.ObjectId, ref: 'department'},
     Teachers: {type: Schema.ObjectId, ref: 'staff'},
     Books: {type: Array, ref: 'book'},
-    Students: {type: Schema.ObjectId, ref: 'student'}
+    Students: {type: Array, ref: 'student'}
 });
 
 module.exports = mongoose.model('course',courseSchema);

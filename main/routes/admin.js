@@ -67,7 +67,8 @@ router.post('/add-course-info', function(req, res) {
                 CourseID: req.body.CourseID,
                 CourseNumber: req.body.CourseID,
                 Department: deptID,
-                Books: CourseID
+                Books: CourseID,
+                Students: []
             };
             console.log(courseInfo);
 
@@ -147,15 +148,28 @@ router.post('/add-student-info', function(req, res) {
 
     course.find( { CourseID : { $in : CourseID } } ,function (err,doc) {
         if(!err){
-            console.log(doc);
+            var studentList;
+            if(doc instanceof Array){
+                for (var i=0; i< doc.length;i++){
+                    doc[i].Students.push(studentInfo.CWID);
+                }
+            }
+            studentList = doc[0].Students;
             studentInfo.Courses = doc;
             student.save(studentInfo,function (err) {
                 if(err){
                     console.log(err);
                     res.redirect('/');
                 }else{
-                    console.log("Saved in students");
-                    res.redirect('/admin');
+                    course.update({CourseID:{$in:CourseID}}, {$set:{Students:studentList}},function (err) {
+                        if(!err){
+                            console.log("Saved in Courses");
+                            res.redirect('/admin');
+                        }else{
+                            console.log(err);
+                            res.redirect('/');
+                        }
+                    });
                 }
             });
             console.log(studentInfo);

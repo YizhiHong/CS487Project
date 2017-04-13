@@ -8,8 +8,9 @@ var mongoose = require("mongoose");
 var filter = require('../sessions/filter');
 
 /** GET student menu **/
-router.get('/', filter.authorizeIndex ,function(req, res, next) {
-        res.redirect('/login');
+router.get('/:id/book', filter.authorizeIndex ,function(req, res, next) {
+    var id = {_id:req.params.id};
+    console.log(id);
 });
 
 

@@ -20,10 +20,16 @@ courseController.prototype =  {
         });
     },
     //update
-    update: function (json, condition, callBack){
-        course.update(json, condition, function (err){
+    update: function (json, condition, callBack ){
+        course.update(json, condition, { multi: true }, function (err){
             callBack(err);
         });
+    },
+    //insert
+    insert: function (json, callBack) {
+      course.insert(json, function (err,doc) {
+          callBack(err,doc);
+      })
     },
     //find one
     findOne: function (json, callBack){
