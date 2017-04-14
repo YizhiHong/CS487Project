@@ -22,7 +22,6 @@
         </table>
     </div>
 </div>
-
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <script>
@@ -82,23 +81,6 @@
                     ]
                 } );
 
-                function format ( d ) {
-                    // `d` is the original data object for the row
-                    return '<table class="sub-table" cellpadding="5" cellspacing="0" border="0">'+
-                            '<tr>' +
-                            '<td>Publisher:</td>'+
-                            '<td>'+d.Publisher+'</td>'+
-                            '</tr>'+
-                            '<tr>'+
-                            '<td>Date:</td>'+
-                            '<td>'+d.PublishedDate+'</td>'+
-                            '</tr>'+
-                            '<tr>'+
-                            '<td>Description:</td>'+
-                            '<td>'+d.Description+'</td>'+
-                            '</tr>'+
-                            '</table>';
-                }
 
                 $('#book_table tbody').on('click', 'td.details-control', function () {
                     var tr = $(this).closest('tr');
@@ -111,7 +93,8 @@
                     }
                     else {
                         // Open this row
-                        row.child( format(row.data()) ).show();
+                        var tb = new TableFormat();
+                        row.child( tb.book(row.data()) ).show();
                         tr.addClass('shown');
                     }
                 } );

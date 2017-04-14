@@ -104,6 +104,15 @@ td.details-control {
 tr.shown td.details-control {
   background: url('../images/details_close.png') no-repeat center center;
 }
+.sub-table-book{
+  text-align: left;
+}
+.sub-table-book td{
+  padding-left: 10px;
+}
+.sub-table-book th{
+  padding-left: 10px;
+}
 
 
 @media (max-width: 768px ) {

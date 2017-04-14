@@ -13,7 +13,7 @@ router.get('/:id/book', function(req, res, next) {
     if(!!req.session._id){
         console.log(req.session._id + new Date());
         var sid = req.session._id;
-        res.render('staff-book-list', {sid:sid,title: 'Modify book information' , users:!!req.session._id, layout: 'layout-login'});
+        res.render('staff-book-list', { sid:sid, title: 'Modify book information', users:!!req.session._id, layout: 'layout-login'});
     }else{
         res.redirect('/login');
     }
@@ -21,7 +21,9 @@ router.get('/:id/book', function(req, res, next) {
 
 router.get('/:id/level', function(req, res, next) {
     if(!!req.session._id){
-        res.render('user-access-level', { title: 'access level' , users:!!req.session._id, layout: 'layout-login'});
+        console.log(req.session._id + new Date());
+        var sid = req.session._id;
+        res.render('user-access-level', { sid:sid, title: 'All Users List', users:!!req.session._id, layout: 'layout-login'});
     }else{
         res.redirect('/login');
     }

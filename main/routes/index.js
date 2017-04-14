@@ -85,5 +85,16 @@ router.get('/staff/:id',function (req,res) {
 
 });
 
+router.post('/:id/users' ,function(req, res) {
+    var userId = {_id:req.params.id};
+
+    var staffs = staff.findAll();
+    var students = student.findAll();
+    res.send({
+        staffs: staffs,
+        students: students
+    });
+});
+
 
 module.exports = router;
