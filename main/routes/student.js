@@ -11,7 +11,6 @@ var mongoose = require("mongoose");
 var filter = require('../sessions/filter');
 var student = require('../controller/student').student;
 var book = require('../controller/book').book;
-var sess = require('../sessions/filter');
 
 /** GET student menu **/
 router.get('/:id/book' ,function(req, res, next) {

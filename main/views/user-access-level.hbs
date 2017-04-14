@@ -1,6 +1,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
 <div class="container">
     <div class="book-list">
+        <ol class="breadcrumb">
+            <li><a href="/staff/{{sid}}">Staff Home</a></li>
+            <li class="active">Book List and Check Out</li>
+        </ol>
         <div>Please Input UserID</div>
         <label for="access_level"></label><input id="access_level" value=""/>
         <button id="search" class="btn btn-default btn-lg">Search</button><button id="search" class="btn btn-primary btn-lg">Show All</button>
@@ -18,80 +22,4 @@
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
 <script>
-    var translate = function(data) {
-        var output=[];
-        for(var i in data){
-            output.push( {
-                "BookID": data[i].industryIdentifiers[0].identifier,
-                "ISBN": data[i].industryIdentifiers[0].identifier,
-                "Title": data[i].title,
-                "Authors": data[i].authors,
-                "Publisher": data[i].publisher,
-                "PublishedDate" : data[i].publishedDate,
-                "Description":  data[i].description,
-                "Categories": data[i].categories,
-                "TotalChecked": 0,
-                "TotalAvailable": 10,
-                "image": data[i].thumbnail
-            })
-        }
-        return JSON.stringify(output);
-    }
-    $(document).ready(function() {
-        var current;
-        $("#search").on('click',function () {
-            var content = $("#search_value").val();
-            $.ajax({
-                url: '/book/book-list',
-                dataType:'json',
-                data: {"search":content},
-                type: 'POST'
-            }).done(function(data){
-//                console.log(data);
-                current = data;
-                var table = $('#book_table').DataTable( {
-                    "ajax": "",
-                    "data": data,
-                    "columns": [
-                        { "data": "industryIdentifiers.0.identifier" },
-                        { "data": "thumbnail" },
-                        { "data": "title" },
-                        { "data": "description"},
-                    ],
-                    "columnDefs": [
-                        {
-                            "render": function ( data, type, row ) {
-                                return '<img src="'+data+'">';
-                            },
-                            "targets": 1
-                        },
-                        {
-                            "render": function ( data, type, row ) {
-                                return data || "no description";
-                            },
-                            "targets": 3
-                        }
-                    ]
-                } );
-
-            });
-        });
-
-        $("#save").on('click',function () {
-            var content = translate(current);
-//            console.log(content);
-            $.ajax({
-                url: '/book/book-list-save',
-                dataType:'json',
-                contentType: "application/json",
-                data: content,
-                type: 'POST'
-            }).done(function(data){
-                console.log(data);
-                alert(data);
-            });
-        })
-
-    } );
-
 </script>

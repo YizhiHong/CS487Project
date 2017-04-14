@@ -1,0 +1,141 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"/>
+<div class="container">
+    <div class="book-list">
+        <ol class="breadcrumb">
+            <li><a href="/staff/{{sid}}">Staff Home</a></li>
+            <li class="active">Modify book list</li>
+        </ol>
+        <div>Modify book list</div>
+        <table id="book_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <th>More</th>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Authors</th>
+            <th>Total Available</th>
+            <th>Total Checked</th>
+            <th>Modify</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table;
+            $.ajax({
+                url: '/book/{{sid}}/Allbook',
+                dataType:'json',
+                data: {"staffID":"{{sid}}"},
+                type: 'POST'
+            }).done(function(data){
+                console.log(data);
+                table = $('#book_table').DataTable({
+                    "data": data,
+                    "columns": [
+                        {
+                            "class":'details-control',
+                            "orderable":false,
+                            "defaultContent": ''
+                        },
+                        { "data": "ISBN" },
+                        { "data": "Title" },
+                        { "data": "image"},
+                        { "data": "Authors"},
+                        { "data": "TotalAvailable"},
+                        { "data": "TotalChecked"},
+                        {
+                            "orderable":false,
+                            "data": "ISBN"
+                        }
+                    ],
+                    "columnDefs": [
+                        {
+                            "render": function ( data, type, row ) {
+                                return '<img src="'+data+'">';
+                            },
+                            "targets": 3
+                        },
+                        {
+                            "render": function ( data, type, row ) {
+                                return '<input value="'+ data +'" name="TotalAvailable" id="ta'+data+'" class="input-full" type="number">';
+                            },
+                            "targets": 5
+                        },
+                        {
+                            "render": function ( data, type, row ) {
+                                return '<input value="'+ data +'" name="TotalAvailable" id="ta'+data+'" class="input-full" type="number">';
+                            },
+                            "targets": 6
+                        },
+                        {
+                            "render": function ( data, type, row ) {
+                                return "<button ISBN='"+data+"' class='btn btn-danger update-to-database'>update</button>";
+                            },
+                            "targets": 7
+                        }
+                    ]
+                } );
+
+                function format ( d ) {
+                    // `d` is the original data object for the row
+                    return '<table class="sub-table" cellpadding="5" cellspacing="0" border="0">'+
+                            '<tr>' +
+                            '<td>Publisher:</td>'+
+                            '<td>'+d.Publisher+'</td>'+
+                            '</tr>'+
+                            '<tr>'+
+                            '<td>Date:</td>'+
+                            '<td>'+d.PublishedDate+'</td>'+
+                            '</tr>'+
+                            '<tr>'+
+                            '<td>Description:</td>'+
+                            '<td>'+d.Description+'</td>'+
+                            '</tr>'+
+                            '</table>';
+                }
+
+                $('#book_table tbody').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+
+                    if ( row.child.isShown() ) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        row.child( format(row.data()) ).show();
+                        tr.addClass('shown');
+                    }
+                } );
+
+                $(".update-to-database").on('click',function () {
+                    var $this = $(this),isbn = $this.attr('ISBN');
+                    var totalChecked = Number($this.parent().prev().children().val());
+                    var total = Number($this.parent().prev().prev().children().val());
+//                    console.log(totalChecked+ "/" + total);
+                   $.ajax({
+                       url: '/book/{{sid}}/update-book',
+                       dataType:'json',
+                       data: {ISBN:isbn,TotalChecked:totalChecked,TotalAvailable:total},
+                       type: 'POST'
+                    }).done(function(data){
+                        swal(data.msg);
+                    });
+
+
+                })
+
+            });
+
+
+    } );
+
+</script>

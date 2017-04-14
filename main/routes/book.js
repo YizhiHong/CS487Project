@@ -155,4 +155,31 @@ router.post('/:id/check-out-book',function (req,res,next){
         })
 });
 
+router.post('/:id/Allbook', function(req, res, next) {
+    var sid = req.session._id;
+    var allBooks =  book.findAll();
+    res.send(allBooks);
+});
+
+router.post('/:id/update-book', function(req, res, next) {
+    var data = req.body;
+    var ISBN = {ISBN:data.ISBN};
+    var tc = data.TotalChecked;
+    var ta = data.TotalAvailable;
+    book.update(ISBN,{TotalChecked:tc,TotalAvailable:ta},function (err) {
+        if(!err){
+            console.log("saved in book db");
+            res.send({
+                msg: "Update succeed!!!"
+            });
+        }else{
+            console.log("error with"+err);
+            res.send({
+                msg: "Fail to Update!!!"
+            });
+        }
+
+    })
+});
+
 module.exports = router;

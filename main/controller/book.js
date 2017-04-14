@@ -13,19 +13,19 @@ bookController.prototype =  {
             callBack(err);
         });
     },
-    //删
+    //delete
     remove: function (json, callBack){
         book.remove(json, function (err){
             callBack(err);
         });
     },
-    //改
+    //update
     update: function (json, condition, callBack){
         book.update(json, condition, function (err){
             callBack(err);
         });
     },
-    //查
+    //find many
     find: function (json, callBack){
         book.find(json, function (err, doc){
             callBack(err, doc);
@@ -34,6 +34,7 @@ bookController.prototype =  {
     findData: function (json, callBack){
        return book.find(json);
     },
+    //find one
     findOne: function (json, callBack){
         book.findOne(json, function (err, doc){
             callBack(err, doc);

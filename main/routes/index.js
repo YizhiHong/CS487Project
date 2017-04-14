@@ -5,7 +5,7 @@ var student = require('../controller/student').student;
 var staff = require('../controller/staff').staff;
 var sess = require('../app').sess;
 
-/**  student Center **/
+/**  post student login **/
 router.post('/student', function(req, res) {
         var query = {
             Email: req.body.name,
@@ -26,6 +26,7 @@ router.post('/student', function(req, res) {
         });
 });
 
+/**  get student Center **/
 router.get('/student/:id',function (req,res) {
     var id = {_id:req.params.id};
     if(!sess){
@@ -42,9 +43,7 @@ router.get('/student/:id',function (req,res) {
     }
 });
 
-
-
-/**  Staff Center **/
+/**  post staff login **/
 router.post('/staff' ,function(req, res) {
         var query = {Email: req.body.name, Password: req.body.password};
         staff.findOne(query, function (err, doc) {
@@ -62,6 +61,7 @@ router.post('/staff' ,function(req, res) {
         });
 });
 
+/**  get staff Center **/
 router.get('/staff/:id',function (req,res) {
     var id = {_id:req.params.id};
     if(!sess){
@@ -84,5 +84,6 @@ router.get('/staff/:id',function (req,res) {
     }
 
 });
+
 
 module.exports = router;

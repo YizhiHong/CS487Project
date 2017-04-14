@@ -6,20 +6,25 @@ var router = express.Router();
 
 var mongoose = require("mongoose");
 var filter = require('../sessions/filter');
-
-/** GET staff menu **/
-router.get('/',filter.authorizeIndex, function(req, res, next) {
-    res.redirect('/login');
-});
+var book = require('../controller/book').book;
 
 /** GET staff menu **/
 router.get('/:id/book', function(req, res, next) {
-    res.render('book-list', { title: 'access level' , layout: 'layout-login'});
+    if(!!req.session._id){
+        console.log(req.session._id + new Date());
+        var sid = req.session._id;
+        res.render('staff-book-list', {sid:sid,title: 'Modify book information' , users:!!req.session._id, layout: 'layout-login'});
+    }else{
+        res.redirect('/login');
+    }
 });
 
 router.get('/:id/level', function(req, res, next) {
-    res.render('user-access-level', { title: 'access level' , layout: 'layout-login'});
+    if(!!req.session._id){
+        res.render('user-access-level', { title: 'access level' , users:!!req.session._id, layout: 'layout-login'});
+    }else{
+        res.redirect('/login');
+    }
 });
-
 
 module.exports = router;

@@ -87,6 +87,25 @@ a {
   border: 1px dimgrey dashed;
   top: 0;
 }
+/** table style **/
+.sub-table{
+  text-align: left;
+}
+.sub-table td:first-child{
+  padding-left: 0px;
+}
+.sub-table td{
+  padding-left: 10px;
+}
+td.details-control {
+  background: url('../images/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('../images/details_close.png') no-repeat center center;
+}
+
+
 @media (max-width: 768px ) {
   .vertical-divider{
     width: 100%;
