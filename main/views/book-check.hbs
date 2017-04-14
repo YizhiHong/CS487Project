@@ -5,21 +5,27 @@
             <li><a href="/student/{{sid}}">Student Home</a></li>
             <li class="active">Book List and Check Out</li>
         </ol>
-        <div class="panel-title">Book List By Class</div>
-        <table id="book_table" class="table table-striped table-bordered" width="100%">
-            <thead>
-            <th>Image</th>
-            <th>ISBN</th>
-            <th>Title</th>
-            <th>Authors</th>
-            <th>Publisher</th>
-            <th>total available</th>
-            <th>total checked</th>
-            <th>Check out</th>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Available Books for your courses</h3>
+            </div>
+            <div class="panel-body">
+                <table id="book_table" class="table table-striped table-bordered" width="100%">
+                    <thead>
+                    <th>Image</th>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Publisher</th>
+                    <th>total available</th>
+                    <th>total checked</th>
+                    <th>Check out</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
@@ -58,7 +64,10 @@
                             if(checkedBook){
                                 for (var i = 0;i<checkedBook.length;i++){
                                     if(checkedBook[i][0].ISBN === data){
-                                        return "<h5>Already checked!!</h5>"
+                                        return "<h4>Checked in</h4>" +
+                                                "<h4><lable class='label label-success'>"+checkedBook[i][0].CheckOutDate+ "</lable><h4>" +
+                                                "<h4>Due date:</h4>" +
+                                                "<h4><lable class='label label-warning'>"+ checkedBook[i][0].DueDate +"</lable><h4>"
                                     }
                                 }
                             }
@@ -81,22 +90,35 @@
                         var total = totalChecked.prev();
                         var CheckISBN = JSON.stringify({ISBN:isbn});
                         console.log(CheckISBN);
-                        var r = confirm("Please sure you need to check out ISBN: " + isbn);
-                        if (r == true) {
-                            $.ajax({
-                                url: '/book/{{sid}}/check-out-book',
-                                dataType:'json',
-                                contentType: "application/json",
-                                data: CheckISBN,
-                                type: 'POST'
-                            }).done(function(data){
-                                if(data){
-                                    totalChecked.text(Number(totalChecked.text()) + 1);
-                                    total.text(Number(total.text()-1));
-                                    $this.parent().html("<h5>Already checked!!!</h5>");
-                                }
-                            });
-                        }
+                        swal({title: "Please sure you need to check out ISBN: " + isbn,
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonText: "Yes, Check it out!",
+                                    cancelButtonText: "No!",
+                                    closeOnConfirm: false,
+                                    closeOnCancel: false},
+                                function(isConfirm){
+                                    if (isConfirm) {
+                                        $.ajax({
+                                            url: '/book/{{sid}}/check-out-book',
+                                            dataType:'json',
+                                            contentType: "application/json",
+                                            data: CheckISBN,
+                                            type: 'POST'
+                                        }).done(function(data){
+                                            if(data){
+                                                totalChecked.text(Number(totalChecked.text()) + 1);
+                                                total.text(Number(total.text()-1));
+                                                $this.parent().html("<h5>Already checked!!!</h5>");
+                                            }
+                                        });
+                                        swal("Done!", "Your Book has been Check out.", "success");
+                                    } else {
+
+                                        swal("Cancelled", "Your cancelled to check out this book", "error");
+                                    }
+                                });
+
                     })
                 }
             });
