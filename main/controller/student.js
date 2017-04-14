@@ -25,17 +25,31 @@ studentController.prototype =  {
             callBack(err);
         });
     },
-    //查
-    find: function (json, callBack){
+    //find one
+    findOne: function (json, callBack){
         student.findOne(json, function (err, doc){
             callBack(err, doc);
         });
     },
+    //find more
+    find: function (json, callBack){
+        student.find(json, function (err, doc){
+            callBack(err, doc);
+        });
+    },
+    //
     findAll: function () {
         return student.find();
     },
     isLogined: function (req) {
         return !!req.session._id
+    },
+    checkOutBook: function (json,isbn,callBack) {
+        student.update(json, {$addToSet:
+            {Books:[{ISBN:isbn, CheckOutDate:new Date(), DueDate: '2017-06-01'}]}
+        },function (err){
+            callBack(err);
+        });
     }
 };
 

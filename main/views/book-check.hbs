@@ -1,0 +1,108 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
+<div class="container">
+    <div class="book-list">
+        <ol class="breadcrumb">
+            <li><a href="/student/{{sid}}">Student Home</a></li>
+            <li class="active">Book List and Check Out</li>
+        </ol>
+        <div class="panel-title">Book List By Class</div>
+        <table id="book_table" class="display" width="100%">
+            <thead>
+            <th>Image</th>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Publisher</th>
+            <th>total available</th>
+            <th>total checked</th>
+            <th>Check out</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table;
+        $.ajax({
+            url: '/student/{{sid}}/book',
+            dataType: 'json',
+            data: { books: "{{sid}}"},
+            type: 'POST'
+        }).done(function (data) {
+            console.log(data);
+            var checkedBook = data.checked;
+
+
+            table = $('#book_table').DataTable({
+                "data": data.list,
+                "columns": [
+                    {"data": "image"},
+                    {"data": "ISBN"},
+                    {"data": "Title"},
+                    {"data": "Authors"},
+                    {"data": "Publisher"},
+                    {"data": "TotalAvailable"},
+                    {"data": "TotalChecked"},
+                    {
+                        "orderable": false,
+                        "data": "ISBN"
+                    }
+                ],
+                "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            if(checkedBook){
+                                for (var i = 0;i<checkedBook.length;i++){
+                                    if(checkedBook[i][0].ISBN === data){
+                                        return "<h5>Already checked!!</h5>"
+                                    }
+                                }
+                            }
+                            return "<button ISBN='" + data + "' class='btn btn-danger check-out-book'>Check Out Book</button>";
+                        },
+                        "targets": 7
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<img src="' + data + '">';
+                        },
+                        "targets": 0
+                    }
+                ],
+                "initComplete": function(settings, json) {
+                    $(".check-out-book").on('click',function () {
+                        var isbn = $(this).attr('ISBN');
+                        var $this = $(this);
+                        var totalChecked = $this.parent().prev();
+                        var total = totalChecked.prev();
+                        var CheckISBN = JSON.stringify({ISBN:isbn});
+                        console.log(CheckISBN);
+                        var r = confirm("Please sure you need to check out ISBN: " + isbn);
+                        if (r == true) {
+                            $.ajax({
+                                url: '/book/{{sid}}/check-out-book',
+                                dataType:'json',
+                                contentType: "application/json",
+                                data: CheckISBN,
+                                type: 'POST'
+                            }).done(function(data){
+                                if(data){
+                                    totalChecked.text(Number(totalChecked.text()) + 1);
+                                    total.text(Number(total.text()-1));
+                                    $this.parent().html("<h5>Already checked!!!</h5>");
+                                }
+                            });
+                        }
+                    })
+                }
+            });
+        });
+
+
+
+    });
+
+</script>

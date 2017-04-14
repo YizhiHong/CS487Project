@@ -12,12 +12,11 @@ router.post('/student', function(req, res) {
             Password: req.body.password
         };
         console.log(query);
-        student.find(query, function (err, doc) {
+        student.findOne(query, function (err, doc) {
             console.log(doc);
             if (doc) {
                 sess = req.session;
                 sess._id = doc._id;
-                console.log(sess._id);
                 console.log(doc.Email + ": Login success " + new Date());
                 res.send({body: doc._id});
             } else {
@@ -33,7 +32,7 @@ router.get('/student/:id',function (req,res) {
         console.log("please log in first");
         res.redirect("/login");
     }else {
-        student.find(id, function (err, doc) {
+        student.findOne(id, function (err, doc) {
             if (doc) {
                 res.render('student-menu', {data: doc , users:!!sess._id , layout: 'layout-login'});
             } else {
@@ -42,16 +41,13 @@ router.get('/student/:id',function (req,res) {
         })
     }
 });
-//
-// router.get('/student/:id',function (req,res) {
-//
-//
-// });
+
+
 
 /**  Staff Center **/
 router.post('/staff' ,function(req, res) {
         var query = {Email: req.body.name, Password: req.body.password};
-        staff.find(query, function (err, doc) {
+        staff.findOne(query, function (err, doc) {
             console.log(doc);
             if (doc) {
                 sess = req.session;
@@ -72,7 +68,7 @@ router.get('/staff/:id',function (req,res) {
         console.log("please log in first");
         res.redirect("/login");
     }else{
-        staff.find(id,function (err,doc) {
+        staff.findOne(id,function (err,doc) {
             if(doc){
                 if(doc.Level === 1){
                     res.render('teacher-menu', { data:doc, users:!!sess._id ,layout: 'layout-login'});

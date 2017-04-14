@@ -143,7 +143,8 @@ router.post('/add-student-info', function(req, res) {
         LastName: req.body.l_name || "unknown",
         FirstName: req.body.f_name || "unknown",
         Brithday: req.body.birthday || "1989-06-04",
-        Courses:[]
+        Courses:[],
+        Books:[]
     };
 
     course.find( { CourseID : { $in : CourseID } } ,function (err,doc) {

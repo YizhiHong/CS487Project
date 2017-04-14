@@ -20,8 +20,8 @@ var bookSchema = new Schema({
     PublishedDate : Date,
     Description: String,
     Categories: {type:Array},
-    TotalChecked: {type:Number, default: 0},
-    TotalAvailable: {type:Number, default: 10},
+    TotalChecked: {type:Number, default: 0, min: 0, max: 1000},
+    TotalAvailable: {type:Number, default: 10, min: 0, max: 1000},
     ClassBook : {type: Schema.ObjectId, ref: 'course'},
     CheckOut: {type: Schema.ObjectId, ref: 'student'},
     image: String

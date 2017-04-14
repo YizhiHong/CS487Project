@@ -27,6 +27,14 @@ bookController.prototype =  {
     },
     //查
     find: function (json, callBack){
+        book.find(json, function (err, doc){
+            callBack(err, doc);
+        });
+    },
+    findData: function (json, callBack){
+       return book.find(json);
+    },
+    findOne: function (json, callBack){
         book.findOne(json, function (err, doc){
             callBack(err, doc);
         });

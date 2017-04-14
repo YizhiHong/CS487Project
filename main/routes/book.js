@@ -11,6 +11,7 @@ router.use(bodyParser.json());
 
 var books = require('google-books-search');
 var book = require('../controller/book').book;
+var student =  require('../controller/student').student;
 
 
 /* book option */
@@ -44,6 +45,7 @@ router.post('/book-list',function (req,res,next){
     });
 });
 
+//book format translation
 var translate = function(data) {
     var output=[];
     for(var i in data){
@@ -126,6 +128,31 @@ router.post('/book-single-save',function (req,res,next){
         })
 
     })(aBook);
+});
+
+/** student check book **/
+router.post('/:id/check-out-book',function (req,res,next){
+    var studentID = {_id:req.params.id};
+    var bookID = {ISBN:req.body.ISBN};
+
+        book.update(bookID,{$inc:{ TotalChecked:+1,TotalAvailable:-1} },function (err) {
+            if(!err){
+                console.log("saved in book db");
+                student.checkOutBook(studentID,bookID.ISBN,function (err) {
+                    if(!err){
+                        console.log("saved in student db");
+                        res.send(true);
+                    }else{
+                        console.log(err);
+                        res.send(false);
+                    }
+                })
+            }else{
+                console.log("error with"+err);
+                res.send(false);
+            }
+
+        })
 });
 
 module.exports = router;
