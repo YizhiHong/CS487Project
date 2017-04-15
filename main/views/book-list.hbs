@@ -29,6 +29,10 @@
     $(document).ready(function() {
         var current,table;
         $("#search").on('click',function () {
+            if ($.fn.DataTable.isDataTable("#book_table")) {
+                $('#book_table').DataTable().clear().destroy();
+            }
+
             var content = $("#search_value").val();
             $.ajax({
                 url: '/book/book-list',
