@@ -12,7 +12,6 @@ var course = require('../controller/course').course;
 
 var departmentID;
 
-
 /** GET teacher register Course  **/
 router.get('/:id/register', function(req, res, next) {
     if(!!req.session._id){
@@ -52,7 +51,7 @@ router.post('/:id/get-course', function(req, res, next) {
     console.log(departmentID);
     course.find({Department: departmentID}, function (err,doc) {
         if (!err){
-            // console.log(doc);
+            console.log(doc);
             res.send(doc);
         }else {
             console.log(err);

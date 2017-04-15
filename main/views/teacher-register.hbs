@@ -13,9 +13,9 @@
                             <h3 class="panel-title">{{staff.WorkFor.DeptID}} - {{staff.WorkFor.JobTitle}} - Your Class</h3>
                         </div>
                         <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
+                            <ul id="Registered" class="nav nav-pills nav-stacked">
                                 {{#each staff.Teach}}
-                                <li role="presentation"><a href="#">{{this}}</a></li>
+                                <li role="presentation" value="{{this}}"><a href="#">{{this}}</a></li>
                                 {{/each}}
                             </ul>
                         </div>
@@ -100,6 +100,11 @@
 <script>
     $(document).ready(function () {
         var classTable;
+        var registeredCourse = [];
+        for(var i = 0;i< $('#Registered').children('li').length;i++){
+            registeredCourse.push($('#Registered').children('li').eq(i).attr('value'));
+        }
+
         $('#teacher_tabs a').click(function (e) {
             if ($(this).attr('class')==='select-class'){
                 if($('#course_table tbody').children().length === 0){
@@ -109,6 +114,8 @@
                         data: {"staffID":"{{sid}}"},
                         type: 'POST'
                     }).done(function(data){
+//                        var registeredCourse = data.Teach;
+                        console.log(registeredCourse);
                         classTable = $('#course_table').DataTable({
                             "data": data,
                             "columns": [
@@ -123,6 +130,11 @@
                             "columnDefs": [
                                 {
                                     "render": function ( data, type, row ) {
+                                        for(var i = 0; i< registeredCourse.length ;i++){
+                                            if(registeredCourse[i] === row.CourseID){
+                                                return "<div>Registered</div>"
+                                            }
+                                        }
                                         return "<button class='btn btn-danger register' CourseID='"+row.CourseID+"'>Register</button>";
                                     },
                                     "targets": 3
