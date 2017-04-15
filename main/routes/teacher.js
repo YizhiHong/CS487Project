@@ -11,6 +11,7 @@ var book = require('../controller/book').book;
 var course = require('../controller/course').course;
 
 var departmentID;
+var teachCoursed;
 
 /** GET teacher register Course  **/
 router.get('/:id/register', function(req, res, next) {
@@ -23,6 +24,7 @@ router.get('/:id/register', function(req, res, next) {
             if(!err){
                 var books = book.findAll();
                 departmentID = doc.WorkFor._id;
+                teachCoursed = doc.Teach;
                 res.render('teacher-register', {staff:doc,books:books,sid:sid, title: 'Register Course', users:!!req.session._id, layout: 'layout-login'});
             }else{
                 console.log(err);

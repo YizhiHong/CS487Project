@@ -152,6 +152,7 @@
                             ],
                             "initComplete": function(settings, json) {
                                 $('.register').on('click',function () {
+                                    var $this = $(this);
                                     var CourseID = $(this).attr('CourseID');
                                     console.log(CourseID);
                                     swal({title: "you are going to teach : " + CourseID,
@@ -172,6 +173,7 @@
                                                     }).done(function(data){
                                                         if(data){
                                                             $('.nav-stacked').append('<li role="presentation"><a href="#">'+ CourseID+'</a></li>');
+                                                            $this.parent().html('<div>Registered</div>');
                                                         }else{
                                                             swal("error", "Your didn't register this course", "error");
                                                         }
