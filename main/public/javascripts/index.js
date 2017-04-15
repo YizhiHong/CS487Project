@@ -34,3 +34,17 @@ var TableFormat = function () {};
                 '</table>';
         }
     };
+
+var UpdateToDB = function (d) {
+    var $this = $(d),isbn = $this.attr('ISBN');
+    var totalChecked = Number($this.parent().prev().children().val());
+    var total = Number($this.parent().prev().prev().children().val());
+    $.ajax({
+        url: '/book/{{sid}}/update-book',
+        dataType:'json',
+        data: {ISBN:isbn,TotalChecked:totalChecked,TotalAvailable:total},
+        type: 'POST'
+    }).done(function(data){
+        swal(data.msg);
+    });
+}

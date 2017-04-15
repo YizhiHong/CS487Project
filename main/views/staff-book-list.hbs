@@ -33,7 +33,9 @@
 <script>
     $(document).ready(function() {
         var table;
-            $.ajax({
+
+
+        $.ajax({
                 url: '/book/{{sid}}/Allbook',
                 dataType:'json',
                 data: {"staffID":"{{sid}}"},
@@ -80,11 +82,28 @@
                         },
                         {
                             "render": function ( data, type, row ) {
-                                return "<button ISBN='"+data+"' class='btn btn-danger update-to-database'>update</button>";
+                                return "<button ISBN='"+data+"' class='btn btn-danger update-to-database' onclick='UpdateToDB(this)'>update</button>";
                             },
                             "targets": 7
                         }
-                    ]
+                    ],
+                    "initComplete":function(settings, json) {
+                        /*
+                        $(".update-to-database").on('click',function () {
+                            var $this = $(this),isbn = $this.attr('ISBN');
+                            var totalChecked = Number($this.parent().prev().children().val());
+                            var total = Number($this.parent().prev().prev().children().val());
+                            $.ajax({
+                                url: '/book/{{sid}}/update-book',
+                                dataType:'json',
+                                data: {ISBN:isbn,TotalChecked:totalChecked,TotalAvailable:total},
+                                type: 'POST'
+                            }).done(function(data){
+                                swal(data.msg);
+                            });
+                        })
+                        */
+                    }
                 } );
 
 
@@ -104,27 +123,6 @@
                         tr.addClass('shown');
                     }
                 } );
-
-                $(".update-to-database").on('click',function () {
-                    var $this = $(this),isbn = $this.attr('ISBN');
-                    var totalChecked = Number($this.parent().prev().children().val());
-                    var total = Number($this.parent().prev().prev().children().val());
-//                    console.log(totalChecked+ "/" + total);
-                   $.ajax({
-                       url: '/book/{{sid}}/update-book',
-                       dataType:'json',
-                       data: {ISBN:isbn,TotalChecked:totalChecked,TotalAvailable:total},
-                       type: 'POST'
-                    }).done(function(data){
-                        swal(data.msg);
-                    });
-
-
-                })
-
             });
-
-
     } );
-
 </script>
