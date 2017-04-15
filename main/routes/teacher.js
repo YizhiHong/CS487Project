@@ -61,7 +61,7 @@ router.post('/:id/get-course', function(req, res, next) {
     });
 });
 
-router.get('/view-books', function(req, res, next) {
+router.get('/:id/view-books', function(req, res, next) {
     res.render('teacher-view-books', { title: 'teacher view books' , layout: 'layout-login'});
 });
 //
