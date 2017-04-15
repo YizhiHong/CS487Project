@@ -129,7 +129,7 @@
                                     <label for="workFor">Work for</label>
                                     <select name="workFor" class="form-control">
                                         {{#each departments}}
-                                            <option departmentCourse={{ this.DeptName }} >{{ this.DeptID }}</option>
+                                            <option departmentCourse={{ this.DeptName }} >{{ this.DeptID }}:{{ this._id }}</option>
                                         {{/each}}
                                     </select>
                                 </div>

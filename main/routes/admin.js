@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require("mongoose");
-
 var db = require('../index').db;
+mongoose.Types.ObjectId();
 
 /** get all controller**/
 
@@ -57,7 +57,7 @@ router.post('/add-course-info', function(req, res) {
     }else{
         CourseID.push(req.body.ClassBook.split(':')[0]);
     }
-
+    console.log();
     department.find({ DeptID:req.body.departmentCourse},function (err,doc) {
         if(!err){
             deptID = doc._id;
@@ -78,11 +78,24 @@ router.post('/add-course-info', function(req, res) {
                         console.log(err);
                         res.redirect('/');
                     }else{
-                        console.log("Saved in courses");
-                        res.redirect('/admin');
+                        if(!!req.body.Teacher){
+                            staff.update({_id:req.body.Teacher},{$addToSet:{Teach: courseInfo.CourseID}},function (err) {
+                                if(err){
+                                    console.log('fail to teach');
+                                    res.send('fail to teach');
+                                }else {
+                                    res.redirect('/teacher/' + req.body.Teacher +'/register');
+                                }
+                            })
+                        }else {
+                            console.log("Saved in courses");
+                            res.redirect('/admin');
+                        }
                     }
                 })
             })(courseInfo);
+
+
         }else {
             console.log(err);
             res.redirect('/');
@@ -94,6 +107,8 @@ router.post('/add-course-info', function(req, res) {
 
 /** add staff information **/
 router.post('/add-staff-info', function(req, res) {
+    var workfor = req.body.workFor.split(':');
+
     console.log(req.body.level);
     var staffInfo = {
         SSN: req.body.SSN,
@@ -104,9 +119,11 @@ router.post('/add-staff-info', function(req, res) {
         Brithday: req.body.birthday || "1989-06-04",
         Level: req.body.level,
         WorkFor: {
-            DeptID:req.body.workFor,
-            JobTitle: req.body.JobTitle
-        }
+            DeptID:workfor[0],
+            JobTitle: req.body.JobTitle,
+            _id:mongoose.Types.ObjectId(workfor[1])
+        },
+        Teach:[]
     };
     console.log(staffInfo);
     (function(){

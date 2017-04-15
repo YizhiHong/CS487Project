@@ -8,7 +8,7 @@ var mongoose = require("mongoose");
 var filter = require('../sessions/filter');
 var book = require('../controller/book').book;
 
-/** GET staff menu **/
+/** GET staff Book**/
 router.get('/:id/book', function(req, res, next) {
     if(!!req.session._id){
         console.log(req.session._id + new Date());

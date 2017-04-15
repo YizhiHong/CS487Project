@@ -60,46 +60,46 @@
     $(document).ready(function() {
         var StudentTable,StaffTable;
         $.ajax({
-            url: '/{{sid}}/users',
-            dataType:'json',
-            data: {"staffID":"{{sid}}"},
-            type: 'POST'
-        }).done(function(data){
-            /** Student Table initialize **/
-            StudentTable = $('#student_table').DataTable({
-                "data": data.students,
-                "columns": [
-                    { "data": "CWID" },
-                    { "data": "Email"},
-                    { "data": "FirstName"},
-                    { "data": "LastName"},
-                    { "data": "Courses"},
-                    {
-                        "class":'details-control',
-                        "orderable":false,
-                        "defaultContent": ''
-                    }
-                ],
-                "columnDefs": [
-                    {
-                        "render": function ( data, type, row ) {
-                            return data + " " + row.LastName;
+                url: '/{{sid}}/users',
+                dataType:'json',
+                data: {"staffID":"{{sid}}"},
+                type: 'POST'
+            }).done(function(data){
+                /** Student Table initialize **/
+                StudentTable = $('#student_table').DataTable({
+                    "data": data.students,
+                    "columns": [
+                        { "data": "CWID" },
+                        { "data": "Email"},
+                        { "data": "FirstName"},
+                        { "data": "LastName"},
+                        { "data": "Courses"},
+                        {
+                            "class":'details-control',
+                            "orderable":false,
+                            "defaultContent": ''
+                        }
+                    ],
+                    "columnDefs": [
+                        {
+                            "render": function ( data, type, row ) {
+                                return data + " " + row.LastName;
+                            },
+                            "targets": 2
                         },
-                        "targets": 2
-                    },
-                    { "visible": false,  "targets": [ 3 ] },
-                    {
-                        "render": function ( data, type, row ) {
-                            var CN = "";
-                            for(var i=0; i<data.length; i++){
-                                CN += data[i].CourseID +", "
-                            }
-                            return CN;
-                        },
-                        "targets": 4
-                    }
-                ]
-            } );
+                        { "visible": false,  "targets": [ 3 ] },
+                        {
+                            "render": function ( data, type, row ) {
+                                var CN = "";
+                                for(var i=0; i<data.length; i++){
+                                    CN += data[i].CourseID +", "
+                                }
+                                return CN;
+                            },
+                            "targets": 4
+                        }
+                    ]
+                } );
             $('#student_table tbody').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var row = StudentTable.row(tr);

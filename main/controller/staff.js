@@ -21,7 +21,7 @@ staffController.prototype =  {
     },
     //update
     update: function (json, condition, callBack){
-        staff.update(json, condition, function (err){
+        staff.update(json, condition,{ upsert: true }, function (err){
             callBack(err);
         });
     },

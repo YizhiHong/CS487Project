@@ -113,7 +113,11 @@ tr.shown td.details-control {
 .sub-table-book th{
   padding-left: 10px;
 }
-
+/** tab **/
+.nav-tabs{
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
 
 @media (max-width: 768px ) {
   .vertical-divider{

@@ -1,91 +1,186 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
 <div class="container">
     <div class="book-list">
-        <h2>Register</h2>
-        <table id="class_table" class="display" width="100%">
-            <thead>
-            <th>CourseName</th>
-            <th>Department</th>
-            <th>CourseNumber</th>
-            <th>Books</th>
-            <th>Register</th>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <ol class="breadcrumb">
+            <li><a href="/staff/{{sid}}">Teacher Home</a></li>
+            <li class="active">Register a Course</li>
+        </ol>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-sm-3 col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{staff.WorkFor.DeptID}} - {{staff.WorkFor.JobTitle}} - Your Class</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                {{#each staff.Teach}}
+                                <li role="presentation"><a href="#">{{this}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-xs-12">
+                    <ul id="teacher_tabs" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a class="add-class" href="#newClass" aria-controls="newClass" role="tab" data-toggle="tab">Register A New Class</a>
+                        </li>
+                        <li role="presentation">
+                            <a class="select-class" href="#selectClass" aria-controls="selectClass" role="tab" data-toggle="tab">Select A Class</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active fade in" id="newClass">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Register A New Class</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="course">
+                                        <h3>add Course</h3>
+                                        <form class="form-group" action="/admin/add-course-info" method="post">
+                                            <div class="form-group">
+                                                <label for="CourseID">Course ID</label>
+                                                <input type="text" name="CourseID" class="form-control" id="CourseID" placeholder="CourseID">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="CourseName">Course Name</label>
+                                                <input type="text" name="CourseName" class="form-control" id="CourseName" placeholder="CourseName">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="departmentCourse">Department Name</label>
+                                                <input readonly="true" type="text" name="departmentCourse" value="{{staff.WorkFor.DeptID}}" class="form-control" id="departmentCourse">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ClassBook">Select Class Book</label>
+                                                <select multiple name="ClassBook" class="form-control" style="height:200px">
+                                                    {{#each books}}
+                                                        <option ClassBook={{ this.ISBN }} >{{ this.ISBN }}<span>: {{ this.Title }}-{{ this.Authors }}</span></option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                            <div class="form-group" style="display: none">
+                                                <label for="Teacher">Teacher</label>
+                                                <input readonly="true" type="text" name="Teacher" value="{{sid}}" class="form-control" id="Teacher">
+                                            </div>
+                                            <button type="submit" class="btn btn-default">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="selectClass">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="panel-title">Select A Class</div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="course_table" class="display" width="100%">
+                                        <thead>
+                                        <th>CourseID</th>
+                                        <th>CourseName</th>
+                                        <th>Books</th>
+                                        <th>Register</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
 <script>
-    var test = [{ CourseName: 'Machine Learning',
-        Department: '0143031171',
-        Title: 'English',
-        Authors: [ 'Jeet Thayil' ],
-        Publisher: 'Penguin Books India',
-        PublishedDate: '2003',
-        Description: 'The Narrator In These Poems Abandons The Sectarian Histories Of 1990S Bombay For The Relative Calm Of New York, Only To Find Himself A Witness To September 11, 2001. In The Faux Prologue Poem About The Author , He Stands On Sixth, Watching Ruin, With A Handful Of Rain And A Prophecy , A Citizen Of No Country Except The Republic That Gives The Book Its Title. English Here Is More Than Language It Is A Metaphor For Divinity, And It Holds A Hard-Won Tenderness For All Things Living. Jeet Thayil S Second Full-Length Collection Links Images Of Water, Addiction And Forgiveness; Poems That Evoke Multiple Outsider Perspectives Are Set In Landscapes As Various As Hong Kong, Doune (Scotland), Pashupatinath (Nepal), Bombay, And, Always, New York City.',
-        Categories: [ 'English poetry' ],
-        TotalChecked: 0,
-        TotalAvailable: 10,
-        image: 'http://books.google.com/books/content?id=tFzZwjkzNREC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api' }];
-    $(document).ready(function() {
-        var table = $('#book_table').DataTable( {
-            "data": test,
-            "columns": [
-                { "data": "CourseName" },
-                { "data": "Department" },
-                { "data": "CourseNumber"},
-                { "data": "Books" },
-                {
-                    "orderable":false,
-                    "data": "ISBN"
+    $(document).ready(function () {
+        var classTable;
+        $('#teacher_tabs a').click(function (e) {
+            if ($(this).attr('class')==='select-class'){
+                if($('#course_table tbody').children().length === 0){
+                    $.ajax({
+                        url: '/teacher/{{sid}}/get-course',
+                        dataType:'json',
+                        data: {"staffID":"{{sid}}"},
+                        type: 'POST'
+                    }).done(function(data){
+                        classTable = $('#course_table').DataTable({
+                            "data": data,
+                            "columns": [
+                                { "data": "CourseID" },
+                                { "data": "CourseName"},
+                                { "data": "Books"},
+                                {
+                                    "orderable":false,
+                                    "defaultContent": ''
+                                }
+                            ],
+                            "columnDefs": [
+                                {
+                                    "render": function ( data, type, row ) {
+                                        return "<button class='btn btn-danger register' CourseID='"+row.CourseID+"'>Register</button>";
+                                    },
+                                    "targets": 3
+                                },
+                                {
+                                    "render": function ( data, type, row ) {
+                                        var b = "";
+                                        for(var i=0; i<data.length; i++){
+                                            b +='<h4><a class="label label-success" href="/book/'+data[i]+'/view">'+data[i]+'</a></h4>'
+                                        }
+                                        return b;
+                                    },
+                                    "targets": 2
+                                }
+                            ],
+                            "initComplete": function(settings, json) {
+                                $('.register').on('click',function () {
+                                    var CourseID = $(this).attr('CourseID');
+                                    console.log(CourseID);
+                                    swal({title: "you are going to teach : " + CourseID,
+                                                type: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonText: "Yes, I am!",
+                                                cancelButtonText: "No!",
+                                                closeOnConfirm: false,
+                                                closeOnCancel: false},
+                                            function(isConfirm){
+                                                if (isConfirm) {
+                                                    console.log(CourseID);
+                                                    $.ajax({
+                                                        url: '/teacher/{{sid}}/register',
+                                                        dataType:'json',
+                                                        data: {"Course":CourseID},
+                                                        type: 'POST'
+                                                    }).done(function(data){
+                                                        if(data){
+                                                            $('.nav-stacked').append('<li role="presentation"><a href="#">'+ CourseID+'</a></li>');
+                                                        }else{
+                                                            swal("error", "Your didn't register this course", "error");
+                                                        }
+                                                    });
+                                                    swal("Done!", "Your are teaching this Course now", "success");
+                                                } else {
+
+                                                    swal("Cancelled", "Your cancelled to register", "error");
+                                                }
+                                            });
+                                });
+                            }
+                        });
+                    });
+                }else {
+
                 }
-            ],
-            "columnDefs": [
-                {
-                    "render": function ( data, type, row ) {
-                        return "<button ISBN='"+data+"' class='btn btn-warning check-out'>Register</button>";
-                    },
-                    "targets": 8
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return '<img src="'+data+'">';
-                    },
-                    "targets": 7
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return data || "No description";
-                    },
-                    "targets": 3
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return data || "No description";
-                    },
-                    "targets": 5
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return data || "Not Category";
-                    },
-                    "targets": 6
-                }
-            ]
-        } );
-
-
-//                function findBook(bookList,id) {
-//                    for(var i in bookList){
-//                        if(bookList[i].ISBN == id){
-//                            return bookList[i];
-//                        }
-//                    }
-//                }
-
-
+            }
+            e.preventDefault()
+            $(this).tab('show')
+        })
 
 
     });

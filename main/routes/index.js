@@ -35,7 +35,7 @@ router.get('/student/:id',function (req,res) {
     }else {
         student.findOne(id, function (err, doc) {
             if (doc) {
-                res.render('student-menu', {data: doc , users:!!sess._id , layout: 'layout-login'});
+                res.render('student-menu', {data: doc , sid:sess._id,users:!!sess._id , layout: 'layout-login'});
             } else {
                 res.redirect('/');
             }
@@ -71,9 +71,9 @@ router.get('/staff/:id',function (req,res) {
         staff.findOne(id,function (err,doc) {
             if(doc){
                 if(doc.Level === 1){
-                    res.render('teacher-menu', { data:doc, users:!!sess._id ,layout: 'layout-login'});
+                    res.render('teacher-menu', { data:doc, sid:sess._id, users:!!sess._id ,layout: 'layout-login'});
                 }else if(doc.Level === 0){
-                    res.render('staff-menu', { data:doc, users:!!sess._id ,layout: 'layout-login'});
+                    res.render('staff-menu', { data:doc, sid:sess._id, users:!!sess._id ,layout: 'layout-login'});
                 }else{
                     next();
                 }
@@ -82,7 +82,6 @@ router.get('/staff/:id',function (req,res) {
             }
         })
     }
-
 });
 
 router.post('/:id/users' ,function(req, res) {
