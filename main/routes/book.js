@@ -11,7 +11,8 @@ router.use(bodyParser.json());
 
 var books = require('google-books-search');
 var book = require('../controller/book').book;
-var student =  require('../controller/student').student;
+var student = require('../controller/student').student;
+var staff = require('../controller/staff').staff;
 
 
 /* book option */
@@ -134,27 +135,51 @@ router.post('/book-single-save',function (req,res,next){
 router.post('/:id/check-out-book',function (req,res,next){
     var studentID = {_id:req.params.id};
     var bookID = {ISBN:req.body.ISBN};
+    book.update(bookID,{$inc:{ TotalChecked:+1,TotalAvailable:-1} },function (err) {
+        if(!err){
+            console.log("saved in book db");
+            student.checkOutBook(studentID,bookID.ISBN,function (err) {
+                if(!err){
+                    console.log("saved in student db");
+                    res.send(true);
+                }else{
+                    console.log(err);
+                    res.send(false);
+                }
+            })
+        }else{
+            console.log("error with"+err);
+            res.send(false);
+        }
 
-        book.update(bookID,{$inc:{ TotalChecked:+1,TotalAvailable:-1} },function (err) {
-            if(!err){
-                console.log("saved in book db");
-                student.checkOutBook(studentID,bookID.ISBN,function (err) {
-                    if(!err){
-                        console.log("saved in student db");
-                        res.send(true);
-                    }else{
-                        console.log(err);
-                        res.send(false);
-                    }
-                })
-            }else{
-                console.log("error with"+err);
-                res.send(false);
-            }
-
-        })
+    })
 });
 
+/** staff check book **/
+router.post('/:id/staff-check-out-book',function (req,res,next){
+    var staffID = {_id:req.params.id};
+    var bookID = {ISBN:req.body.ISBN};
+    book.update(bookID,{$inc:{ TotalChecked:+1,TotalAvailable:-1} },function (err) {
+        if(!err){
+            console.log("saved in book db");
+            staff.checkOutBook(staffID,bookID.ISBN,function (err) {
+                if(!err){
+                    console.log("saved in staff db");
+                    res.send(true);
+                }else{
+                    console.log(err);
+                    res.send(false);
+                }
+            })
+        }else{
+            console.log("error with"+err);
+            res.send(false);
+        }
+
+    })
+});
+
+/** get All book **/
 router.post('/:id/Allbook', function(req, res, next) {
     var sid = req.session._id;
     var allBooks =  book.findAll();

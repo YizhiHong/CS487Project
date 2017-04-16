@@ -84,6 +84,7 @@ router.get('/staff/:id',function (req,res) {
     }
 });
 
+/** get users info **/
 router.post('/:id/users' ,function(req, res) {
     var userId = {_id:req.params.id};
 
@@ -95,5 +96,9 @@ router.post('/:id/users' ,function(req, res) {
     });
 });
 
+/** get users profile **/
+router.get('/profile/:id',function (req,res) {
+  
+});
 
 module.exports = router;

@@ -11,12 +11,12 @@ var book = require('../controller/book').book;
 var course = require('../controller/course').course;
 
 var departmentID;
-var teachCoursed;
+var teachCourse;
 
 /** GET teacher register Course  **/
 router.get('/:id/register', function(req, res, next) {
     if(!!req.session._id){
-        console.log(req.session._id + new Date());
+        // console.log(req.session._id + new Date());
         var sid = req.session._id;
         var id = {_id:req.params.id};
 
@@ -24,7 +24,7 @@ router.get('/:id/register', function(req, res, next) {
             if(!err){
                 var books = book.findAll();
                 departmentID = doc.WorkFor._id;
-                teachCoursed = doc.Teach;
+
                 res.render('teacher-register', {staff:doc,books:books,sid:sid, title: 'Register Course', users:!!req.session._id, layout: 'layout-login'});
             }else{
                 console.log(err);
@@ -50,7 +50,7 @@ router.post('/:id/register', function(req, res, next) {
 });
 
 router.post('/:id/get-course', function(req, res, next) {
-    console.log(departmentID);
+    // console.log(departmentID);
     course.find({Department: departmentID}, function (err,doc) {
         if (!err){
             console.log(doc);
@@ -63,11 +63,58 @@ router.post('/:id/get-course', function(req, res, next) {
 });
 
 router.get('/:id/view-books', function(req, res, next) {
-    res.render('teacher-view-books', { title: 'teacher view books' , layout: 'layout-login'});
+    if(!!req.session._id){
+        var sid = req.params.id;
+        res.render('teacher-view-books', { sid:sid,users: !!req.session._id ,title:"Teacher check book!", layout: 'layout-login'});
+    }else {
+        res.redirect('/login');
+    }
+
 });
-//
-// router.get('/register', function(req, res, next) {
-//     res.render('teacher-register', { title: 'teacher register' , layout: 'layout-login'});
-// });
+
+var getStaffBook = function (Courses,callBack){
+    var IDList = [];
+    course.find({CourseID:Courses},function (err,doc) {
+        if(!err){
+            for (var i = 0; i < doc.length; i++){
+                for(var j = 0 ; j < doc[i].Books.length;j++){
+                    IDList.push(doc[i].Books[j]);
+                }
+            }
+            callBack(IDList);
+        }else {
+            console.log(err);
+        }
+    });
+};
+
+router.post('/:id/book', function(req, res) {
+    var id = {_id:req.body.staff};
+    staff.findOne(id, function (err,doc) {
+        if(!err){
+            var bookList;
+            if(!!doc.Teach){
+                getStaffBook(doc.Teach,function (IDList) {
+                    bookList = book.findData({ISBN:IDList});
+                    res.send({
+                        list:bookList,
+                        checked: doc.Books
+                    });
+                });
+            }else{
+                bookList = {};
+                res.send({
+                    list:bookList,
+                    checked: false
+                });
+            }
+
+        }else {
+            console.log("Fail to find student" + err);
+        }
+    })
+});
+
+
 
 module.exports = router;

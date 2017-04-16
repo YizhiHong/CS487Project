@@ -21,7 +21,7 @@ var studentSchema = Schema(
         Birthday : Date,
         Courses: {type: Object, ref: 'course'},
         Books: {type: Object, ref: 'book',
-            CheckOutDate: {type: Date, default: Date.now},
+            CheckOutDate: {type: Date},
             DueDate: {type: Date, default: '2017-06-01'}
         }
     }

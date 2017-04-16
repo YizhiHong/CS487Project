@@ -39,6 +39,13 @@ staffController.prototype =  {
     },
     findAll: function (){
        return staff.find();
+    },
+    checkOutBook: function (json,isbn,callBack) {
+        staff.update(json, {$addToSet:
+            {Books:[{ISBN:isbn, CheckOutDate:new Date(), DueDate: '2018-09-01'}]}
+        },function (err){
+            callBack(err);
+        });
     }
 };
 

@@ -1,98 +1,140 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"/>
 <div class="container">
     <div class="book-list">
-        <h2>View Books</h2>
-        <table id="book_table" class="display" width="100%">
-            <thead>
-            <th>ISBN</th>
-            <th>Title</th>
-            <th>Authors</th>
-            <th>Publisher</th>
-            <th>PublishedDate</th>
-            <th>Description</th>
-            <th>Categories</th>
-            <th>Image</th>
-            <th>Check</th>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <ol class="breadcrumb">
+            <li><a href="/staff/{{sid}}">Teacher Home</a></li>
+            <li class="active">Book List and Check Out</li>
+        </ol>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Available Books for your Classes</h3>
+            </div>
+            <div class="panel-body">
+                <table id="book_table" class="table table-striped table-bordered" width="100%">
+                    <thead>
+                    <th>Image</th>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Publisher</th>
+                    <th>total available</th>
+                    <th>total checked</th>
+                    <th>Check out</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <script>
-    var test = [{ BookID: '0143031171',
-        ISBN: '0143031171',
-        Title: 'English',
-        Authors: [ 'Jeet Thayil' ],
-        Publisher: 'Penguin Books India',
-        PublishedDate: '2003',
-        Description: 'The Narrator In These Poems Abandons The Sectarian Histories Of 1990S Bombay For The Relative Calm Of New York, Only To Find Himself A Witness To September 11, 2001. In The Faux Prologue Poem About The Author , He Stands On Sixth, Watching Ruin, With A Handful Of Rain And A Prophecy , A Citizen Of No Country Except The Republic That Gives The Book Its Title. English Here Is More Than Language It Is A Metaphor For Divinity, And It Holds A Hard-Won Tenderness For All Things Living. Jeet Thayil S Second Full-Length Collection Links Images Of Water, Addiction And Forgiveness; Poems That Evoke Multiple Outsider Perspectives Are Set In Landscapes As Various As Hong Kong, Doune (Scotland), Pashupatinath (Nepal), Bombay, And, Always, New York City.',
-        Categories: [ 'English poetry' ],
-        TotalChecked: 0,
-        TotalAvailable: 10,
-        image: 'http://books.google.com/books/content?id=tFzZwjkzNREC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api' }];
     $(document).ready(function() {
-        var table = $('#book_table').DataTable( {
-            "data": test,
-            "columns": [
-                { "data": "ISBN" },
-                { "data": "Title" },
-                { "data": "Authors" },
-                { "data": "Publisher"},
-                { "data": "PublishedDate"},
-                { "data": "Description"},
-                { "data": "Categories"},
-                { "data": "image"},
-                {
-                    "orderable":false,
-                    "data": "ISBN"
+        var table;
+        $.ajax({
+            url: '/teacher/{{sid}}/book',
+            dataType: 'json',
+            data: { staff: "{{sid}}"},
+            type: 'POST'
+        }).done(function (data) {
+            console.log(data);
+            var checkedBook = data.checked;
+
+            table = $('#book_table').DataTable({
+                "data": data.list,
+                "columns": [
+                    {"data": "image"},
+                    {"data": "ISBN"},
+                    {"data": "Title"},
+                    {"data": "Authors"},
+                    {"data": "Publisher"},
+                    {"data": "TotalAvailable"},
+                    {"data": "TotalChecked"},
+                    {
+                        "orderable": false,
+                        "data": "ISBN"
+                    }
+                ],
+                "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            if(checkedBook){
+                                for (var i = 0;i<checkedBook.length;i++){
+                                    if(checkedBook[i][0].ISBN === data){
+                                        return "<h4>Checked in</h4>" +
+                                                "<h4><lable class='label label-success'>"+checkedBook[i][0].CheckOutDate+ "</lable><h4>" +
+                                                "<h4>Due date:</h4>" +
+                                                "<h4><lable class='label label-warning'>"+ checkedBook[i][0].DueDate +"</lable><h4>"
+                                    }
+                                }
+                            }
+                            return "<button ISBN='" + data + "' class='btn btn-danger check-out-book'>Check Out Book</button>";
+                        },
+                        "targets": 7
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<img src="' + data + '">';
+                        },
+                        "targets": 0
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return  data || "No Desc";
+                        },
+                        "targets": 3
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return  data || "No Desc";
+                        },
+                        "targets": 4
+                    }
+
+                ],
+                "initComplete": function(settings, json) {
+                    $(".check-out-book").on('click',function () {
+                        var isbn = $(this).attr('ISBN');
+                        var $this = $(this);
+                        var totalChecked = $this.parent().prev();
+                        var total = totalChecked.prev();
+                        var CheckISBN = JSON.stringify({ISBN:isbn});
+                        console.log(CheckISBN);
+                        swal({title: "Please sure you need to check out ISBN: " + isbn,
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonText: "Yes, Check it out!",
+                                    cancelButtonText: "No!",
+                                    closeOnConfirm: false,
+                                    closeOnCancel: false},
+                                function(isConfirm){
+                                    if (isConfirm) {
+                                        $.ajax({
+                                            url: '/book/{{sid}}/staff-check-out-book',
+                                            dataType:'json',
+                                            contentType: "application/json",
+                                            data: CheckISBN,
+                                            type: 'POST'
+                                        }).done(function(data){
+                                            if(data){
+                                                totalChecked.text(Number(totalChecked.text()) + 1);
+                                                total.text(Number(total.text()-1));
+                                                $this.parent().html("<h5>Already checked!!!</h5>");
+                                            }
+                                        });
+                                        swal("Done!", "Your Book has been Check out.", "success");
+                                    } else {
+
+                                        swal("Cancelled", "Your cancelled to check out this book", "error");
+                                    }
+                                });
+
+                    })
                 }
-            ],
-            "columnDefs": [
-                {
-                    "render": function ( data, type, row ) {
-                        return "<button ISBN='"+data+"' class='btn btn-warning check-out'>check out</button>";
-                    },
-                    "targets": 8
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return '<img src="'+data+'">';
-                    },
-                    "targets": 7
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return data || "No description";
-                    },
-                    "targets": 3
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return data || "No description";
-                    },
-                    "targets": 5
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return data || "Not Category";
-                    },
-                    "targets": 6
-                }
-            ]
-        } );
-
-
-//                function findBook(bookList,id) {
-//                    for(var i in bookList){
-//                        if(bookList[i].ISBN == id){
-//                            return bookList[i];
-//                        }
-//                    }
-//                }
-
+            });
+        });
 
 
 

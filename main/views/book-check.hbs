@@ -79,6 +79,18 @@
                             return '<img src="' + data + '">';
                         },
                         "targets": 0
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return  data || "No Desc";
+                        },
+                        "targets": 3
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return  data || "No Desc";
+                        },
+                        "targets": 4
                     }
                 ],
                 "initComplete": function(settings, json) {

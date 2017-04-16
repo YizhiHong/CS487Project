@@ -32,7 +32,7 @@ var getStudentsBook = function (Courses) {
     }
     var bookCollection = book.findData({ISBN:books});
     return bookCollection;
-}
+};
 /** **/
 
 router.post('/:id/book', function(req, res) {

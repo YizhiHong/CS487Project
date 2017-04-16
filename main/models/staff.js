@@ -20,7 +20,11 @@ var staffSchema = new Schema({
     Birthday : Date,
     Level : {type:Number,require: true, enum: [1, 0], default: 1},
     WorkFor: {type: Object, ref: 'department'},
-    Teach: {type: Array, ref: 'course'}
+    Teach: {type: Array, ref: 'course'},
+    Books: {type: Object, ref: 'book',
+        CheckOutDate: {type: Date},
+        DueDate: {type: Date, default: '2017-06-01'}
+    }
 });
 
 module.exports = mongoose.model('staff',staffSchema);
