@@ -98,7 +98,17 @@ router.post('/:id/users' ,function(req, res) {
 
 /** get users profile **/
 router.get('/profile/:id',function (req,res) {
-  
+
+});
+
+/** get student sign up **/
+router.post('/student-sign-up',function (req,res) {
+    console.log(req.body);
+});
+
+/** get staff sign up **/
+router.post('/staff-sign-up',function (req,res) {
+    console.log(req.body);
 });
 
 module.exports = router;

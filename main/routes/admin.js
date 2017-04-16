@@ -133,7 +133,7 @@ router.post('/add-staff-info', function(req, res) {
                 res.redirect('/');
             }else{
                 console.log("Saved in staffs");
-                res.redirect('/admin');
+                res.redirect('/login');
             }
         })
     })(staffInfo);
@@ -182,7 +182,7 @@ router.post('/add-student-info', function(req, res) {
                     course.update({CourseID:{$in:CourseID}}, {$set:{Students:studentList}},function (err) {
                         if(!err){
                             console.log("Saved in Courses");
-                            res.redirect('/admin');
+                            res.redirect('/login');
                         }else{
                             console.log(err);
                             res.redirect('/');

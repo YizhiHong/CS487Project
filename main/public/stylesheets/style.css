@@ -52,7 +52,7 @@ a {
   text-align: left !important;
   width: 100%;
 }
-.input-box > input{
+.input-box > input,.input-box > select{
   background: #f4f4f4;
   padding: 5px;
   height: 35px;
@@ -60,7 +60,6 @@ a {
   border-radius: 0;
   margin: 0;
   width: 100%;
-
 }
 .btn-full {
   background: rgba(0, 0, 0, 0);

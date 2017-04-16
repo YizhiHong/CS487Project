@@ -58,7 +58,7 @@
                                     <label for="departmentCourse">Select Department</label>
                                     <select name="departmentCourse" class="form-control">
                                         {{#each departments}}
-                                            <option departmentCourse={{ this.DeptName }} >{{ this.DeptID }}</option>
+                                            <option departmentCourse="{{ this.DeptName }}" >{{ this.DeptID }}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -66,7 +66,7 @@
                                     <label for="ClassBook">Select Class Book</label>
                                     <select multiple name="ClassBook" class="form-control" style="height:200px">
                                         {{#each books}}
-                                            <option ClassBook={{ this.ISBN }} >{{ this.ISBN }}<span>: {{ this.Title }}-{{ this.Authors }}</span></option>
+                                            <option ClassBook="{{ this.ISBN }}" >{{ this.ISBN }}<span>: {{ this.Title }}-{{ this.Authors }}</span></option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -129,7 +129,7 @@
                                     <label for="workFor">Work for</label>
                                     <select name="workFor" class="form-control">
                                         {{#each departments}}
-                                            <option departmentCourse={{ this.DeptName }} >{{ this.DeptID }}:{{ this._id }}</option>
+                                            <option value="{{ this._id }}" >{{ this.DeptID }}:{{ this.DeptName }}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -192,7 +192,7 @@
                                     <label for="studentCourse">Select Course</label>
                                     <select multiple name="studentCourse" class="form-control" style="height:200px">
                                         {{#each courses}}
-                                            <option studentCourse={{ this.CourseName }} >{{ this.CourseID }}: {{ this.CourseName }}</option>
+                                            <option studentCourse="{{ this.CourseName }}" >{{ this.CourseID }}: {{ this.CourseName }}</option>
                                         {{/each}}
                                     </select>
                                 </div>

@@ -66,8 +66,15 @@ app.get('/log-out', function(req, res) {
     });
 });
 
-app.get('/sign-up', filter.authorize, function(req, res) {
-    res.render('sign-up', {title: 'sign up', layout: 'layout-login'});
+app.get('/sign-up/:user', filter.authorize, function(req, res) {
+    var user = req.params.user;
+    if(user === 'student'){
+        var data = CourseCollection.find();
+        res.render('sign-up', {Courses: data,title: 'Student sign up',isStudent:true, layout: 'layout-login'});
+    }else {
+        var data = DepartmentCollections.find();
+        res.render('sign-up', {Department: data, title: 'Staff sign up', isStudent:false, layout: 'layout-login'});
+    }
 });
 
 
