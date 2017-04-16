@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/javascripts/parsley.min.js"></script>
 <div class="container">
     <div class="row">
         {{#if isStudent}}
@@ -27,8 +28,8 @@
                             <input type="text" name="l_name" class="form-control" id="l_name" placeholder="last name">
                         </div>
                         <div class="input-box">
-                            <label for="student_birthday">Student birthday</label>
-                            <input type="text"  name="birthday" class="form-control" id="student_birthday" placeholder="ex:2000-01-01">
+                            <label for="Birthday">Birthday</label>
+                            <input readonly type="text"  name="birthday" class="form-control" id="Birthday" value="{{this.Birthday}}">
                         </div>
                         <div class="input-box">
                             <label for="studentCourse">Select Course</label>
@@ -50,7 +51,7 @@
                     <form class="form-group" action="/admin/add-staff-info" method="post">
                         <div class="input-box">
                             <label for="staff_email">Email Address</label>
-                            <input type="email" name="email" class="form-control" id="staff_email" placeholder="your@email.com">
+                            <input type="email" data-parsley-trigger="change"  name="email" class="form-control" id="staff_email" placeholder="your@email.com">
                         </div>
                         <div class="input-box">
                             <label for="staff_password">Password</label>
@@ -70,7 +71,7 @@
                         </div>
                         <div class="input-box">
                             <label for="Birthday">Birthday</label>
-                            <input type="text" name="birthday" class="form-control" id="Birthday" placeholder="ex:2000-01-01">
+                            <input readonly type="text" name="birthday" class="form-control" id="Birthday" value="{{this.Birthday}}">
                         </div>
                         <div class="input-box">
                             <label for="JobTitle">Job Title</label>
@@ -80,7 +81,7 @@
                             <label for="workFor">Select Department</label>
                             <select name="workFor">
                                 {{#each Department}}
-                                    <option value="{{this.DeptID}}:{{this._id}}">{{this.DeptID}}: {{this.DeptName}}</option>
+                                    <option value="{{this.DeptID}}:{{this._id}}:{{this.DeptName}}">{{this.DeptID}}: {{this.DeptName}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -97,3 +98,11 @@
         {{/if}}
     </div>
 </div>
+<script>
+    $('#Birthday').datetimepicker({
+        format: 'yyyy-mm-dd',
+        startView: 4,
+        minView: 2,
+        initialDate: '2000-01-01'
+    });
+</script>

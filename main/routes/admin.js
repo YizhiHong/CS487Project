@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require("mongoose");
-var db = require('../index').db;
 mongoose.Types.ObjectId();
 
 /** get all controller**/
@@ -12,7 +11,6 @@ var course = require('../controller/course').course;
 var student = require('../controller/student').student;
 var staff = require('../controller/staff').staff;
 var book = require('../controller/book').book;
-
 
 /** add info **/
 router.get('/', function(req, res) {
@@ -116,12 +114,13 @@ router.post('/add-staff-info', function(req, res) {
         Password: req.body.password  || 123,
         LastName: req.body.l_name || "unknown",
         FirstName: req.body.f_name || "unknown",
-        Brithday: req.body.birthday || "1989-06-04",
+        Birthday: req.body.birthday || "1989-06-04",
         Level: req.body.level,
         WorkFor: {
             DeptID:workfor[0],
             JobTitle: req.body.JobTitle,
-            _id:mongoose.Types.ObjectId(workfor[1])
+            _id:mongoose.Types.ObjectId(workfor[1]),
+            DeptName:workfor[2]
         },
         Teach:[]
     };
@@ -139,9 +138,15 @@ router.post('/add-staff-info', function(req, res) {
     })(staffInfo);
 });
 
+/** modify staff information **/
+router.post('/modify-staff-info',function (req,res) {
+    console.log(req.body);
+});
+
 /** add student information **/
 router.post('/add-student-info', function(req, res) {
     var CourseID = [];
+    console.log(req.body.studentCourse);
 
     if(!!req.body.studentCourse ){
         if(req.body.studentCourse instanceof Array){
@@ -159,49 +164,44 @@ router.post('/add-student-info', function(req, res) {
         CWID : req.body.CWID || "A00000000",
         LastName: req.body.l_name || "unknown",
         FirstName: req.body.f_name || "unknown",
-        Brithday: req.body.birthday || "1989-06-04",
+        Birthday: req.body.birthday || "1989-06-04",
         Courses:[],
         Books:[]
     };
 
-    course.find( { CourseID : { $in : CourseID } } ,function (err,doc) {
+    course.update({CourseID:{$in:CourseID}}, {$addToSet:{Students:studentInfo.CWID}},function (err) {
         if(!err){
-            var studentList;
-            if(doc instanceof Array){
-                for (var i=0; i< doc.length;i++){
-                    doc[i].Students.push(studentInfo.CWID);
-                }
-            }
-            studentList = doc[0].Students;
-            studentInfo.Courses = doc;
-            student.save(studentInfo,function (err) {
-                if(err){
-                    console.log(err);
-                    res.redirect('/');
-                }else{
-                    course.update({CourseID:{$in:CourseID}}, {$set:{Students:studentList}},function (err) {
-                        if(!err){
-                            console.log("Saved in Courses");
-                            res.redirect('/login');
-                        }else{
+            console.log("Saved in Courses");
+            course.find( { CourseID : { $in : CourseID } } ,function (err,doc) {
+                if(!err){
+                    studentInfo.Courses = doc;
+
+                    student.save(studentInfo,function (err) {
+                        if(err){
                             console.log(err);
                             res.redirect('/');
+                        }else{
+                            res.redirect('/login');
                         }
                     });
+                    console.log(studentInfo);
+                }else {
+                    console.log(err);
+                    res.redirect('/');
                 }
             });
-            console.log(studentInfo);
-        }else {
+        }else{
             console.log(err);
             res.redirect('/');
         }
     });
-
-
-    // if(!(CourseObj.length === 0)) {studentInfo.Courses = CourseObj;}
-
-
 });
+
+/** modify student information **/
+router.post('/modify-student-info',function (req,res) {
+    console.log(req.body);
+});
+
 
 
 

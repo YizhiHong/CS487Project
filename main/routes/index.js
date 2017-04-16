@@ -3,7 +3,8 @@ var router = express.Router();
 
 var student = require('../controller/student').student;
 var staff = require('../controller/staff').staff;
-var sess = require('../app').sess;
+
+
 
 /**  post student login **/
 router.post('/student', function(req, res) {
@@ -29,13 +30,14 @@ router.post('/student', function(req, res) {
 /**  get student Center **/
 router.get('/student/:id',function (req,res) {
     var id = {_id:req.params.id};
-    if(!sess){
+    if(!req.session){
         console.log("please log in first");
         res.redirect("/login");
     }else {
         student.findOne(id, function (err, doc) {
             if (doc) {
-                res.render('student-menu', {data: doc , sid:sess._id,users:!!sess._id , layout: 'layout-login'});
+                res.render('student-menu', {data: doc, title: 'Student Center',
+                    sid:req.session._id, users:true, user:"student" ,layout: 'layout-login'});
             } else {
                 res.redirect('/');
             }
@@ -64,16 +66,18 @@ router.post('/staff' ,function(req, res) {
 /**  get staff Center **/
 router.get('/staff/:id',function (req,res) {
     var id = {_id:req.params.id};
-    if(!sess){
+    if(!req.session){
         console.log("please log in first");
         res.redirect("/login");
     }else{
         staff.findOne(id,function (err,doc) {
             if(doc){
                 if(doc.Level === 1){
-                    res.render('teacher-menu', { data:doc, sid:sess._id, users:!!sess._id ,layout: 'layout-login'});
+                    res.render('teacher-menu', { data:doc, title: 'Teacher Center',
+                        sid:req.session._id, users:true ,user:"staff",layout: 'layout-login'});
                 }else if(doc.Level === 0){
-                    res.render('staff-menu', { data:doc, sid:sess._id, users:!!sess._id ,layout: 'layout-login'});
+                    res.render('staff-menu', { data:doc, title: 'Staff Center',
+                        sid:req.session._id, users:true ,user:"staff",layout: 'layout-login'});
                 }else{
                     next();
                 }
@@ -84,7 +88,7 @@ router.get('/staff/:id',function (req,res) {
     }
 });
 
-/** get users info **/
+/** get All users info **/
 router.post('/:id/users' ,function(req, res) {
     var userId = {_id:req.params.id};
 
@@ -97,18 +101,25 @@ router.post('/:id/users' ,function(req, res) {
 });
 
 /** get users profile **/
-router.get('/profile/:id',function (req,res) {
-
-});
-
-/** get student sign up **/
-router.post('/student-sign-up',function (req,res) {
-    console.log(req.body);
-});
-
-/** get staff sign up **/
-router.post('/staff-sign-up',function (req,res) {
-    console.log(req.body);
+router.get('/:user/profile/:id',function (req,res) {
+    if(!!req.session._id){
+        var id = {_id:req.params.id};
+        var user = req.params.user;
+        if(user === 'staff'){
+            staff.findOne(id,function (err,doc) {
+                res.render('profile', { data:doc, title: 'Staff Profile', isStudent:false,
+                    sid:req.session._id, users:true ,user:"staff",layout: 'layout-login'});
+            })
+        }else{
+            student.findOne(id,function (err,doc) {
+                res.render('profile', { data:doc, title: 'Student Profile', isStudent:true,
+                    sid:req.session._id, users:true ,user:"student",layout: 'layout-login'});
+            })
+        }
+    }else{
+        console.log("please log in first");
+        res.redirect("/login");
+    }
 });
 
 module.exports = router;

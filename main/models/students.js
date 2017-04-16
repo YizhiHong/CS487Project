@@ -18,7 +18,7 @@ var studentSchema = Schema(
         Password: {type:String,required: true},
         FirstName: {type:String,max:50,required: true},
         LastName: {type:String,max:50,required: true},
-        Birthday : Date,
+        Birthday : String,
         Courses: {type: Object, ref: 'course'},
         Books: {type: Object, ref: 'book',
             CheckOutDate: {type: Date},

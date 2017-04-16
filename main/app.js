@@ -31,16 +31,37 @@ var CourseCollection = models.CourseCollection;
 
 /** session check **/
 var session = require('express-session');
-// var FileStore = require('session-file-store')(session);
-// var identityKey = 'hong';
-
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
 }));
+
 var filter = require('./sessions/filter');
 var sess;
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', index);
+app.use('/requirement', requirement);
+app.use('/book', book);
+app.use('/staff', staff);
+app.use('/teacher', teacher);
+app.use('/student', student);
+
+//only for admin
+app.use('/admin', admin);
+
 /** home page. **/
 app.get('/',filter.authorizeIndex, function(req, res, next) {
     res.render('index', {
@@ -76,43 +97,6 @@ app.get('/sign-up/:user', filter.authorize, function(req, res) {
         res.render('sign-up', {Department: data, title: 'Staff sign up', isStudent:false, layout: 'layout-login'});
     }
 });
-
-
-//
-// app.get('/users', function(req, res) {
-//     res.send(StudentCollections.find());
-// });
-//
-// app.get('/books', function(req, res) {
-//     res.send(BookCollections.find());
-// });
-
-
-
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', index);
-app.use('/requirement', requirement);
-app.use('/book', book);
-app.use('/staff', staff);
-app.use('/teacher', teacher);
-app.use('/student', student);
-
-//only for admin
-app.use('/admin', admin);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

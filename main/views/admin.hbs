@@ -129,7 +129,7 @@
                                     <label for="workFor">Work for</label>
                                     <select name="workFor" class="form-control">
                                         {{#each departments}}
-                                            <option value="{{ this._id }}" >{{ this.DeptID }}:{{ this.DeptName }}</option>
+                                            <option value="{{this.DeptID}}:{{this._id}}:{{this.DeptName}}" >{{ this.DeptID }}:{{ this.DeptName }}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -192,7 +192,7 @@
                                     <label for="studentCourse">Select Course</label>
                                     <select multiple name="studentCourse" class="form-control" style="height:200px">
                                         {{#each courses}}
-                                            <option studentCourse="{{ this.CourseName }}" >{{ this.CourseID }}: {{ this.CourseName }}</option>
+                                            <option value="{{ this.CourseID }}" studentCourse="{{ this.CourseName }}" >{{ this.CourseID }}: {{ this.CourseName }}</option>
                                         {{/each}}
                                     </select>
                                 </div>
@@ -221,8 +221,18 @@
 </div>
 <script>
     $(document).ready(function () {
-
-
+        $('#student_birthday').datetimepicker({
+            format: 'yyyy-mm-dd',
+            startView: 4,
+            minView: 2,
+            initialDate: '2000-01-01'
+        });
+        $('#staff_birthday').datetimepicker({
+            format: 'yyyy-mm-dd',
+            startView: 4,
+            minView: 2,
+            initialDate: '1980-01-01'
+        });
 
     })
 </script>

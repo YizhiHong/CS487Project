@@ -25,7 +25,8 @@ router.get('/:id/register', function(req, res, next) {
                 var books = book.findAll();
                 departmentID = doc.WorkFor._id;
 
-                res.render('teacher-register', {staff:doc,books:books,sid:sid, title: 'Register Course', users:!!req.session._id, layout: 'layout-login'});
+                res.render('teacher-register', {staff:doc,books:books, title: 'Teacher Register Center',
+                    sid:sid, users:!!req.session._id, user:"staff", layout: 'layout-login'});
             }else{
                 console.log(err);
                 res.render("Teacher Not Found!!");
@@ -65,7 +66,8 @@ router.post('/:id/get-course', function(req, res, next) {
 router.get('/:id/view-books', function(req, res, next) {
     if(!!req.session._id){
         var sid = req.params.id;
-        res.render('teacher-view-books', { sid:sid,users: !!req.session._id ,title:"Teacher check book!", layout: 'layout-login'});
+        res.render('teacher-view-books', { title:"Teacher Book Center",
+            sid:sid, users:!!req.session._id ,user:"staff", layout: 'layout-login'});
     }else {
         res.redirect('/login');
     }

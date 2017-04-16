@@ -112,7 +112,7 @@
                 else {
                     // Open this row
                     var tb = new TableFormat();
-                    if(!!row.data().Books){
+                    if(!!row.data().Books && row.data().Books.length !== 0 ){
                         row.child( tb.student(row.data().Books) ).show();
                         tr.addClass('shown');
                     }

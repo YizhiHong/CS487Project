@@ -1,0 +1,101 @@
+<script type="text/javascript" src="/javascripts/parsley.min.js"></script>
+<div class="container">
+    <div class="row">
+        {{#if isStudent}}
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-vertical">
+                    <h2>Student Profile</h2>
+                    <form class="form-group" action="/admin/modify-student-info" method="post">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="input-box">
+                                <label for="cwid">CWID</label>
+                                <h5 class="form-control-static">{{data.CWID}}</h5>
+                            </div>
+                            <div class="input-box">
+                                <label for="student_email">Email address</label>
+                                <h5 class="form-control-static">{{data.Email}}</h5>
+                            </div>
+                            <div class="input-box">
+                                <label for="student_password">New Password</label>
+                                <input type="password" name="password" class="form-control" id="student_password" placeholder="Password">
+                            </div>
+                            <div class="input-box">
+                                <label for="f_name">First name</label>
+                                <input type="text"  name="f_name" class="form-control" id="f_name" value="{{data.FirstName}}" placeholder="first name">
+                            </div>
+                            <div class="input-box">
+                                <label for="l_name">Last name</label>
+                                <input type="text" name="l_name" class="form-control" id="l_name" value="{{data.LastName}}" placeholder="last name">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="input-box">
+                                <label for="Birthday">Birthday</label>
+                                <input readonly type="text"  name="birthday" class="form-control" id="Birthday" value="{{data.Birthday}}">
+                            </div>
+                            <div class="input-box">
+                                <label for="studentCourse">Select Course</label>
+                                <select multiple name="studentCourse" class="form-control" style="height:300px">
+                                    {{#each Courses}}
+                                        <option studentCourse="{{ this.CourseName }}" >{{ this.CourseID }}: {{ this.CourseName }}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        {{else}}
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-vertical">
+                    <h2>Staff Profile</h2>
+                    <form class="form-group" action="/admin/modify-staff-info" method="post">
+                        <div class="input-box">
+                            <label for="SSN">SSN</label>
+                            <h5 class="form-control-static">{{data.SSN}}</h5>
+                        </div>
+                        <div class="input-box">
+                            <label for="staff_email">Email Address</label>
+                            <h5 class="form-control-static">{{data.Email}}</h5>
+                        </div>
+                        <div class="input-box">
+                            <label for="Department">Department</label>
+                            <h5 class="form-control-static">{{data.WorkFor.DeptName}}</h5>
+                        </div>
+                        <div class="input-box">
+                            <label for="staff_password">New Password</label>
+                            <input type="password" name="password" class="form-control" id="staff_password" placeholder="*****">
+                        </div>
+                        <div class="input-box">
+                            <label for="FirstName">First Name</label>
+                            <input type="text" name="f_name" class="form-control" id="FirstName" value="{{data.FirstName}}" placeholder="First Name">
+                        </div>
+                        <div class="input-box">
+                            <label for="LastName">Last Name</label>
+                            <input type="text" name="l_name" class="form-control" id="LastName" value="{{data.LastName}}" placeholder="Last Name">
+                        </div>
+                        <div class="input-box">
+                            <label for="Birthday">Birthday</label>
+                            <input readonly type="text" name="birthday" class="form-control" id="Birthday" value="{{data.Birthday}}">
+                        </div>
+                        <div class="input-box">
+                            <label for="JobTitle">Job Title</label>
+                            <input type="text" name="JobTitle" class="form-control" id="JobTitle" value="{{data.WorkFor.JobTitle}}" placeholder="Job Title">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</div>
+<script>
+    $('#Birthday').datetimepicker({
+        format: 'yyyy-mm-dd',
+        startView: 4,
+        minView: 2,
+        initialDate: '2000-01-01'
+    });
+</script>

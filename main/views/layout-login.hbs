@@ -3,10 +3,11 @@
   <head>
     <title>{{title}}</title>
       <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/sweetalert.css">
       <link rel='stylesheet' href='/stylesheets/style.css' />
       <script type="text/javascript" src="/javascripts/jquery-1.10.1.min.js"></script>
       <script src="/javascripts/sweetalert.min.js"></script>
-      <link rel="stylesheet" type="text/css" href="/stylesheets/sweetalert.css">
+      <script type="text/javascript" src="/javascripts/index.js"></script>
   </head>
   <body>
   <nav class="navbar navbar-inverse navbar-static-top">
@@ -26,7 +27,7 @@
                           <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                               <ul class="dropdown-menu">
-                                  <li><a href="/profile/{{sid}}">Profile</a></li>
+                                  <li><a href="/{{user}}/profile/{{sid}}">Profile</a></li>
                                   <li><a href="/log-out">Log Out</a></li>
                               </ul>
                           </li>
@@ -34,8 +35,8 @@
                       {{else}}
                           <li><a href="/login">Login</a></li>
                       {{/if}}
-                      <li><a href="/requirement/DSD">DSD</a></li>
-                      <li><a href="/requirement/RSD">RSD</a></li>
+                      <li><a href="/requirement/DSD/{{user}}">DSD</a></li>
+                      <li><a href="/requirement/RSD/{{user}}">RSD</a></li>
                   </ul>
               </div>
           </div>
@@ -43,5 +44,4 @@
     {{{body}}}
   </body>
   <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
-  <script type="text/javascript"src="/javascripts/index.js"></script>
 </html>
