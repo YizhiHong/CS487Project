@@ -17,7 +17,7 @@ router.get('/:id/book' ,function(req, res, next) {
     if(!!req.session._id){
         console.log(req.params.id);
         var sid = req.params.id;
-        res.render('book-check', { title:"Student Book Center",
+        res.render('student-book-check', { title:"Student Book Center",
             sid: sid,users: !!req.session._id , user:"student", layout: 'layout-login'});
     }else{
         res.redirect('/login');

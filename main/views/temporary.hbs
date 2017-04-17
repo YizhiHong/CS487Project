@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{info}}</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/sweetalert.css">
+</head>
+<body>
+
+</body>
+<script src="/javascripts/sweetalert.min.js"></script>
+<script>
+    swal("{{info}}", "Redirecting","{{state}}");
+    setTimeout(function () {
+        window.location.href= '{{url}}';
+    },1500);
+</script>
+</html>

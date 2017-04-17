@@ -4,8 +4,6 @@ var router = express.Router();
 var student = require('../controller/student').student;
 var staff = require('../controller/staff').staff;
 
-
-
 /**  post student login **/
 router.post('/student', function(req, res) {
         var query = {
@@ -120,6 +118,47 @@ router.get('/:user/profile/:id',function (req,res) {
         console.log("please log in first");
         res.redirect("/login");
     }
+});
+
+/** handle all temporary page **/
+router.get('/temp/:state',function (req,res) {
+   var state = req.params.state;
+   switch(state){
+       case 'update-succeed':
+           res.render('temporary',{info:'Your information update successfully!', url:'/login',state:"success"});
+           break;
+       case 'update-fail':
+           res.render('temporary',{info:'Your information update fail!', url:'/',state:"error"});
+           break;
+       case 'sign-succeed':
+           res.render('temporary',{info:'Sign up successfully! Please Start to login in now!', url:'/login',state:"success"});
+           break;
+       case 'sign-fail':
+           res.render('temporary',{info:'Your information have some problem! Please try again!', url:'/login',state:"error"});
+           break;
+       case 'course-succeed':
+           res.render('temporary',{info:'Course Added!', url:'/admin',state:"success"});
+           break;
+       case 'course-fail':
+           res.render('temporary',{info:'Course fail to add!', url:'/admin',state:"error"});
+           break;
+       case 'register-succeed':
+           res.render('temporary',{info:'Course Added!', url:'/teacher',state:"success"});
+           break;
+       case 'register-fail':
+           res.render('temporary',{info:'Course fail to add!', url:'/login',state:"error"});
+           break;
+       case 'dept-succeed':
+           res.render('temporary',{info:'Department Added', url:'/admin',state:"success"});
+           break;
+       case 'dept-fail':
+           res.render('temporary',{info:'Department fail to add!', url:'/admin',state:"error"});
+           break;
+       default:// teacher course register success
+           res.render('temporary',{info:'Course registered!', url:'/teacher/' + state +'/register',state:"success"});
+           break;
+   }
+
 });
 
 module.exports = router;

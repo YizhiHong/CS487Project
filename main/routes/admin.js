@@ -35,10 +35,10 @@ router.post('/add-department-info', function(req, res) {
         department.save(departmentInfo,function (err) {
             if(err){
                 console.log(err);
-                res.redirect('/');
+                res.redirect('/temp/dept-fail');
             }else{
                 console.log("Saved in departments");
-                res.redirect('/admin');
+                res.redirect('/temp/dept-succeed');
             }
         })
     })(departmentInfo);
@@ -80,14 +80,15 @@ router.post('/add-course-info', function(req, res) {
                             staff.update({_id:req.body.Teacher},{$addToSet:{Teach: courseInfo.CourseID}},function (err) {
                                 if(err){
                                     console.log('fail to teach');
-                                    res.send('fail to teach');
+                                    res.redirect('/temp/register-fail');
                                 }else {
-                                    res.redirect('/teacher/' + req.body.Teacher +'/register');
+                                    res.redirect('/temp/'+req.body.Teacher);
+                                    // res.redirect('/teacher/' + req.body.Teacher +'/register');
                                 }
                             })
                         }else {
                             console.log("Saved in courses");
-                            res.redirect('/admin');
+                            res.redirect('/temp/course-succeed');
                         }
                     }
                 })
@@ -96,7 +97,7 @@ router.post('/add-course-info', function(req, res) {
 
         }else {
             console.log(err);
-            res.redirect('/');
+            res.redirect('/temp/course-fail');
         }
     });
 
@@ -129,18 +130,13 @@ router.post('/add-staff-info', function(req, res) {
         staff.save(staffInfo,function (err) {
             if(err){
                 console.log(err);
-                res.redirect('/');
+                res.redirect('/temp/sign-fail');
             }else{
                 console.log("Saved in staffs");
-                res.redirect('/login');
+                res.redirect('/temp/sign-succeed');
             }
         })
     })(staffInfo);
-});
-
-/** modify staff information **/
-router.post('/modify-staff-info',function (req,res) {
-    console.log(req.body);
 });
 
 /** add student information **/
@@ -179,29 +175,54 @@ router.post('/add-student-info', function(req, res) {
                     student.save(studentInfo,function (err) {
                         if(err){
                             console.log(err);
-                            res.redirect('/');
+                            res.redirect('/temp/sign-fail');
                         }else{
-                            res.redirect('/login');
+                            res.redirect('/temp/sign-succeed');
                         }
                     });
                     console.log(studentInfo);
                 }else {
                     console.log(err);
-                    res.redirect('/');
+                    res.redirect('/temp/sign-fail');
                 }
             });
         }else{
             console.log(err);
-            res.redirect('/');
+            res.redirect('/temp/sign-fail');
         }
     });
 });
 
-/** modify student information **/
-router.post('/modify-student-info',function (req,res) {
-    console.log(req.body);
+/** modify staff information **/
+router.post('/modify-staff-info/:id',function (req,res) {
+    staff.update({_id:req.params.id},
+        { $set:{FirstName:req.body.f_name,LastName:req.body.l_name,Birthday:req.body.birthday, 'WorkFor.JobTitle' :req.body.JobTitle}},
+        function (err) {
+            if(!err){
+                console.log("update succeed in staff db!");
+                res.redirect('/temp/update-succeed');
+            }else{
+                console.log(err);
+                res.redirect('/temp/update-fail');
+            }
+        })
+
 });
 
+/** modify student information **/
+router.post('/modify-student-info/:id',function (req,res) {
+    student.update({_id:req.params.id},
+        { $set:{FirstName:req.body.f_name,LastName:req.body.l_name,Birthday:req.body.birthday}},
+        function (err) {
+            if(!err){
+                console.log("update succeed in staff db!");
+                res.redirect('/temp/update-succeed');
+            }else{
+                console.log(err);
+                res.redirect('/temp/update-fail');
+            }
+        })
+});
 
 
 

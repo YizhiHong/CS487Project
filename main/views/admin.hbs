@@ -10,11 +10,11 @@
                         <form class="form-group" action="/admin/add-department-info" method="post">
                             <div class="form-group">
                                 <label for="DepartmentID">DepartmentID</label>
-                                <input type="text" name="DeptID" class="form-control" id="DepartmentID" placeholder="Department ID">
+                                <input required="true"  type="text" name="DeptID" class="form-control" id="DepartmentID" placeholder="Department ID">
                             </div>
                             <div class="form-group">
                                 <label for="DepartmentName">DepartmentName</label>
-                                <input type="text" name="DeptName" class="form-control" id="DepartmentName" placeholder="Department Name">
+                                <input required="true"  type="text" name="DeptName" class="form-control" id="DepartmentName" placeholder="Department Name">
                             </div>
                             <div class="form-group">
                                 <label for="Location">Location</label>
@@ -48,15 +48,15 @@
                             <form class="form-group" action="/admin/add-course-info" method="post">
                                 <div class="form-group">
                                     <label for="CourseID">Course ID</label>
-                                    <input type="text" name="CourseID" class="form-control" id="CourseID" placeholder="CourseID">
+                                    <input required="true"  type="text" name="CourseID" class="form-control" id="CourseID" placeholder="CourseID">
                                 </div>
                                 <div class="form-group">
                                     <label for="CourseName">Course Name</label>
-                                    <input type="text" name="CourseName" class="form-control" id="CourseName" placeholder="CourseName">
+                                    <input required="true"  type="text" name="CourseName" class="form-control" id="CourseName" placeholder="CourseName">
                                 </div>
                                 <div class="form-group">
                                     <label for="departmentCourse">Select Department</label>
-                                    <select name="departmentCourse" class="form-control">
+                                    <select required="true"  name="departmentCourse" class="form-control">
                                         {{#each departments}}
                                             <option departmentCourse="{{ this.DeptName }}" >{{ this.DeptID }}</option>
                                         {{/each}}
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ClassBook">Select Class Book</label>
-                                    <select multiple name="ClassBook" class="form-control" style="height:200px">
+                                    <select required="true" multiple name="ClassBook" class="form-control" style="height:200px">
                                         {{#each books}}
                                             <option ClassBook="{{ this.ISBN }}" >{{ this.ISBN }}<span>: {{ this.Title }}-{{ this.Authors }}</span></option>
                                         {{/each}}
@@ -99,23 +99,23 @@
                             <form class="form-group" action="/admin/add-staff-info" method="post">
                                 <div class="form-group">
                                     <label for="staff_email">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="student_email" placeholder="Email">
+                                    <input required="true"  type="email" name="email" class="form-control" id="student_email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="staff_password">Password</label>
-                                    <input type="password" name="password" class="form-control" id="student_password" placeholder="Password">
+                                    <input required="true"  type="password" name="password" class="form-control" id="student_password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <label for="SSN">SSN</label>
-                                    <input type="text" name="SSN" class="form-control" id="SSN" placeholder="SSN">
+                                    <input required="true"  type="text" name="SSN" class="form-control" id="SSN" placeholder="SSN">
                                 </div>
                                 <div class="form-group">
                                     <label for="f_name">First name</label>
-                                    <input type="text"  name="f_name" class="form-control" id="f_name" placeholder="first name">
+                                    <input required="true"  type="text"  name="f_name" class="form-control" id="f_name" placeholder="first name">
                                 </div>
                                 <div class="form-group">
                                     <label for="l_name">Last name</label>
-                                    <input type="text" name="l_name" class="form-control" id="l_name" placeholder="last name">
+                                    <input required="true"  type="text" name="l_name" class="form-control" id="l_name" placeholder="last name">
                                 </div>
                                 <div class="form-group">
                                     <label for="staff_birthday">Staff birthday</label>
@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="workFor">Work for</label>
-                                    <select name="workFor" class="form-control">
+                                    <select required="true"  name="workFor" class="form-control">
                                         {{#each departments}}
                                             <option value="{{this.DeptID}}:{{this._id}}:{{this.DeptName}}" >{{ this.DeptID }}:{{ this.DeptName }}</option>
                                         {{/each}}
@@ -166,23 +166,23 @@
                             <form class="form-group" action="/admin/add-student-info" method="post">
                                 <div class="form-group">
                                     <label for="student_email">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="student_email" placeholder="Email">
+                                    <input required="true"  type="email" name="email" class="form-control" id="student_email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="student_password">Password</label>
-                                    <input type="password" name="password" class="form-control" id="student_password" placeholder="Password">
+                                    <input required="true"  type="password" name="password" class="form-control" id="student_password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <label for="cwid">CWID</label>
-                                    <input type="text" name="CWID" class="form-control" id="cwid" placeholder="CWID">
+                                    <input required="true"  type="text" name="CWID" class="form-control" id="cwid" placeholder="CWID">
                                 </div>
                                 <div class="form-group">
                                     <label for="f_name">First name</label>
-                                    <input type="text"  name="f_name" class="form-control" id="f_name" placeholder="first name">
+                                    <input required="true"  type="text"  name="f_name" class="form-control" id="f_name" placeholder="first name">
                                 </div>
                                 <div class="form-group">
                                     <label for="l_name">Last name</label>
-                                    <input type="text" name="l_name" class="form-control" id="l_name" placeholder="last name">
+                                    <input required="true"  type="text" name="l_name" class="form-control" id="l_name" placeholder="last name">
                                 </div>
                                 <div class="form-group">
                                     <label for="student_birthday">Student birthday</label>
@@ -196,7 +196,6 @@
                                         {{/each}}
                                     </select>
                                 </div>
-
                                 <button type="submit" class="btn btn-default">Submit</button>
                             </form>
                         </div>
