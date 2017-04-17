@@ -32,6 +32,7 @@
 
         $("#search").on('click',function () {
             if ($.fn.DataTable.isDataTable("#book_table")) {
+                $("#book_table tbody").off();
                 $('#book_table').DataTable().clear().destroy();
             }
 
@@ -106,6 +107,21 @@
                         }
                     ],
                     "initComplete":function(settings, json) {
+                        $("#book_table tbody").on('click','.save-to-database',function () {
+                            var id = $(this).attr('ISBN');
+                            var bookSave = JSON.stringify(findBook(current,String(id)));
+
+                            $.ajax({
+                                url: '/book/book-single-save',
+                                dataType:'json',
+                                contentType: "application/json",
+                                data: bookSave,
+                                type: 'POST'
+                            }).done(function(data){
+                                console.log(data);
+                                alert(data.msg);
+                            });
+                        });
                     }
                 });
 
@@ -117,21 +133,7 @@
                     }
                 };
 
-                $("#book_table tbody").on('click','.save-to-database',function () {
-                    var id = $(this).attr('ISBN');
-                    var bookSave = JSON.stringify(findBook(current,String(id)));
 
-                    $.ajax({
-                        url: '/book/book-single-save',
-                        dataType:'json',
-                        contentType: "application/json",
-                        data: bookSave,
-                        type: 'POST'
-                    }).done(function(data){
-                        console.log(data);
-                        alert(data.msg);
-                    });
-                });
             });
         });
 
