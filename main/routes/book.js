@@ -138,10 +138,10 @@ router.post('/:id/check-out-book',function (req,res,next){
     book.update(bookID,{$inc:{ TotalChecked:+1,TotalAvailable:-1} },function (err) {
         if(!err){
             console.log("saved in book db");
-            student.checkOutBook(studentID,bookID.ISBN,function (err) {
+            student.checkOutBook(studentID,bookID.ISBN,function (err,d,m) {
                 if(!err){
                     console.log("saved in student db");
-                    res.send(true);
+                    res.send({CheckOutDate:d,DueDate:m});
                 }else{
                     console.log(err);
                     res.send(false);

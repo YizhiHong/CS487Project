@@ -22,7 +22,7 @@ var studentSchema = Schema(
         Courses: {type: Object, ref: 'course'},
         Books: {type: Object, ref: 'book',
             CheckOutDate: {type: Date},
-            DueDate: {type: Date, default: '2017-06-01'}
+            DueDate: {type: Date, default: new Date()}
         }
     }
 );

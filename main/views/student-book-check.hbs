@@ -120,7 +120,10 @@
                                             if(data){
                                                 totalChecked.text(Number(totalChecked.text()) + 1);
                                                 total.text(Number(total.text()-1));
-                                                $this.parent().html("<h5>Already checked!!!</h5>");
+                                                $this.parent().html("<h4>Checked in</h4>" +
+                                                        "<h4><lable class='label label-success'>"+ data.CheckOutDate+ "</lable><h4>" +
+                                                        "<h4>Due date:</h4>" +
+                                                        "<h4><lable class='label label-warning'>"+ data.DueDate +"</lable><h4>");
                                             }
                                         });
                                         swal("Done!", "Your Book has been Check out.", "success");

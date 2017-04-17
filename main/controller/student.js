@@ -2,6 +2,7 @@
  * Created by Chi.Hong on 4/6/17.
  */
 var student = require("../models/students");
+var moment = require('moment');
 
 var studentController = function () {};
 
@@ -45,10 +46,12 @@ studentController.prototype =  {
         return !!req.session._id
     },
     checkOutBook: function (json,isbn,callBack) {
+        var d = new Date();
+        var m = new Date(moment(d).add(3,'month').toString());
         student.update(json, {$addToSet:
-            {Books:[{ISBN:isbn, CheckOutDate:new Date(), DueDate: '2017-06-01'}]}
+            {Books:[{ISBN:isbn, CheckOutDate:  d , DueDate: m}]}
         },function (err){
-            callBack(err);
+            callBack(err,d,m);
         });
     }
 };
