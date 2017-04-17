@@ -17,7 +17,7 @@ var staff = require('../controller/staff').staff;
 
 /* book option */
 var options = {
-    limit: 10,
+    limit: 20,
     type: 'books',
     order: 'relevance',
     lang: 'en'

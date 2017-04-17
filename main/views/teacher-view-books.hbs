@@ -95,7 +95,7 @@
 
                 ],
                 "initComplete": function(settings, json) {
-                    $(".check-out-book").on('click',function () {
+                    $("#book_table tbody").on('click','.check-out-book',function () {
                         var isbn = $(this).attr('ISBN');
                         var $this = $(this);
                         var totalChecked = $this.parent().prev();

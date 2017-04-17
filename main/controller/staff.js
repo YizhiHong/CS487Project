@@ -2,6 +2,7 @@
  * Created by Chi.Hong on 4/6/17.
  */
 var staff = require("../models/staff");
+var moment = require('moment');
 
 var staffController = function () {};
 
@@ -41,8 +42,10 @@ staffController.prototype =  {
        return staff.find();
     },
     checkOutBook: function (json,isbn,callBack) {
+        var d = new Date();
+        var m = new Date(moment(d).add(3,'month').toString());
         staff.update(json, {$addToSet:
-            {Books:[{ISBN:isbn, CheckOutDate:new Date(), DueDate: '2018-09-01'}]}
+            {Books:[{ISBN:isbn, CheckOutDate:  d , DueDate: m}]}
         },function (err){
             callBack(err);
         });

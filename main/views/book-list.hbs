@@ -26,8 +26,10 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 
 <script>
+
     $(document).ready(function() {
         var current,table;
+
         $("#search").on('click',function () {
             if ($.fn.DataTable.isDataTable("#book_table")) {
                 $('#book_table').DataTable().clear().destroy();
@@ -41,8 +43,10 @@
                 type: 'POST'
             }).done(function(data){
                 current = data;
+
                 table = $('#book_table').DataTable( {
                     "data": data,
+                    "responsive": true,
                     "columns": [
                         { "data": "ISBN" },
                         { "data": "Title" },
@@ -100,8 +104,10 @@
                             },
                             "targets": 6
                         }
-                    ]
-                } );
+                    ],
+                    "initComplete":function(settings, json) {
+                    }
+                });
 
                 function findBook(bookList,id) {
                     for(var i in bookList){
@@ -109,9 +115,9 @@
                             return bookList[i];
                         }
                     }
-                }
+                };
 
-                $(".save-to-database").on('click',function () {
+                $("#book_table tbody").on('click','.save-to-database',function () {
                     var id = $(this).attr('ISBN');
                     var bookSave = JSON.stringify(findBook(current,String(id)));
 
@@ -125,15 +131,12 @@
                         console.log(data);
                         alert(data.msg);
                     });
-
-                })
-
+                });
             });
         });
 
         $("#save").on('click',function () {
             var content = current;
-
             $.ajax({
                 url: '/book/book-list-save',
                 dataType:'json',
@@ -147,5 +150,6 @@
         });
 
     } );
+
 
 </script>

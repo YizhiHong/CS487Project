@@ -151,7 +151,7 @@
                                 }
                             ],
                             "initComplete": function(settings, json) {
-                                $('.register').on('click',function () {
+                                $("#course_table tbody").on('click','.register',function () {
                                     var $this = $(this);
                                     var CourseID = $(this).attr('CourseID');
                                     console.log(CourseID);

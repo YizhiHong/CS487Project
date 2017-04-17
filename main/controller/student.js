@@ -47,7 +47,7 @@ studentController.prototype =  {
     },
     checkOutBook: function (json,isbn,callBack) {
         var d = new Date();
-        var m = new Date(moment(d).add(3,'month').toString());
+        var m = new Date(moment(d).add(12,'month').toString());
         student.update(json, {$addToSet:
             {Books:[{ISBN:isbn, CheckOutDate:  d , DueDate: m}]}
         },function (err){
