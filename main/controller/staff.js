@@ -42,7 +42,7 @@ staffController.prototype =  {
        return staff.find();
     },
     checkOutBook: function (json,isbn,callBack) {
-        var d = new Date();
+        var d = moment(new Date()).subtract('5','hour');
         var m = new Date(moment(d).add(12,'month').toString());
         staff.update(json, {$addToSet:
             {Books:[{ISBN:isbn, CheckOutDate:  d , DueDate: m}]}
