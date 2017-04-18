@@ -49,7 +49,7 @@ studentController.prototype =  {
         var d = moment(new Date()).subtract('5','hour');
         var m = new Date(moment(d).add(3,'month').toString());
         student.update(json, {$addToSet:
-            {Books:[{ISBN:isbn, CheckOutDate:  d , DueDate: m}]}
+            {Books:[{ISBN:isbn, CheckOutDate:   new Date(d)  , DueDate: m}]}
         },function (err){
             callBack(err,d,m);
         });
