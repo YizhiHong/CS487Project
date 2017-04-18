@@ -127,7 +127,7 @@
                                 type: 'POST'
                             }).done(function(data){
                                 console.log(data);
-                                alert(data.msg);
+                                swal(data.msg);
                             });
                         });
                         $('#book_table tbody').on('click', 'td.details-control', function () {
