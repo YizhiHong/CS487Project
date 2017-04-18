@@ -29,8 +29,8 @@
                         <ul class="list-group">
                             {{#each departments}}
                                 <li class="list-group-item">
-                                    <h4>Department Name: {{ this.DeptName }}</h4>
-                                    <h4>Department Location: {{ this.Location }}</h4>
+                                    <h4>{{ this.DeptName }}</h4>
+                                    <h5>Location: {{ this.Location }}</h5>
                                 </li>
                             {{/each}}
                         </ul>
@@ -79,9 +79,9 @@
                         <ul class="list-group">
                             {{#each courses}}
                                 <li class="list-group-item">
-                                    <h4>CourseNumber: {{ this.CourseNumber }}</h4>
-                                    <h4>CourseName: {{this.CourseName}} </h4>
-                                    <h4>Books: {{ this.Books }}</h4>
+                                    <h5>CourseNumber: {{ this.CourseNumber }}</h5>
+                                    <h5>CourseName: {{this.CourseName}} </h5>
+                                    <h5>Books: {{ this.Books }}</h5>
                                 </li>
                             {{/each}}
                         </ul>
@@ -146,10 +146,10 @@
                         <ul class="list-group">
                             {{#each staffs}}
                                 <li class="list-group-item">
-                                    <h4>SSN: {{this.SSN}}</h4>
-                                    <h4>First Name: {{ this.FirstName }}</h4>
-                                    <h4>Last Name: {{this.LastName}}</h4>
-                                    <h4>Email: {{this.Email}}</h4>
+                                    <h5>{{this.Level}} {{this.WorkFor.JobTitle}}</h5>
+                                    <h5>SSN: {{this.SSN}}</h5>
+                                    <h5>{{ this.FirstName }} {{this.LastName}}</h5>
+                                    <h5>Email: {{this.Email}}</h5>
                                 </li>
                             {{/each}}
                         </ul>
@@ -206,7 +206,7 @@
                             {{#each students}}
                                 <li class="list-group-item"><h4>{{ this.FirstName }} {{this.LastName}}: {{this.CWID}}</h4>
                                      {{#each this.Courses}}
-                                     <p>{{this.CourseID}}: {{this.CourseName}}</p>
+                                     <h5>{{this.CourseID}}: {{this.CourseName}}</h5>
                                     {{/each}}
                                 </li>
                             {{/each}}
