@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"bookTrackingApp.books"},{"v":2,"unique":true,"key":{"BookID":1},"name":"BookID_1","ns":"bookTrackingApp.books","background":true},{"v":2,"unique":true,"key":{"ISBN":1},"name":"ISBN_1","ns":"bookTrackingApp.books","background":true}]}

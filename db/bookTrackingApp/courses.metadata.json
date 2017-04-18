@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"bookTrackingApp.courses"},{"v":2,"unique":true,"key":{"CourseID":1},"name":"CourseID_1","ns":"bookTrackingApp.courses","background":true},{"v":2,"unique":true,"key":{"CourseNumber":1},"name":"CourseNumber_1","ns":"bookTrackingApp.courses","background":true}]}
